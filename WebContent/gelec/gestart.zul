@@ -1,0 +1,158 @@
+<vlayout xmlns:n="native" xmlns:w="client" apply="org.zkoss.bind.BindComposer"
+	binder="@init(queueName='myqueue')"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.gelec.GElecStartVM')"
+	form="@id('fx') @load(vm.genElecInfo) @save(vm.genElecInfo,before='submitForm') @validator(vm)"
+	validationMessages="@id('vmsgs')">
+	<style>.z-hlayout-inner{display:inherit;} .z-hlayout .z-label{font-size:14px;}</style>
+	<!-- 		<div class="container-fluid"> -->
+	<!-- 			<div class="row-fluid"> -->
+	<!-- 		<div class="span12"> -->
+	<!-- 			<n:h5 class="text-center">请选择发电区域</n:h5> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	<!-- 	</div> -->
+	<hlayout style="padding-top:10px;">
+		<div class="col-xs-4">
+			<label sclass="heavy" value="故障单编码" />
+		</div>
+		<div class="col-xs-8">
+			<label sclass="red heavy" value="@load(fx.billCode)" />
+		</div>
+	</hlayout>
+	<hlayout>
+		<div class="col-xs-4">
+			<label sclass="heavy" value="故障来源" />
+		</div>
+		<div class="col-xs-8">
+			<label sclass="heavy" value="@load(fx.faultSource)" />
+		</div>
+	</hlayout>
+	<hlayout>
+		<div class="col-xs-4">
+			<label sclass="heavy" value="告警描述" />
+		</div>
+		<div class="col-xs-8">
+			<label sclass="heavy" value="@load(fx.alarmDetail)" />
+		</div>
+	</hlayout>
+	<hlayout>
+		<div class="col-xs-4">
+			<label sclass="heavy" value="站址名称" />
+		</div>
+		<div class="col-xs-8">
+			<label sclass="blue heavy" value="@load(fx.stationName)" />
+		</div>
+	</hlayout>
+	<hlayout>
+		<div class="col-xs-4">
+			<label sclass="heavy" value="站址编码" />
+		</div>
+		<div class="col-xs-8">
+			<label sclass="blue heavy" value="@load(fx.stationCode)" />
+		</div>
+	</hlayout>
+<!-- 	<hlayout> -->
+<!-- 		<div class="col-xs-4"> -->
+<!-- 			<label sclass="heavy" value="当前电压" /> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-xs-8 "> -->
+<!-- 			<image id="vloaddingImg" src="../img/spin_1.gif" -->
+<!-- 				style="display:inline-block;padding-top:3px;margin-bottom: 6px;" /> -->
+<!-- 			<label id="vLbl" value="" style="font-size:14px;font-weight:bold;" /> -->
+<!-- 		</div> -->
+<!-- 	</hlayout> -->
+	<hlayout>
+		<div class="col-xs-4">
+			<div style="padding-top:5px;">
+				<label sclass="heavy" value="发电人" />
+			</div>
+		</div>
+		<div class="col-xs-8">
+			<div sclass="input-lg" style="padding: 0px;">
+				<textbox height="30px" class="form-control" value="@bind(fx.person)"
+					maxlength="40">
+				</textbox>
+			</div>
+		</div>
+	</hlayout>
+	<hlayout>
+		<div class="col-xs-4">
+			<div style="padding-top:5px;">
+				<label sclass="heavy" value="联系方式" />
+			</div>
+		</div>
+		<div class="col-xs-8">
+			<div sclass="input-lg" style="padding: 0px;">
+				<textbox height="30px" class="form-control" value="@bind(fx.contact)"
+					maxlength="40">
+				</textbox>
+			</div>
+		</div>
+	</hlayout>
+	<hlayout>
+		<div class="col-xs-4">
+			<label sclass="heavy" value="开始发电照片" />
+		</div>
+		<div class="col-xs-8"></div>
+	</hlayout>
+	<space></space>
+	<div class="row-fluid" style="height:120px;">
+		<div class="col-xs-12">
+			<div class="center">
+				<a>
+					<image id="pic1" src="../img/add_img.png" />
+					<attribute w:name="doClick_">
+						function (evt) { this.$doClick_(evt);
+						jq('$uploadBtn1').next().find('input').click(); }
+					</attribute>
+				</a>
+			</div>
+		</div>
+	</div>
+	<space></space>
+	<div class="row-fluid">
+		<div class="span12 center">
+			<label style="color:#bd362f;font-size:14px" value="@load(vmsgs['key'])" />
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12 center">
+			<button iconSclass="glyphicon glyphicon-flash" sclass="btn-danger btn-large"
+				label="开始发电" onClick="@command('submitForm') @global-command('callSummaryInit')"
+				autodisable="self" zclass="btn" width="110px" style="font-size:16px" height="40px" />
+		</div>
+	</div>
+	<space></space>
+	<button upload="true,accept=image/*,maxsize=-1" id="uploadBtn1" visible="false"></button>
+	<doublebox id="startLngTxt" value="@bind(fx.startLng)" visible="false" />
+	<doublebox id="startLatTxt" value="@bind(fx.startLat)" visible="false" />
+	<textbox id="startAddrTxt" value="@bind(fx.startAddr)" visible="false" />
+	<script type="text/javascript" defer="true">
+		<![CDATA[ 
+		var convertor = new BMap.Convertor(); 
+		var geoc = new BMap.Geocoder(); 
+		var geolocation = new BMap.Geolocation(); 
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				var startLngWgt=zk.Widget.$('$startLngTxt'); 
+				var startLatWgt=zk.Widget.$('$startLatTxt');
+				startLngWgt.setValue(r.point.lng);
+				startLatWgt.setValue(r.point.lat); startLngWgt.fireOnChange();
+				startLatWgt.fireOnChange();
+				geoc.getLocation(r.point,function(rs){ 
+					var addComp = rs.addressComponents; 
+					var address=addComp.province+addComp.city+addComp.district+addComp.street+addComp.streetNumber;
+					var startAddrWgt=zk.Widget.$('$startAddrTxt')
+					startAddrWgt.setValue(address); startAddrWgt.fireOnChange();
+					console.log(address);
+				});
+			}else { 
+				//alert('failed'+this.getStatus());
+				console.log('failed'+this.getStatus()); 
+			} 
+		},{enableHighAccuracy:true});
+		//var vLblwgt=zk.Widget.$('$vLbl');
+		//zAu.send(new zk.Event(vLblwgt, "onPiggyback", null, {toServer:true}));
+	]]>
+	</script>
+</vlayout>

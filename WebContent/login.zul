@@ -1,0 +1,98 @@
+<?page title="铁塔微信监控机器人系统" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="css/_style.css" ?>
+<?link rel="stylesheet" type="text/css" href="css/_mobile.css" ?>
+<?link rel="stylesheet" type="text/css" href="css/primary-royal-blue.css"
+	id="cssfile" ?>
+<?link href="bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+<zk xmlns:n="native">
+	<style>
+		* { margin: 0; padding: 0; } body {background: #122A53}
+		.loginBox { width: 330px; height: 270px; padding: 0 20px;
+		border: 1px solid #fff; margin-top: 40px; border-radius: 8px;
+		background: white; box-shadow: 0 0 15px #222; background:
+		-moz-linear-gradient(top, #fff, #efefef 8%); background:
+		-webkit-gradient(linear, 0 0, 0 100%, from(#f6f6f6), to(#f4f4f4)
+		); font: 11px; position: absolute; left: 50%; top: 50%;
+		margin-left: -180px; margin-top: -115px; } .loginBox h2 {
+		height: 45px; font-family: 'Open Sans','宋体','微软雅黑';} .loginBox
+		.left { border-right: 1px solid #ccc; height: 100%;
+		padding-right: 34px;padding-left: 12px; } h3{font-weight:normal}
+		.z-button i{margin-top:3px} 
+	</style>
+	<n:body>
+		<div class="container" apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.LoginVM')"
+			onOK="@command('login')"
+			form="@id('fx') @load(vm.user) @save(vm.user,before='login') @validator(vm)"
+			validationMessages="@id('vmsgs')">
+			<n:section class="loginBox row-fluid">
+				<n:section>
+					<div>
+						<n:a href="">
+							<n:img src="img/logo-201305-b.png"
+								border="0" />
+						</n:a>
+						<label class="pull-right"
+							style="color:#2C2F38;font-size:14px;margin-top:24px;">
+							微信监控机器人系统
+						</label>
+						<!-- 						<label class="pull-right" -->
+						<!-- 							style="color:#2C2F38;font-family:'黑体';font-size:14px;margin-top:-27px;"> -->
+						<!-- 							（湖南铁塔） -->
+						<!-- 						</label> -->
+					</div>
+					<separator bar="true" height="40px"
+						style="margin-top:-20px;">
+					</separator>
+					<div style="margin-left: 42px;padding-top:6px;">
+						<n:p>
+							<textbox id="nameTxt" width="195px"
+								height="30px" placeholder="请输入用户名"
+								value="@load(fx.loginname) @save(fx.loginname)"
+								sclass="form-control" />
+						</n:p>
+						<n:p>
+							<textbox id="pwdTxt" type="password"
+								width="195px" height="30px" placeholder="请输入密码"
+								value="@load(fx.loginpwd) @save(fx.loginpwd)"
+								sclass="form-control" />
+						</n:p>
+						<n:p>
+							<hbox>
+								<textbox id="vTxt" width="95px"
+									height="30px" placeholder="验证码" maxlength="4"
+									value="@load(fx.tempStr) @save(fx.tempStr)"
+									sclass="form-control" />
+								<space></space>
+								<style>td{vertical-align:top;}</style>
+								<div style="cursor:pointer;">
+									<captcha id="captcha" length="4"
+										bgColor="#5c5c5c" fontColor="#1D1D1D" width="83px"
+										height="30px" />
+								</div>
+							</hbox>
+						</n:p>
+						<label style="color:#bd362f"
+							value="@load(vmsgs['key'])" />
+						<n:p class="pull-right"
+							style="margin-top:5px;">
+							<button id="loginBtn" label=" 登 录 "
+								sclass="btn-primary btn-sm" zclass="btn"
+								iconSclass="glyphicon glyphicon-log-in"
+								onClick="@command('login')" autodisable="self" />
+						</n:p>
+					</div>
+				</n:section>
+			</n:section>
+		</div>
+		<n:footer
+			style="position:fixed;bottom:0px;text-align:center;padding-top: 13px">
+			<n:p>
+				Copyright © 2016 All Rights Reserved. 铁塔 版权所有
+				为了提高系统的使用性能，请尽量使用谷歌浏览器。
+			</n:p>
+		</n:footer>
+	</n:body>
+</zk>

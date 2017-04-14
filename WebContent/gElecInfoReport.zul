@@ -1,0 +1,159 @@
+<vlayout xmlns:n="native" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.ElecInfoReportVM')" style="min-height:860px ;">
+	<style>
+		.myoddrow{background-color: #f2f6fb; background-image: none;} .reportGid.z-grid { border:
+		1px solid #f0f6f9; overflow: hidden; zoom: 1;margin-top:10px;} .reportGid.z-grid .z-row-content{line-height: 18px;padding: 4px 20px;}
+		.infobox-content .z-label{font-size:13px;} .reportGid.z-grid .z-footer-content{padding: 4px
+		20px;} .reportGid.z-grid .z-grid-footer{ background: #FFFFFF;}
+		.z-datebox-input{height:30px;} .z-datebox-button{height:30px;padding-top:
+		7px;}.z-popup-content{padding:0;} .z-datebox-input{ padding: 4px 10px;} .date.z-popup
+		.z-listbox .z-listcell-content { margin:0; line-height: 20px;} .date.z-popup .z-listbox
+		.z-listitem-selected .z-listcell-content:before {top:6px;} .reportGid
+		.z-grid-header-border{border-bottom: 1px solid #f0f6f9;} .reportGid .z-column{border-left:
+		1px solid #f0f6f9;border-bottom:0;} .reportGid .z-grid-footer { border-top: 1px solid
+		#f0f6f9} .reportGid .z-grid-footer .z-label{font-weight:bold;color: #707070;}
+		.z-groupbox>.z-groupbox-header { border: 1px solid #f0f6f9;border-bottom: 0; }
+		.z-groupbox-content { border: 1px solid #f0f6f9; } .z-groupbox { padding-top: 8px; }
+	</style>
+	<a label="发电数据统计" iconSclass="z-icon-list-alt" sclass="rcaption lighter" />
+	<columnlayout
+		style="border-bottom: 1px dotted #E2E2E2;padding-bottom: 16px;padding-top: 7px;border-top: 1px solid #DCE8F1;padding-bottom: 16px;padding-top: 16px;">
+		<columnchildren>
+			<panel>
+				<panelchildren>
+					<hbox align="center" spacing="10px">
+						查询地区：
+						<button dir="reverse" id="areaBtn" label="@bind(vm.selectedArea)"
+							sclass="btn-default btn-sm dropdown-toggle areaBtn"
+							popup="areapp, position=after_end, type=toggle" iconSclass="caret" width="150px"
+							zclass="btn" />
+						<space></space>
+						时间：
+						<datebox height="30px" constraint="no future,after 20160101"
+							format="yyyy-MM-dd" id="startDbx" width="110px">
+						</datebox>
+						—
+						<datebox height="30px" constraint="no future,after 20160101"
+							format="yyyy-MM-dd" id="endDbx" width="110px">
+						</datebox>
+						<space></space>
+						<button iconSclass="glyphicon glyphicon-search" sclass="btn-primary btn-sm"
+							zclass="btn" label=" 查询 " onClick="@command('queryReport')"
+							autodisable="self,exportReportBtn" id="queryReportBtn"
+							onCreate="Events.postEvent(Events.ON_CLICK,self,null);" />
+						<button iconSclass="glyphicon glyphicon glyphicon-export"
+							sclass="btn-success btn-sm" zclass="btn" label=" 导出EXCEL" onClick="@command('exportReport')"
+							autodisable="self" style="margin-right:5px;" id="exportReportBtn" />
+					</hbox>
+				</panelchildren>
+			</panel>
+		</columnchildren>
+	</columnlayout>
+	<columnlayout style="padding-top:20px;">
+		<columnchildren width="210px">
+			<panel>
+				<panelchildren>
+					<groupbox closable="false">
+						<caption>
+							<label value="@load(vm.summary.showText)"></label>
+							概要统计
+						</caption>
+						<vlayout sclass="infobox-container">
+							<hlayout spacing="0">
+								<div sclass="infobox infobox-green">
+									<span sclass="infobox-icon">
+										<span zclass="z-icon-check-square-o" />
+									</span>
+									<div sclass="infobox-data">
+										<label value="@load(vm.summary.sumDone)"
+											sclass="infobox-data-number" />
+										<div sclass="infobox-content">已完成总数</div>
+									</div>
+									<!-- 									<div sclass="stat stat-success">8%</div> -->
+								</div>
+
+								<div sclass="infobox infobox-blue">
+									<span sclass="infobox-icon">
+										<span zclass="z-icon-calendar" />
+									</span>
+									<div sclass="infobox-data">
+										<label value="@load(vm.summary.monthDone)"
+											sclass="infobox-data-number" />
+										<div sclass="infobox-content">本月已完成</div>
+									</div>
+									<!-- 									<a sclass="badge badge-success" label="+32%" -->
+									<!-- 										iconSclass="z-icon-arrow-up" /> -->
+								</div>
+
+								<div sclass="infobox infobox-pink">
+									<span sclass="infobox-icon">
+										<span zclass="z-icon-twitter" />
+									</span>
+									<div sclass="infobox-data">
+										<label value="@load(vm.summary.todayDone)"
+											sclass="infobox-data-number" />
+										<div sclass="infobox-content">今日已完成</div>
+									</div>
+									<!-- 									<div class="stat stat-important">4%</div> -->
+								</div>
+
+								<div class="infobox infobox-red">
+									<span sclass="infobox-icon">
+										<span zclass="z-icon-warning" />
+									</span>
+									<div class="infobox-data">
+										<label value="@load(vm.summary.sumIng)"
+											sclass="infobox-data-number" />
+										<div class="infobox-content">进行中总数</div>
+									</div>
+								</div>
+							</hlayout>
+						</vlayout>
+					</groupbox>
+				</panelchildren>
+			</panel>
+		</columnchildren>
+		<columnchildren width="30px"></columnchildren>
+		<columnchildren width="700px">
+			<panel>
+				<panelchildren>
+					<groupbox closable="false">
+						<caption>
+							查询结果
+						</caption>
+						<vlayout>
+							<div sclass="chart" style="height:250px;" />
+							<grid id="reportGid" class="reportGid" oddRowSclass="myoddrow">
+								<columns>
+									<column iconSclass="z-icon-caret-right blue" label="@load(vm.fristHeaderLabel)" />
+									<column iconSclass="z-icon-caret-right blue" label="已完成" />
+									<column iconSclass="z-icon-caret-right blue" label="进行中" />
+									<column iconSclass="z-icon-caret-right blue" label="总数量" />
+								</columns>	
+								<foot>
+									<footer>
+										<label value="合计" />
+									</footer>
+									<footer>
+										<label value="@load(vm.sumReprotItem.done)" />
+									</footer>
+									<footer>
+										<label value="@load(vm.sumReprotItem.ing)" />
+									</footer>
+									<footer>
+										<label value="@load(vm.sumReprotItem.sum)" />
+									</footer>
+								</foot>
+							</grid>
+						</vlayout>
+					</groupbox>
+				</panelchildren>
+			</panel>
+		</columnchildren>
+	</columnlayout>
+	<popup id="areapp" width="120px" sclass="date">
+		<listbox id="areaLbx" multiple="false" onSelect="@command('areaOnSelect',target=self)"
+			onCreate="Events.postEvent(Events.ON_SELECT,self,null);">
+		</listbox>
+	</popup>
+</vlayout>

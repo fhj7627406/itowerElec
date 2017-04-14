@@ -1,0 +1,1261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ITBILLMAPPER" >
+  <resultMap id="BaseResultMap" type="com.fuhj.itower.model.ITBill" >
+    <id column="it_bill_id" property="itBillId" jdbcType="INTEGER" />
+    <result column="bill_code" property="billCode" jdbcType="VARCHAR" />
+    <result column="bill_status" property="billStatus" jdbcType="VARCHAR" />
+    <result column="accept_time" property="acceptTime" jdbcType="TIMESTAMP" />
+    <result column="dispatch_time" property="dispatchTime" jdbcType="TIMESTAMP" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_time" property="alarmTime" jdbcType="TIMESTAMP" />
+    <result column="time_limit" property="timeLimit" jdbcType="VARCHAR" />
+    <result column="receipt_time" property="receiptTime" jdbcType="TIMESTAMP" />
+    <result column="filed_time" property="filedTime" jdbcType="TIMESTAMP" />
+    <result column="fault_source" property="faultSource" jdbcType="VARCHAR" />
+    <result column="alarm_name" property="alarmName" jdbcType="VARCHAR" />
+    <result column="alarm_status" property="alarmStatus" jdbcType="VARCHAR" />
+    <result column="alarm_detail" property="alarmDetail" jdbcType="VARCHAR" />
+    <result column="alarm_level" property="alarmLevel" jdbcType="VARCHAR" />
+    <result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="it_province_id" property="itProvinceId" jdbcType="VARCHAR" />
+    <result column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+    <result column="it_district_id" property="itDistrictId" jdbcType="VARCHAR" />
+    <result column="go_station" property="goStation" jdbcType="VARCHAR" />
+    <result column="fault_reason" property="faultReason" jdbcType="VARCHAR" />
+    <result column="immunity" property="immunity" jdbcType="VARCHAR" />
+    <result column="disclaimer" property="disclaimer" jdbcType="VARCHAR" />
+    <result column="immunity_reason" property="immunityReason" jdbcType="VARCHAR" />
+    <result column="alarm_clear_time" property="alarmClearTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_reply_content" property="alarmReplyContent" jdbcType="VARCHAR" />
+    <result column="fault_device_type" property="faultDeviceType" jdbcType="VARCHAR" />
+    <result column="has_pressed" property="hasPressed" jdbcType="VARCHAR" />
+    <result column="is_receipt_timeout" property="isReceiptTimeout" jdbcType="VARCHAR" />
+    <result column="receipt_person" property="receiptPerson" jdbcType="VARCHAR" />
+    <result column="agents_corp" property="agentsCorp" jdbcType="VARCHAR" />
+    <result column="bill_process" property="billProcess" jdbcType="VARCHAR" />
+    <result column="machine_room_type" property="machineRoomType" jdbcType="VARCHAR" />
+    <result column="power_supply_mode" property="powerSupplyMode" jdbcType="VARCHAR" />
+    <result column="fsu_network_card_type" property="fsuNetworkCardType" jdbcType="VARCHAR" />
+    <result column="fsu_manufactor" property="fsuManufactor" jdbcType="VARCHAR" />
+    <result column="ac_manufactor" property="acManufactor" jdbcType="VARCHAR" />
+    <result column="battery_manufactor" property="batteryManufactor" jdbcType="VARCHAR" />
+    <result column="switch_manufactor" property="switchManufactor" jdbcType="VARCHAR" />
+    <result column="elec_conditions" property="elecConditions" jdbcType="VARCHAR" />
+    <result column="battery_count" property="batteryCount" jdbcType="VARCHAR" />
+    <result column="battery_capacity" property="batteryCapacity" jdbcType="VARCHAR" />
+    <result column="total_current" property="totalCurrent" jdbcType="VARCHAR" />
+    <result column="battery_guarantee" property="batteryGuarantee" jdbcType="VARCHAR" />
+    <result column="alarm_duration" property="alarmDuration" jdbcType="VARCHAR" />
+    <result column="bill_duration" property="billDuration" jdbcType="VARCHAR" />
+    <result column="bill_handler" property="billHandler" jdbcType="VARCHAR" />
+    <result column="receipt_terminal" property="receiptTerminal" jdbcType="VARCHAR" />
+    <result column="receive_duration" property="receiveDuration" jdbcType="VARCHAR" />
+    <result column="first_reply_time" property="firstReplyTime" jdbcType="TIMESTAMP" />
+    <result column="is_receive_timeout" property="isReceiveTimeout" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="fault_confirm_content" property="faultConfirmContent" jdbcType="VARCHAR" />
+    <result column="area_manager" property="areaManager" jdbcType="VARCHAR" />
+    <result column="data_origin" property="dataOrigin" jdbcType="VARCHAR" />
+    <result column="receive_terminal" property="receiveTerminal" jdbcType="VARCHAR" />
+    <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="sign_lng" property="signLng" jdbcType="VARCHAR" />
+    <result column="sign_lat" property="signLat" jdbcType="VARCHAR" />
+    <result column="station_lng" property="stationLng" jdbcType="VARCHAR" />
+    <result column="station_lat" property="stationLat" jdbcType="VARCHAR" />
+    <result column="is_elec_gener_bill" property="isElecGenerBill" jdbcType="VARCHAR" />
+    <result column="fault_type" property="faultType" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    it_bill_id, bill_code, bill_status, accept_time, dispatch_time, receive_time, alarm_time, 
+    time_limit, receipt_time, filed_time, fault_source, alarm_name, alarm_status, alarm_detail, 
+    alarm_level, station_code, station_name, province, city, district, it_province_id, 
+    it_city_id, it_district_id, go_station, fault_reason, immunity, disclaimer, immunity_reason, 
+    alarm_clear_time, alarm_reply_content, fault_device_type, has_pressed, is_receipt_timeout, 
+    receipt_person, agents_corp, bill_process, machine_room_type, power_supply_mode, 
+    fsu_network_card_type, fsu_manufactor, ac_manufactor, battery_manufactor, switch_manufactor, 
+    elec_conditions, battery_count, battery_capacity, total_current, battery_guarantee, 
+    alarm_duration, bill_duration, bill_handler, receipt_terminal, receive_duration, 
+    first_reply_time, is_receive_timeout, operator, fault_confirm_content, area_manager, 
+    data_origin, receive_terminal, sign_time, sign_lng, sign_lat, station_lng, station_lat, 
+    is_elec_gener_bill, fault_type, remark, update_time, create_time, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from it_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    from it_bill
+    where it_bill_id = #{itBillId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from it_bill
+    where it_bill_id = #{itBillId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example" >
+    delete from it_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fuhj.itower.model.ITBill" >
+    <selectKey resultType="int" keyProperty="itBillId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into it_bill (bill_code, bill_status, accept_time, 
+      dispatch_time, receive_time, alarm_time, 
+      time_limit, receipt_time, filed_time, 
+      fault_source, alarm_name, alarm_status, 
+      alarm_detail, alarm_level, station_code, 
+      station_name, province, city, 
+      district, it_province_id, it_city_id, 
+      it_district_id, go_station, fault_reason, 
+      immunity, disclaimer, immunity_reason, 
+      alarm_clear_time, alarm_reply_content, fault_device_type, 
+      has_pressed, is_receipt_timeout, receipt_person, 
+      agents_corp, bill_process, machine_room_type, 
+      power_supply_mode, fsu_network_card_type, fsu_manufactor, 
+      ac_manufactor, battery_manufactor, switch_manufactor, 
+      elec_conditions, battery_count, battery_capacity, 
+      total_current, battery_guarantee, alarm_duration, 
+      bill_duration, bill_handler, receipt_terminal, 
+      receive_duration, first_reply_time, is_receive_timeout, 
+      operator, fault_confirm_content, area_manager, 
+      data_origin, receive_terminal, sign_time, 
+      sign_lng, sign_lat, station_lng, 
+      station_lat, is_elec_gener_bill, fault_type, 
+      remark, update_time, create_time, 
+      status)
+    values (#{billCode,jdbcType=VARCHAR}, #{billStatus,jdbcType=VARCHAR}, #{acceptTime,jdbcType=TIMESTAMP}, 
+      #{dispatchTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, #{alarmTime,jdbcType=TIMESTAMP}, 
+      #{timeLimit,jdbcType=VARCHAR}, #{receiptTime,jdbcType=TIMESTAMP}, #{filedTime,jdbcType=TIMESTAMP}, 
+      #{faultSource,jdbcType=VARCHAR}, #{alarmName,jdbcType=VARCHAR}, #{alarmStatus,jdbcType=VARCHAR}, 
+      #{alarmDetail,jdbcType=VARCHAR}, #{alarmLevel,jdbcType=VARCHAR}, #{stationCode,jdbcType=VARCHAR}, 
+      #{stationName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{itProvinceId,jdbcType=VARCHAR}, #{itCityId,jdbcType=VARCHAR}, 
+      #{itDistrictId,jdbcType=VARCHAR}, #{goStation,jdbcType=VARCHAR}, #{faultReason,jdbcType=VARCHAR}, 
+      #{immunity,jdbcType=VARCHAR}, #{disclaimer,jdbcType=VARCHAR}, #{immunityReason,jdbcType=VARCHAR}, 
+      #{alarmClearTime,jdbcType=TIMESTAMP}, #{alarmReplyContent,jdbcType=VARCHAR}, #{faultDeviceType,jdbcType=VARCHAR}, 
+      #{hasPressed,jdbcType=VARCHAR}, #{isReceiptTimeout,jdbcType=VARCHAR}, #{receiptPerson,jdbcType=VARCHAR}, 
+      #{agentsCorp,jdbcType=VARCHAR}, #{billProcess,jdbcType=VARCHAR}, #{machineRoomType,jdbcType=VARCHAR}, 
+      #{powerSupplyMode,jdbcType=VARCHAR}, #{fsuNetworkCardType,jdbcType=VARCHAR}, #{fsuManufactor,jdbcType=VARCHAR}, 
+      #{acManufactor,jdbcType=VARCHAR}, #{batteryManufactor,jdbcType=VARCHAR}, #{switchManufactor,jdbcType=VARCHAR}, 
+      #{elecConditions,jdbcType=VARCHAR}, #{batteryCount,jdbcType=VARCHAR}, #{batteryCapacity,jdbcType=VARCHAR}, 
+      #{totalCurrent,jdbcType=VARCHAR}, #{batteryGuarantee,jdbcType=VARCHAR}, #{alarmDuration,jdbcType=VARCHAR}, 
+      #{billDuration,jdbcType=VARCHAR}, #{billHandler,jdbcType=VARCHAR}, #{receiptTerminal,jdbcType=VARCHAR}, 
+      #{receiveDuration,jdbcType=VARCHAR}, #{firstReplyTime,jdbcType=TIMESTAMP}, #{isReceiveTimeout,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{faultConfirmContent,jdbcType=VARCHAR}, #{areaManager,jdbcType=VARCHAR}, 
+      #{dataOrigin,jdbcType=VARCHAR}, #{receiveTerminal,jdbcType=VARCHAR}, #{signTime,jdbcType=TIMESTAMP}, 
+      #{signLng,jdbcType=VARCHAR}, #{signLat,jdbcType=VARCHAR}, #{stationLng,jdbcType=VARCHAR}, 
+      #{stationLat,jdbcType=VARCHAR}, #{isElecGenerBill,jdbcType=VARCHAR}, #{faultType,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhj.itower.model.ITBill" >
+    <selectKey resultType="int" keyProperty="itBillId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into it_bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billCode != null" >
+        bill_code,
+      </if>
+      <if test="billStatus != null" >
+        bill_status,
+      </if>
+      <if test="acceptTime != null" >
+        accept_time,
+      </if>
+      <if test="dispatchTime != null" >
+        dispatch_time,
+      </if>
+      <if test="receiveTime != null" >
+        receive_time,
+      </if>
+      <if test="alarmTime != null" >
+        alarm_time,
+      </if>
+      <if test="timeLimit != null" >
+        time_limit,
+      </if>
+      <if test="receiptTime != null" >
+        receipt_time,
+      </if>
+      <if test="filedTime != null" >
+        filed_time,
+      </if>
+      <if test="faultSource != null" >
+        fault_source,
+      </if>
+      <if test="alarmName != null" >
+        alarm_name,
+      </if>
+      <if test="alarmStatus != null" >
+        alarm_status,
+      </if>
+      <if test="alarmDetail != null" >
+        alarm_detail,
+      </if>
+      <if test="alarmLevel != null" >
+        alarm_level,
+      </if>
+      <if test="stationCode != null" >
+        station_code,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="itProvinceId != null" >
+        it_province_id,
+      </if>
+      <if test="itCityId != null" >
+        it_city_id,
+      </if>
+      <if test="itDistrictId != null" >
+        it_district_id,
+      </if>
+      <if test="goStation != null" >
+        go_station,
+      </if>
+      <if test="faultReason != null" >
+        fault_reason,
+      </if>
+      <if test="immunity != null" >
+        immunity,
+      </if>
+      <if test="disclaimer != null" >
+        disclaimer,
+      </if>
+      <if test="immunityReason != null" >
+        immunity_reason,
+      </if>
+      <if test="alarmClearTime != null" >
+        alarm_clear_time,
+      </if>
+      <if test="alarmReplyContent != null" >
+        alarm_reply_content,
+      </if>
+      <if test="faultDeviceType != null" >
+        fault_device_type,
+      </if>
+      <if test="hasPressed != null" >
+        has_pressed,
+      </if>
+      <if test="isReceiptTimeout != null" >
+        is_receipt_timeout,
+      </if>
+      <if test="receiptPerson != null" >
+        receipt_person,
+      </if>
+      <if test="agentsCorp != null" >
+        agents_corp,
+      </if>
+      <if test="billProcess != null" >
+        bill_process,
+      </if>
+      <if test="machineRoomType != null" >
+        machine_room_type,
+      </if>
+      <if test="powerSupplyMode != null" >
+        power_supply_mode,
+      </if>
+      <if test="fsuNetworkCardType != null" >
+        fsu_network_card_type,
+      </if>
+      <if test="fsuManufactor != null" >
+        fsu_manufactor,
+      </if>
+      <if test="acManufactor != null" >
+        ac_manufactor,
+      </if>
+      <if test="batteryManufactor != null" >
+        battery_manufactor,
+      </if>
+      <if test="switchManufactor != null" >
+        switch_manufactor,
+      </if>
+      <if test="elecConditions != null" >
+        elec_conditions,
+      </if>
+      <if test="batteryCount != null" >
+        battery_count,
+      </if>
+      <if test="batteryCapacity != null" >
+        battery_capacity,
+      </if>
+      <if test="totalCurrent != null" >
+        total_current,
+      </if>
+      <if test="batteryGuarantee != null" >
+        battery_guarantee,
+      </if>
+      <if test="alarmDuration != null" >
+        alarm_duration,
+      </if>
+      <if test="billDuration != null" >
+        bill_duration,
+      </if>
+      <if test="billHandler != null" >
+        bill_handler,
+      </if>
+      <if test="receiptTerminal != null" >
+        receipt_terminal,
+      </if>
+      <if test="receiveDuration != null" >
+        receive_duration,
+      </if>
+      <if test="firstReplyTime != null" >
+        first_reply_time,
+      </if>
+      <if test="isReceiveTimeout != null" >
+        is_receive_timeout,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="faultConfirmContent != null" >
+        fault_confirm_content,
+      </if>
+      <if test="areaManager != null" >
+        area_manager,
+      </if>
+      <if test="dataOrigin != null" >
+        data_origin,
+      </if>
+      <if test="receiveTerminal != null" >
+        receive_terminal,
+      </if>
+      <if test="signTime != null" >
+        sign_time,
+      </if>
+      <if test="signLng != null" >
+        sign_lng,
+      </if>
+      <if test="signLat != null" >
+        sign_lat,
+      </if>
+      <if test="stationLng != null" >
+        station_lng,
+      </if>
+      <if test="stationLat != null" >
+        station_lat,
+      </if>
+      <if test="isElecGenerBill != null" >
+        is_elec_gener_bill,
+      </if>
+      <if test="faultType != null" >
+        fault_type,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      status,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billCode != null" >
+        #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="billStatus != null" >
+        #{billStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptTime != null" >
+        #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dispatchTime != null" >
+        #{dispatchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null" >
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmTime != null" >
+        #{alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeLimit != null" >
+        #{timeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTime != null" >
+        #{receiptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filedTime != null" >
+        #{filedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="faultSource != null" >
+        #{faultSource,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmName != null" >
+        #{alarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmStatus != null" >
+        #{alarmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmDetail != null" >
+        #{alarmDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmLevel != null" >
+        #{alarmLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCode != null" >
+        #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="itProvinceId != null" >
+        #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="itCityId != null" >
+        #{itCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="itDistrictId != null" >
+        #{itDistrictId,jdbcType=VARCHAR},
+      </if>
+      <if test="goStation != null" >
+        #{goStation,jdbcType=VARCHAR},
+      </if>
+      <if test="faultReason != null" >
+        #{faultReason,jdbcType=VARCHAR},
+      </if>
+      <if test="immunity != null" >
+        #{immunity,jdbcType=VARCHAR},
+      </if>
+      <if test="disclaimer != null" >
+        #{disclaimer,jdbcType=VARCHAR},
+      </if>
+      <if test="immunityReason != null" >
+        #{immunityReason,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmClearTime != null" >
+        #{alarmClearTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmReplyContent != null" >
+        #{alarmReplyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="faultDeviceType != null" >
+        #{faultDeviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="hasPressed != null" >
+        #{hasPressed,jdbcType=VARCHAR},
+      </if>
+      <if test="isReceiptTimeout != null" >
+        #{isReceiptTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPerson != null" >
+        #{receiptPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="agentsCorp != null" >
+        #{agentsCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="billProcess != null" >
+        #{billProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="machineRoomType != null" >
+        #{machineRoomType,jdbcType=VARCHAR},
+      </if>
+      <if test="powerSupplyMode != null" >
+        #{powerSupplyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fsuNetworkCardType != null" >
+        #{fsuNetworkCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="fsuManufactor != null" >
+        #{fsuManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="acManufactor != null" >
+        #{acManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryManufactor != null" >
+        #{batteryManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="switchManufactor != null" >
+        #{switchManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="elecConditions != null" >
+        #{elecConditions,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryCount != null" >
+        #{batteryCount,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryCapacity != null" >
+        #{batteryCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCurrent != null" >
+        #{totalCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryGuarantee != null" >
+        #{batteryGuarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmDuration != null" >
+        #{alarmDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="billDuration != null" >
+        #{billDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="billHandler != null" >
+        #{billHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTerminal != null" >
+        #{receiptTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDuration != null" >
+        #{receiveDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="firstReplyTime != null" >
+        #{firstReplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReceiveTimeout != null" >
+        #{isReceiveTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="faultConfirmContent != null" >
+        #{faultConfirmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="areaManager != null" >
+        #{areaManager,jdbcType=VARCHAR},
+      </if>
+      <if test="dataOrigin != null" >
+        #{dataOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTerminal != null" >
+        #{receiveTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signLng != null" >
+        #{signLng,jdbcType=VARCHAR},
+      </if>
+      <if test="signLat != null" >
+        #{signLat,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLng != null" >
+        #{stationLng,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLat != null" >
+        #{stationLat,jdbcType=VARCHAR},
+      </if>
+      <if test="isElecGenerBill != null" >
+        #{isElecGenerBill,jdbcType=VARCHAR},
+      </if>
+      <if test="faultType != null" >
+        #{faultType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      #{status,jdbcType=SMALLINT},
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer" >
+    select count(*) from it_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update it_bill
+    <set >
+      <if test="record.itBillId != null" >
+        it_bill_id = #{record.itBillId,jdbcType=INTEGER},
+      </if>
+      <if test="record.billCode != null" >
+        bill_code = #{record.billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billStatus != null" >
+        bill_status = #{record.billStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acceptTime != null" >
+        accept_time = #{record.acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dispatchTime != null" >
+        dispatch_time = #{record.dispatchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.receiveTime != null" >
+        receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.alarmTime != null" >
+        alarm_time = #{record.alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.timeLimit != null" >
+        time_limit = #{record.timeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiptTime != null" >
+        receipt_time = #{record.receiptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.filedTime != null" >
+        filed_time = #{record.filedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.faultSource != null" >
+        fault_source = #{record.faultSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmName != null" >
+        alarm_name = #{record.alarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmStatus != null" >
+        alarm_status = #{record.alarmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmDetail != null" >
+        alarm_detail = #{record.alarmDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmLevel != null" >
+        alarm_level = #{record.alarmLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationCode != null" >
+        station_code = #{record.stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationName != null" >
+        station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null" >
+        district = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itProvinceId != null" >
+        it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itCityId != null" >
+        it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itDistrictId != null" >
+        it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goStation != null" >
+        go_station = #{record.goStation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faultReason != null" >
+        fault_reason = #{record.faultReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.immunity != null" >
+        immunity = #{record.immunity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disclaimer != null" >
+        disclaimer = #{record.disclaimer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.immunityReason != null" >
+        immunity_reason = #{record.immunityReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmClearTime != null" >
+        alarm_clear_time = #{record.alarmClearTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.alarmReplyContent != null" >
+        alarm_reply_content = #{record.alarmReplyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faultDeviceType != null" >
+        fault_device_type = #{record.faultDeviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasPressed != null" >
+        has_pressed = #{record.hasPressed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isReceiptTimeout != null" >
+        is_receipt_timeout = #{record.isReceiptTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiptPerson != null" >
+        receipt_person = #{record.receiptPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentsCorp != null" >
+        agents_corp = #{record.agentsCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billProcess != null" >
+        bill_process = #{record.billProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineRoomType != null" >
+        machine_room_type = #{record.machineRoomType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerSupplyMode != null" >
+        power_supply_mode = #{record.powerSupplyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsuNetworkCardType != null" >
+        fsu_network_card_type = #{record.fsuNetworkCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsuManufactor != null" >
+        fsu_manufactor = #{record.fsuManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acManufactor != null" >
+        ac_manufactor = #{record.acManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batteryManufactor != null" >
+        battery_manufactor = #{record.batteryManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.switchManufactor != null" >
+        switch_manufactor = #{record.switchManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elecConditions != null" >
+        elec_conditions = #{record.elecConditions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batteryCount != null" >
+        battery_count = #{record.batteryCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batteryCapacity != null" >
+        battery_capacity = #{record.batteryCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalCurrent != null" >
+        total_current = #{record.totalCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batteryGuarantee != null" >
+        battery_guarantee = #{record.batteryGuarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmDuration != null" >
+        alarm_duration = #{record.alarmDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billDuration != null" >
+        bill_duration = #{record.billDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billHandler != null" >
+        bill_handler = #{record.billHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiptTerminal != null" >
+        receipt_terminal = #{record.receiptTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveDuration != null" >
+        receive_duration = #{record.receiveDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstReplyTime != null" >
+        first_reply_time = #{record.firstReplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isReceiveTimeout != null" >
+        is_receive_timeout = #{record.isReceiveTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faultConfirmContent != null" >
+        fault_confirm_content = #{record.faultConfirmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaManager != null" >
+        area_manager = #{record.areaManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataOrigin != null" >
+        data_origin = #{record.dataOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveTerminal != null" >
+        receive_terminal = #{record.receiveTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signTime != null" >
+        sign_time = #{record.signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.signLng != null" >
+        sign_lng = #{record.signLng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signLat != null" >
+        sign_lat = #{record.signLat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationLng != null" >
+        station_lng = #{record.stationLng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationLat != null" >
+        station_lat = #{record.stationLat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isElecGenerBill != null" >
+        is_elec_gener_bill = #{record.isElecGenerBill,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faultType != null" >
+        fault_type = #{record.faultType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update it_bill
+    set it_bill_id = #{record.itBillId,jdbcType=INTEGER},
+      bill_code = #{record.billCode,jdbcType=VARCHAR},
+      bill_status = #{record.billStatus,jdbcType=VARCHAR},
+      accept_time = #{record.acceptTime,jdbcType=TIMESTAMP},
+      dispatch_time = #{record.dispatchTime,jdbcType=TIMESTAMP},
+      receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+      alarm_time = #{record.alarmTime,jdbcType=TIMESTAMP},
+      time_limit = #{record.timeLimit,jdbcType=VARCHAR},
+      receipt_time = #{record.receiptTime,jdbcType=TIMESTAMP},
+      filed_time = #{record.filedTime,jdbcType=TIMESTAMP},
+      fault_source = #{record.faultSource,jdbcType=VARCHAR},
+      alarm_name = #{record.alarmName,jdbcType=VARCHAR},
+      alarm_status = #{record.alarmStatus,jdbcType=VARCHAR},
+      alarm_detail = #{record.alarmDetail,jdbcType=VARCHAR},
+      alarm_level = #{record.alarmLevel,jdbcType=VARCHAR},
+      station_code = #{record.stationCode,jdbcType=VARCHAR},
+      station_name = #{record.stationName,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      district = #{record.district,jdbcType=VARCHAR},
+      it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+      it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+      go_station = #{record.goStation,jdbcType=VARCHAR},
+      fault_reason = #{record.faultReason,jdbcType=VARCHAR},
+      immunity = #{record.immunity,jdbcType=VARCHAR},
+      disclaimer = #{record.disclaimer,jdbcType=VARCHAR},
+      immunity_reason = #{record.immunityReason,jdbcType=VARCHAR},
+      alarm_clear_time = #{record.alarmClearTime,jdbcType=TIMESTAMP},
+      alarm_reply_content = #{record.alarmReplyContent,jdbcType=VARCHAR},
+      fault_device_type = #{record.faultDeviceType,jdbcType=VARCHAR},
+      has_pressed = #{record.hasPressed,jdbcType=VARCHAR},
+      is_receipt_timeout = #{record.isReceiptTimeout,jdbcType=VARCHAR},
+      receipt_person = #{record.receiptPerson,jdbcType=VARCHAR},
+      agents_corp = #{record.agentsCorp,jdbcType=VARCHAR},
+      bill_process = #{record.billProcess,jdbcType=VARCHAR},
+      machine_room_type = #{record.machineRoomType,jdbcType=VARCHAR},
+      power_supply_mode = #{record.powerSupplyMode,jdbcType=VARCHAR},
+      fsu_network_card_type = #{record.fsuNetworkCardType,jdbcType=VARCHAR},
+      fsu_manufactor = #{record.fsuManufactor,jdbcType=VARCHAR},
+      ac_manufactor = #{record.acManufactor,jdbcType=VARCHAR},
+      battery_manufactor = #{record.batteryManufactor,jdbcType=VARCHAR},
+      switch_manufactor = #{record.switchManufactor,jdbcType=VARCHAR},
+      elec_conditions = #{record.elecConditions,jdbcType=VARCHAR},
+      battery_count = #{record.batteryCount,jdbcType=VARCHAR},
+      battery_capacity = #{record.batteryCapacity,jdbcType=VARCHAR},
+      total_current = #{record.totalCurrent,jdbcType=VARCHAR},
+      battery_guarantee = #{record.batteryGuarantee,jdbcType=VARCHAR},
+      alarm_duration = #{record.alarmDuration,jdbcType=VARCHAR},
+      bill_duration = #{record.billDuration,jdbcType=VARCHAR},
+      bill_handler = #{record.billHandler,jdbcType=VARCHAR},
+      receipt_terminal = #{record.receiptTerminal,jdbcType=VARCHAR},
+      receive_duration = #{record.receiveDuration,jdbcType=VARCHAR},
+      first_reply_time = #{record.firstReplyTime,jdbcType=TIMESTAMP},
+      is_receive_timeout = #{record.isReceiveTimeout,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      fault_confirm_content = #{record.faultConfirmContent,jdbcType=VARCHAR},
+      area_manager = #{record.areaManager,jdbcType=VARCHAR},
+      data_origin = #{record.dataOrigin,jdbcType=VARCHAR},
+      receive_terminal = #{record.receiveTerminal,jdbcType=VARCHAR},
+      sign_time = #{record.signTime,jdbcType=TIMESTAMP},
+      sign_lng = #{record.signLng,jdbcType=VARCHAR},
+      sign_lat = #{record.signLat,jdbcType=VARCHAR},
+      station_lng = #{record.stationLng,jdbcType=VARCHAR},
+      station_lat = #{record.stationLat,jdbcType=VARCHAR},
+      is_elec_gener_bill = #{record.isElecGenerBill,jdbcType=VARCHAR},
+      fault_type = #{record.faultType,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.ITBill" >
+    update it_bill
+    <set >
+      <if test="billCode != null" >
+        bill_code = #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="billStatus != null" >
+        bill_status = #{billStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptTime != null" >
+        accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dispatchTime != null" >
+        dispatch_time = #{dispatchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmTime != null" >
+        alarm_time = #{alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeLimit != null" >
+        time_limit = #{timeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTime != null" >
+        receipt_time = #{receiptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filedTime != null" >
+        filed_time = #{filedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="faultSource != null" >
+        fault_source = #{faultSource,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmName != null" >
+        alarm_name = #{alarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmStatus != null" >
+        alarm_status = #{alarmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmDetail != null" >
+        alarm_detail = #{alarmDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmLevel != null" >
+        alarm_level = #{alarmLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCode != null" >
+        station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="itProvinceId != null" >
+        it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="itCityId != null" >
+        it_city_id = #{itCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="itDistrictId != null" >
+        it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+      </if>
+      <if test="goStation != null" >
+        go_station = #{goStation,jdbcType=VARCHAR},
+      </if>
+      <if test="faultReason != null" >
+        fault_reason = #{faultReason,jdbcType=VARCHAR},
+      </if>
+      <if test="immunity != null" >
+        immunity = #{immunity,jdbcType=VARCHAR},
+      </if>
+      <if test="disclaimer != null" >
+        disclaimer = #{disclaimer,jdbcType=VARCHAR},
+      </if>
+      <if test="immunityReason != null" >
+        immunity_reason = #{immunityReason,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmClearTime != null" >
+        alarm_clear_time = #{alarmClearTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmReplyContent != null" >
+        alarm_reply_content = #{alarmReplyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="faultDeviceType != null" >
+        fault_device_type = #{faultDeviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="hasPressed != null" >
+        has_pressed = #{hasPressed,jdbcType=VARCHAR},
+      </if>
+      <if test="isReceiptTimeout != null" >
+        is_receipt_timeout = #{isReceiptTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPerson != null" >
+        receipt_person = #{receiptPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="agentsCorp != null" >
+        agents_corp = #{agentsCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="billProcess != null" >
+        bill_process = #{billProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="machineRoomType != null" >
+        machine_room_type = #{machineRoomType,jdbcType=VARCHAR},
+      </if>
+      <if test="powerSupplyMode != null" >
+        power_supply_mode = #{powerSupplyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fsuNetworkCardType != null" >
+        fsu_network_card_type = #{fsuNetworkCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="fsuManufactor != null" >
+        fsu_manufactor = #{fsuManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="acManufactor != null" >
+        ac_manufactor = #{acManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryManufactor != null" >
+        battery_manufactor = #{batteryManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="switchManufactor != null" >
+        switch_manufactor = #{switchManufactor,jdbcType=VARCHAR},
+      </if>
+      <if test="elecConditions != null" >
+        elec_conditions = #{elecConditions,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryCount != null" >
+        battery_count = #{batteryCount,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryCapacity != null" >
+        battery_capacity = #{batteryCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCurrent != null" >
+        total_current = #{totalCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryGuarantee != null" >
+        battery_guarantee = #{batteryGuarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmDuration != null" >
+        alarm_duration = #{alarmDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="billDuration != null" >
+        bill_duration = #{billDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="billHandler != null" >
+        bill_handler = #{billHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTerminal != null" >
+        receipt_terminal = #{receiptTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDuration != null" >
+        receive_duration = #{receiveDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="firstReplyTime != null" >
+        first_reply_time = #{firstReplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReceiveTimeout != null" >
+        is_receive_timeout = #{isReceiveTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="faultConfirmContent != null" >
+        fault_confirm_content = #{faultConfirmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="areaManager != null" >
+        area_manager = #{areaManager,jdbcType=VARCHAR},
+      </if>
+      <if test="dataOrigin != null" >
+        data_origin = #{dataOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTerminal != null" >
+        receive_terminal = #{receiveTerminal,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signLng != null" >
+        sign_lng = #{signLng,jdbcType=VARCHAR},
+      </if>
+      <if test="signLat != null" >
+        sign_lat = #{signLat,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLng != null" >
+        station_lng = #{stationLng,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLat != null" >
+        station_lat = #{stationLat,jdbcType=VARCHAR},
+      </if>
+      <if test="isElecGenerBill != null" >
+        is_elec_gener_bill = #{isElecGenerBill,jdbcType=VARCHAR},
+      </if>
+      <if test="faultType != null" >
+        fault_type = #{faultType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where it_bill_id = #{itBillId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.ITBill" >
+    update it_bill
+    set bill_code = #{billCode,jdbcType=VARCHAR},
+      bill_status = #{billStatus,jdbcType=VARCHAR},
+      accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      dispatch_time = #{dispatchTime,jdbcType=TIMESTAMP},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      alarm_time = #{alarmTime,jdbcType=TIMESTAMP},
+      time_limit = #{timeLimit,jdbcType=VARCHAR},
+      receipt_time = #{receiptTime,jdbcType=TIMESTAMP},
+      filed_time = #{filedTime,jdbcType=TIMESTAMP},
+      fault_source = #{faultSource,jdbcType=VARCHAR},
+      alarm_name = #{alarmName,jdbcType=VARCHAR},
+      alarm_status = #{alarmStatus,jdbcType=VARCHAR},
+      alarm_detail = #{alarmDetail,jdbcType=VARCHAR},
+      alarm_level = #{alarmLevel,jdbcType=VARCHAR},
+      station_code = #{stationCode,jdbcType=VARCHAR},
+      station_name = #{stationName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      it_city_id = #{itCityId,jdbcType=VARCHAR},
+      it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+      go_station = #{goStation,jdbcType=VARCHAR},
+      fault_reason = #{faultReason,jdbcType=VARCHAR},
+      immunity = #{immunity,jdbcType=VARCHAR},
+      disclaimer = #{disclaimer,jdbcType=VARCHAR},
+      immunity_reason = #{immunityReason,jdbcType=VARCHAR},
+      alarm_clear_time = #{alarmClearTime,jdbcType=TIMESTAMP},
+      alarm_reply_content = #{alarmReplyContent,jdbcType=VARCHAR},
+      fault_device_type = #{faultDeviceType,jdbcType=VARCHAR},
+      has_pressed = #{hasPressed,jdbcType=VARCHAR},
+      is_receipt_timeout = #{isReceiptTimeout,jdbcType=VARCHAR},
+      receipt_person = #{receiptPerson,jdbcType=VARCHAR},
+      agents_corp = #{agentsCorp,jdbcType=VARCHAR},
+      bill_process = #{billProcess,jdbcType=VARCHAR},
+      machine_room_type = #{machineRoomType,jdbcType=VARCHAR},
+      power_supply_mode = #{powerSupplyMode,jdbcType=VARCHAR},
+      fsu_network_card_type = #{fsuNetworkCardType,jdbcType=VARCHAR},
+      fsu_manufactor = #{fsuManufactor,jdbcType=VARCHAR},
+      ac_manufactor = #{acManufactor,jdbcType=VARCHAR},
+      battery_manufactor = #{batteryManufactor,jdbcType=VARCHAR},
+      switch_manufactor = #{switchManufactor,jdbcType=VARCHAR},
+      elec_conditions = #{elecConditions,jdbcType=VARCHAR},
+      battery_count = #{batteryCount,jdbcType=VARCHAR},
+      battery_capacity = #{batteryCapacity,jdbcType=VARCHAR},
+      total_current = #{totalCurrent,jdbcType=VARCHAR},
+      battery_guarantee = #{batteryGuarantee,jdbcType=VARCHAR},
+      alarm_duration = #{alarmDuration,jdbcType=VARCHAR},
+      bill_duration = #{billDuration,jdbcType=VARCHAR},
+      bill_handler = #{billHandler,jdbcType=VARCHAR},
+      receipt_terminal = #{receiptTerminal,jdbcType=VARCHAR},
+      receive_duration = #{receiveDuration,jdbcType=VARCHAR},
+      first_reply_time = #{firstReplyTime,jdbcType=TIMESTAMP},
+      is_receive_timeout = #{isReceiveTimeout,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      fault_confirm_content = #{faultConfirmContent,jdbcType=VARCHAR},
+      area_manager = #{areaManager,jdbcType=VARCHAR},
+      data_origin = #{dataOrigin,jdbcType=VARCHAR},
+      receive_terminal = #{receiveTerminal,jdbcType=VARCHAR},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      sign_lng = #{signLng,jdbcType=VARCHAR},
+      sign_lat = #{signLat,jdbcType=VARCHAR},
+      station_lng = #{stationLng,jdbcType=VARCHAR},
+      station_lat = #{stationLat,jdbcType=VARCHAR},
+      is_elec_gener_bill = #{isElecGenerBill,jdbcType=VARCHAR},
+      fault_type = #{faultType,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT}
+    where it_bill_id = #{itBillId,jdbcType=INTEGER}
+  </update>
+  <update id="updateFieldsByExample" parameterType="map" >
+    update it_bill set 
+    <foreach collection="fields" item="field" separator="," >
+      ${field.fieldName} = #{field.fieldValue}
+    </foreach>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

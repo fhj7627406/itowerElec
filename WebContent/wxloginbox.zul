@@ -1,0 +1,32 @@
+<zk xmlns:n="native">
+	<div class="login_box" id="loginBox">
+		<div class="qrcode">
+			<image class="img" id="qrcodeimg"></image>
+			<n:p class="sub_title">扫描二维码登录微信</n:p>
+			<div class="extension">
+				<div class="item">
+					<n:i class="icon web_wechat_login_phone_icon"></n:i>
+					<div class="cont">
+						<n:h4 class="title">登录手机微信</n:h4>
+						<n:p class="desc">
+							手机上<!-- ngIf: lang == 'zh_CN' -->
+							<n:a class="ng-scope"
+								href="http://weixin.qq.com/cgi-bin/readtemplate?t=weixin_download_list&amp;lang=zh_CN"
+								target="_blank">
+								安装
+							</n:a>
+							并登录微信
+						</n:p>
+					</div>
+				</div>
+				<div class="item">
+					<n:i class="icon web_wechat_login_scan_icon"></n:i>
+					<div class="cont">
+						<n:h4 class="title">进入“扫一扫”</n:h4>
+						<n:p class="desc">从“发现”，进入“扫一扫”，扫码登录</n:p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</zk>

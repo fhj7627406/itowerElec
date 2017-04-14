@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ITCITYMAPPER" >
+  <resultMap id="BaseResultMap" type="com.fuhj.itower.model.ITCity" >
+    <id column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+    <result column="it_province_id" property="itProvinceId" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="sortrule" property="sortrule" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    it_city_id, it_province_id, cname, sortrule
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from it_city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from it_city
+    where it_city_id = #{itCityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from it_city
+    where it_city_id = #{itCityId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example" >
+    delete from it_city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fuhj.itower.model.ITCity" >
+    insert into it_city (it_city_id, it_province_id, cname, 
+      sortrule)
+    values (#{itCityId,jdbcType=VARCHAR}, #{itProvinceId,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
+      #{sortrule,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhj.itower.model.ITCity" >
+    insert into it_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itCityId != null" >
+        it_city_id,
+      </if>
+      <if test="itProvinceId != null" >
+        it_province_id,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      sortrule,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itCityId != null" >
+        #{itCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="itProvinceId != null" >
+        #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      #{sortrule,jdbcType=INTEGER},
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer" >
+    select count(*) from it_city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update it_city
+    <set >
+      <if test="record.itCityId != null" >
+        it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itProvinceId != null" >
+        it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortrule != null" >
+        sortrule = #{record.sortrule,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update it_city
+    set it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      sortrule = #{record.sortrule,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.ITCity" >
+    update it_city
+    <set >
+      <if test="itProvinceId != null" >
+        it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="sortrule != null" >
+        sortrule = #{sortrule,jdbcType=INTEGER},
+      </if>
+    </set>
+    where it_city_id = #{itCityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.ITCity" >
+    update it_city
+    set it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      sortrule = #{sortrule,jdbcType=INTEGER}
+    where it_city_id = #{itCityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateFieldsByExample" parameterType="map" >
+    update it_city set 
+    <foreach collection="fields" item="field" separator="," >
+      ${field.fieldName} = #{field.fieldValue}
+    </foreach>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ITSTATIONMAPPER">
+	<resultMap id="BaseResultMap" type="com.fuhj.itower.model.ItStation">
+		<id column="it_station_id" property="itStationId" jdbcType="INTEGER" />
+		<result column="it_province_id" property="itProvinceId" jdbcType="VARCHAR" />
+		<result column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+		<result column="it_district_id" property="itDistrictId" jdbcType="VARCHAR" />
+		<result column="station_name" property="stationName" jdbcType="VARCHAR" />
+		<result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+		<result column="station_sys_code" property="stationSysCode" jdbcType="VARCHAR" />
+		<result column="lng" property="lng" jdbcType="VARCHAR" />
+		<result column="lat" property="lat" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="origin_id" property="originId" jdbcType="SMALLINT" />
+		<result column="operator" property="operator" jdbcType="SMALLINT" />
+		<result column="scene_id" property="sceneId" jdbcType="SMALLINT" />
+		<result column="alias_cm" property="aliasCm" jdbcType="VARCHAR" />
+		<result column="alias_cu" property="aliasCu" jdbcType="VARCHAR" />
+		<result column="alias_ct" property="aliasCt" jdbcType="VARCHAR" />
+		<result column="station_type_id" property="stationTypeId" jdbcType="SMALLINT" />
+		<result column="area_manager" property="areaManager" jdbcType="VARCHAR" />
+		<result column="area_manager_phone" property="areaManagerPhone" jdbcType="VARCHAR" />
+		<result column="fsu_manufactor" property="fsuManufactor" jdbcType="VARCHAR" />
+		<result column="maintenance_corp" property="maintenanceCorp" jdbcType="VARCHAR" />
+		<result column="acceptance_date" property="acceptanceDate" jdbcType="DATE" />
+		<result column="outside_customer" property="outsideCustomer" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+                </when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+                </when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		it_station_id, it_province_id, it_city_id, it_district_id, station_name, station_code,
+		station_sys_code, lng, lat, address, origin_id, operator, scene_id, alias_cm, alias_cu,
+		alias_ct,
+		station_type_id, area_manager, area_manager_phone, fsu_manufactor, maintenance_corp,
+		acceptance_date, outside_customer, remark, status, create_time, update_time
+  </sql>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example">
+		select
+		<if test="distinct">
+			distinct
+    </if>
+		<include refid="Base_Column_List" />
+		from it_station
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+    </if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from it_station
+		where it_station_id = #{itStationId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from it_station
+		where it_station_id =
+		#{itStationId,jdbcType=INTEGER}
+  </delete>
+	<delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example">
+		delete from it_station
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.fuhj.itower.model.ItStation">
+		<selectKey resultType="int" keyProperty="itStationId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into it_station (it_province_id, it_city_id, it_district_id,
+		station_name, station_code,
+		station_sys_code,
+		lng, lat, address,
+		origin_id, operator, scene_id,
+		alias_cm, alias_cu, alias_ct,
+		station_type_id, area_manager, area_manager_phone,
+		fsu_manufactor, maintenance_corp,
+		acceptance_date,
+		outside_customer, remark, status,
+		create_time, update_time)
+		values
+		(#{itProvinceId,jdbcType=VARCHAR}, #{itCityId,jdbcType=VARCHAR},
+		#{itDistrictId,jdbcType=VARCHAR},
+		#{stationName,jdbcType=VARCHAR}, #{stationCode,jdbcType=VARCHAR},
+		#{stationSysCode,jdbcType=VARCHAR},
+		#{lng,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{originId,jdbcType=SMALLINT}, #{operator,jdbcType=SMALLINT},
+		#{sceneId,jdbcType=SMALLINT},
+		#{aliasCm,jdbcType=VARCHAR}, #{aliasCu,jdbcType=VARCHAR},
+		#{aliasCt,jdbcType=VARCHAR},
+		#{stationTypeId,jdbcType=SMALLINT}, #{areaManager,jdbcType=VARCHAR},
+		#{areaManagerPhone,jdbcType=VARCHAR},
+		#{fsuManufactor,jdbcType=VARCHAR},
+		#{maintenanceCorp,jdbcType=VARCHAR},
+		#{acceptanceDate,jdbcType=DATE},
+		#{outsideCustomer,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.fuhj.itower.model.ItStation">
+		<selectKey resultType="int" keyProperty="itStationId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into it_station
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="itProvinceId != null">
+				it_province_id,
+      </if>
+			<if test="itCityId != null">
+				it_city_id,
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id,
+      </if>
+			<if test="stationName != null">
+				station_name,
+      </if>
+			<if test="stationCode != null">
+				station_code,
+      </if>
+			<if test="stationSysCode != null">
+				station_sys_code,
+      </if>
+			<if test="lng != null">
+				lng,
+      </if>
+			<if test="lat != null">
+				lat,
+      </if>
+			<if test="address != null">
+				address,
+      </if>
+			origin_id,
+			operator,
+			scene_id,
+			<if test="aliasCm != null">
+				alias_cm,
+      </if>
+			<if test="aliasCu != null">
+				alias_cu,
+      </if>
+			<if test="aliasCt != null">
+				alias_ct,
+      </if>
+			station_type_id,
+			<if test="areaManager != null">
+				area_manager,
+      </if>
+			<if test="areaManagerPhone != null">
+				area_manager_phone,
+      </if>
+			<if test="fsuManufactor != null">
+				fsu_manufactor,
+      </if>
+			<if test="maintenanceCorp != null">
+				maintenance_corp,
+      </if>
+			<if test="acceptanceDate != null">
+				acceptance_date,
+      </if>
+			<if test="outsideCustomer != null">
+				outside_customer,
+      </if>
+			<if test="remark != null">
+				remark,
+      </if>
+			status,
+			<if test="createTime != null">
+				create_time,
+      </if>
+			<if test="updateTime != null">
+				update_time,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="itProvinceId != null">
+				#{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				#{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				#{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="stationName != null">
+				#{stationName,jdbcType=VARCHAR},
+      </if>
+			<if test="stationCode != null">
+				#{stationCode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationSysCode != null">
+				#{stationSysCode,jdbcType=VARCHAR},
+      </if>
+			<if test="lng != null">
+				#{lng,jdbcType=VARCHAR},
+      </if>
+			<if test="lat != null">
+				#{lat,jdbcType=VARCHAR},
+      </if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+      </if>
+			#{originId,jdbcType=SMALLINT},
+			#{operator,jdbcType=SMALLINT},
+			#{sceneId,jdbcType=SMALLINT},
+			<if test="aliasCm != null">
+				#{aliasCm,jdbcType=VARCHAR},
+      </if>
+			<if test="aliasCu != null">
+				#{aliasCu,jdbcType=VARCHAR},
+      </if>
+			<if test="aliasCt != null">
+				#{aliasCt,jdbcType=VARCHAR},
+      </if>
+			#{stationTypeId,jdbcType=SMALLINT},
+			<if test="areaManager != null">
+				#{areaManager,jdbcType=VARCHAR},
+      </if>
+			<if test="areaManagerPhone != null">
+				#{areaManagerPhone,jdbcType=VARCHAR},
+      </if>
+			<if test="fsuManufactor != null">
+				#{fsuManufactor,jdbcType=VARCHAR},
+      </if>
+			<if test="maintenanceCorp != null">
+				#{maintenanceCorp,jdbcType=VARCHAR},
+      </if>
+			<if test="acceptanceDate != null">
+				#{acceptanceDate,jdbcType=DATE},
+      </if>
+			<if test="outsideCustomer != null">
+				#{outsideCustomer,jdbcType=VARCHAR},
+      </if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+			#{status,jdbcType=SMALLINT},
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+      </if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer">
+		select count(*) from it_station
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update it_station
+		<set>
+			<if test="record.itStationId != null">
+				it_station_id = #{record.itStationId,jdbcType=INTEGER},
+      </if>
+			<if test="record.itProvinceId != null">
+				it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itCityId != null">
+				it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itDistrictId != null">
+				it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationName != null">
+				station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationCode != null">
+				station_code = #{record.stationCode,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationSysCode != null">
+				station_sys_code = #{record.stationSysCode,jdbcType=VARCHAR},
+      </if>
+			<if test="record.lng != null">
+				lng = #{record.lng,jdbcType=VARCHAR},
+      </if>
+			<if test="record.lat != null">
+				lat = #{record.lat,jdbcType=VARCHAR},
+      </if>
+			<if test="record.address != null">
+				address = #{record.address,jdbcType=VARCHAR},
+      </if>
+			<if test="record.originId != null">
+				origin_id = #{record.originId,jdbcType=SMALLINT},
+      </if>
+			<if test="record.operator != null">
+				operator = #{record.operator,jdbcType=SMALLINT},
+      </if>
+			<if test="record.sceneId != null">
+				scene_id = #{record.sceneId,jdbcType=SMALLINT},
+      </if>
+			<if test="record.aliasCm != null">
+				alias_cm = #{record.aliasCm,jdbcType=VARCHAR},
+      </if>
+			<if test="record.aliasCu != null">
+				alias_cu = #{record.aliasCu,jdbcType=VARCHAR},
+      </if>
+			<if test="record.aliasCt != null">
+				alias_ct = #{record.aliasCt,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationTypeId != null">
+				station_type_id = #{record.stationTypeId,jdbcType=SMALLINT},
+      </if>
+			<if test="record.areaManager != null">
+				area_manager = #{record.areaManager,jdbcType=VARCHAR},
+      </if>
+			<if test="record.areaManagerPhone != null">
+				area_manager_phone = #{record.areaManagerPhone,jdbcType=VARCHAR},
+      </if>
+			<if test="record.fsuManufactor != null">
+				fsu_manufactor = #{record.fsuManufactor,jdbcType=VARCHAR},
+      </if>
+			<if test="record.maintenanceCorp != null">
+				maintenance_corp = #{record.maintenanceCorp,jdbcType=VARCHAR},
+      </if>
+			<if test="record.acceptanceDate != null">
+				acceptance_date = #{record.acceptanceDate,jdbcType=DATE},
+      </if>
+			<if test="record.outsideCustomer != null">
+				outside_customer = #{record.outsideCustomer,jdbcType=VARCHAR},
+      </if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=SMALLINT},
+      </if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update it_station
+		set it_station_id = #{record.itStationId,jdbcType=INTEGER},
+		it_province_id =
+		#{record.itProvinceId,jdbcType=VARCHAR},
+		it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+		it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+		station_name =
+		#{record.stationName,jdbcType=VARCHAR},
+		station_code = #{record.stationCode,jdbcType=VARCHAR},
+		station_sys_code = #{record.stationSysCode,jdbcType=VARCHAR},
+		lng = #{record.lng,jdbcType=VARCHAR},
+		lat = #{record.lat,jdbcType=VARCHAR},
+		address = #{record.address,jdbcType=VARCHAR},
+		origin_id =
+		#{record.originId,jdbcType=SMALLINT},
+		operator = #{record.operator,jdbcType=SMALLINT},
+		scene_id =
+		#{record.sceneId,jdbcType=SMALLINT},
+		alias_cm = #{record.aliasCm,jdbcType=VARCHAR},
+		alias_cu =
+		#{record.aliasCu,jdbcType=VARCHAR},
+		alias_ct = #{record.aliasCt,jdbcType=VARCHAR},
+		station_type_id =
+		#{record.stationTypeId,jdbcType=SMALLINT},
+		area_manager = #{record.areaManager,jdbcType=VARCHAR},
+		area_manager_phone = #{record.areaManagerPhone,jdbcType=VARCHAR},
+		fsu_manufactor =
+		#{record.fsuManufactor,jdbcType=VARCHAR},
+		maintenance_corp =
+		#{record.maintenanceCorp,jdbcType=VARCHAR},
+		acceptance_date =
+		#{record.acceptanceDate,jdbcType=DATE},
+		outside_customer =
+		#{record.outsideCustomer,jdbcType=VARCHAR},
+		remark = #{record.remark,jdbcType=VARCHAR},
+		status =
+		#{record.status,jdbcType=SMALLINT},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.ItStation">
+		update it_station
+		<set>
+			<if test="itProvinceId != null">
+				it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				it_city_id = #{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="stationName != null">
+				station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+			<if test="stationCode != null">
+				station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationSysCode != null">
+				station_sys_code = #{stationSysCode,jdbcType=VARCHAR},
+      </if>
+			<if test="lng != null">
+				lng = #{lng,jdbcType=VARCHAR},
+      </if>
+			<if test="lat != null">
+				lat = #{lat,jdbcType=VARCHAR},
+      </if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+      </if>
+			<if test="originId != null">
+				origin_id = #{originId,jdbcType=SMALLINT},
+      </if>
+			<if test="operator != null">
+				operator = #{operator,jdbcType=SMALLINT},
+      </if>
+			<if test="sceneId != null">
+				scene_id = #{sceneId,jdbcType=SMALLINT},
+      </if>
+			<if test="aliasCm != null">
+				alias_cm = #{aliasCm,jdbcType=VARCHAR},
+      </if>
+			<if test="aliasCu != null">
+				alias_cu = #{aliasCu,jdbcType=VARCHAR},
+      </if>
+			<if test="aliasCt != null">
+				alias_ct = #{aliasCt,jdbcType=VARCHAR},
+      </if>
+			<if test="stationTypeId != null">
+				station_type_id = #{stationTypeId,jdbcType=SMALLINT},
+      </if>
+			<if test="areaManager != null">
+				area_manager = #{areaManager,jdbcType=VARCHAR},
+      </if>
+			<if test="areaManagerPhone != null">
+				area_manager_phone = #{areaManagerPhone,jdbcType=VARCHAR},
+      </if>
+			<if test="fsuManufactor != null">
+				fsu_manufactor = #{fsuManufactor,jdbcType=VARCHAR},
+      </if>
+			<if test="maintenanceCorp != null">
+				maintenance_corp = #{maintenanceCorp,jdbcType=VARCHAR},
+      </if>
+			<if test="acceptanceDate != null">
+				acceptance_date = #{acceptanceDate,jdbcType=DATE},
+      </if>
+			<if test="outsideCustomer != null">
+				outside_customer = #{outsideCustomer,jdbcType=VARCHAR},
+      </if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+      </if>
+			<if test="status != null">
+				status = #{status,jdbcType=SMALLINT},
+      </if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+		</set>
+		where it_station_id = #{itStationId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.ItStation">
+		update it_station
+		set it_province_id =
+		#{itProvinceId,jdbcType=VARCHAR},
+		it_city_id = #{itCityId,jdbcType=VARCHAR},
+		it_district_id =
+		#{itDistrictId,jdbcType=VARCHAR},
+		station_name = #{stationName,jdbcType=VARCHAR},
+		station_code =
+		#{stationCode,jdbcType=VARCHAR},
+		station_sys_code = #{stationSysCode,jdbcType=VARCHAR},
+		lng =
+		#{lng,jdbcType=VARCHAR},
+		lat = #{lat,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		origin_id = #{originId,jdbcType=SMALLINT},
+		operator = #{operator,jdbcType=SMALLINT},
+		scene_id =
+		#{sceneId,jdbcType=SMALLINT},
+		alias_cm = #{aliasCm,jdbcType=VARCHAR},
+		alias_cu =
+		#{aliasCu,jdbcType=VARCHAR},
+		alias_ct = #{aliasCt,jdbcType=VARCHAR},
+		station_type_id =
+		#{stationTypeId,jdbcType=SMALLINT},
+		area_manager = #{areaManager,jdbcType=VARCHAR},
+		area_manager_phone = #{areaManagerPhone,jdbcType=VARCHAR},
+		fsu_manufactor =
+		#{fsuManufactor,jdbcType=VARCHAR},
+		maintenance_corp = #{maintenanceCorp,jdbcType=VARCHAR},
+		acceptance_date = #{acceptanceDate,jdbcType=DATE},
+		outside_customer =
+		#{outsideCustomer,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		status =
+		#{status,jdbcType=SMALLINT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where it_station_id = #{itStationId,jdbcType=INTEGER}
+  </update>
+	<update id="updateFieldsByExample" parameterType="map">
+		update it_station set
+		<foreach collection="fields" item="field" separator=",">
+			${field.fieldName} =
+			#{field.fieldValue}
+    </foreach>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<resultMap id="StationModelMap" type="com.fuhj.itower.ui.model.StationModel" extends="BaseResultMap">
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="district" property="district" jdbcType="VARCHAR" />
+		<result column="agstaffname" property="agstaffname" jdbcType="VARCHAR" />
+		<result column="agstafftel" property="agstafftel" jdbcType="VARCHAR" />
+		<result column="batteryId" property="batteryId" jdbcType="VARCHAR" />
+		<result column="origin_name" property="originName" jdbcType="VARCHAR" />
+		<result column="scene_name" property="sceneName" jdbcType="VARCHAR" />
+		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectStaPageByCustom" parameterType="map" resultMap="StationModelMap">
+		SELECT a.*,b.pname province,
+		c.cname city,
+		d.dname district,
+		e.agstaffName,
+		e.agstaffTel,
+		f.origin_name,
+		g.scene_name,
+		h.type_name
+		FROM (SELECT it_station_id, it_province_id, it_city_id,
+		it_district_id, station_name, station_code,
+		station_sys_code, lng, lat, address, origin_id,
+		operator, scene_id, alias_cm, alias_cu,
+		alias_ct,
+		station_type_id, area_manager, area_manager_phone,
+		fsu_manufactor, maintenance_corp,
+		acceptance_date, outside_customer, remark, STATUS, create_time,
+		update_time FROM it_station WHERE 1=1
+		<if test="stName!=null">
+			AND station_name like #{stName,jdbcType=VARCHAR}
+		</if>
+		<if test="stCode!=null">
+			AND station_code =#{stCode,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceId!=null">
+			AND it_province_id =#{provinceId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityId!=null">
+			AND it_city_id =#{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="districtId!=null">
+			AND it_district_id =#{districtId,jdbcType=VARCHAR}
+		</if>
+		ORDER BY it_station_id
+		<if test="offset!=null">
+			LIMIT #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+		</if>
+		) a
+		LEFT JOIN it_province b ON
+		a.it_province_id = b.it_province_id
+		LEFT JOIN it_city c
+		ON
+		a.it_city_id
+		=
+		c.it_city_id
+		LEFT JOIN it_district d
+		ON a.it_district_id =
+		d.it_district_id
+		LEFT JOIN
+		sta_agt_staff e
+		ON a.station_code = e.stationCode
+		LEFT JOIN it_origin f ON a.origin_id=f.it_origin_id
+		LEFT JOIN
+		it_scene g ON a.scene_id=g.it_scene_id
+		LEFT JOIN it_station_type h ON
+		a.station_type_id=h.it_station_type_id
+	</select>
+	<select id="selectStaSBySCode" parameterType="map" resultMap="StationModelMap">
+		SELECT a.*,b.cname city,c.dname
+		district,d.agstaffName,d.agstaffTel,e.batteryId,f.origin_name,
+		g.scene_name,
+		h.type_name FROM it_station a
+		LEFT
+		JOIN it_city b ON a.it_city_id=b.it_city_id
+		LEFT JOIN
+		it_district c ON
+		a.it_district_id=c.it_district_id
+		LEFT JOIN sta_agt_staff d ON
+		a.station_code
+		=d.stationCode AND
+		d.sas_id=(SELECT MAX(sas_id) FROM
+		sta_agt_staff WHERE
+		sta_agt_staff.stationCode=d.stationCode)
+		LEFT
+		JOIN
+		station_battery e ON a.station_code=e.stationCode
+		AND
+		e.station_battery_id = (SELECT
+		MAX(station_battery_id) FROM
+		station_battery WHERE
+		station_battery.stationCode=e.stationCode)
+		LEFT JOIN it_origin f ON a.origin_id=f.it_origin_id
+		LEFT
+		JOIN it_scene g ON a.scene_id=g.it_scene_id
+		LEFT JOIN it_station_type h ON
+		a.station_type_id=h.it_station_type_id
+		WHERE
+		a.station_code IN
+		<foreach collection="scodeList" item="scode" open="(" close=")" separator=",">
+			#{scode}
+		</foreach>
+	</select>
+</mapper>

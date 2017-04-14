@@ -1,0 +1,107 @@
+<div sclass="navbar"
+	apply="com.fuhj.itower.ui.vm.gelec.GelecNaverBarComposer">
+	<!-- Brand Logo -->
+	<style>
+		.logo{ height:36px;
+		background-image:url('../img/93b6d70c-0902-4306-9525-7217ab6af20d.png');
+		background-repeat:no-repeat;
+		position:relative;background-position:-45px 0px; margin-top:3px;
+		margin-left:12px;} .logo a{padding-left:15px;margin-top:-3px;}
+	</style>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-3">
+				<!-- Navbar -->
+				<hlayout sclass="nav-user pull-left" spacing="0">
+					<a id="ahome" iconSclass="z-icon-home">
+					</a>
+				</hlayout>
+			</div>
+			<div class="col-xs-6">
+				<div sclass="logo">
+					<!-- <a label="铁塔精准发电调度系统" sclass="navbar-brand" /> -->
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<!-- Navbar -->
+				<hlayout sclass="nav-user pull-right" spacing="0">
+					<a id="anotie" iconSclass="z-icon-tasks"
+						popup="notiepp, position=after_end" sclass="blue">
+						<label id="noticeLbl"
+							sclass="badge badge-danger" />
+					</a>
+				</hlayout>
+			</div>
+		</div>
+	</div>
+	<popup id="notiepp" sclass="menu" width="50%">
+		<a id="pHeaderTxt" sclass="header"
+			iconSclass="z-icon-exclamation-triangle" />
+		<vlayout spacing="0">
+			<a id="ingPBtn"
+				iconSclass="btn btn-xs no-hover btn-danger z-icon-random"
+				href="#">
+				<label>进行中</label>
+				<label id="ingLbl"
+					class="badge badge-danger pull-right" />
+			</a>
+			<a id="donePBtn"
+				iconSclass="btn btn-xs no-hover btn-success z-icon-check" href="#">
+				<label>已完成</label>
+				<label id="doneLbl"
+					class="badge badge-success pull-right" />
+			</a>
+			<a id="allPBtn"
+				iconSclass="btn btn-xs no-hover btn-info z-icon-list"
+				href="#">
+				<label>全部</label>
+				<label id="allLbl" class="badge badge-info pull-right" />
+			</a>
+			<a label="注销登陆" id="logoutBtn">
+				<span class="z-icon-sign-out blue" />
+			</a>
+		</vlayout>
+	</popup>
+	<script type="text/javascript" defer="true">
+		//显示遮罩层 
+		function showMask(){
+			jq("$mask").css("height",$(document).height());
+			jq("$mask").css("width",$(document).width());
+			jq("$mask").show(); 
+		} 
+		//隐藏遮罩层 
+		function hideMask(){
+			jq("$mask").hide(); 
+		} 
+		zk.afterLoad (function(){
+		var notiepp=zk.Widget.$('$notiepp');
+			notiepp.listen({
+				onOpen: function () {
+					if(this.isOpen()){
+						showMask(); 
+					}else{ 
+						hideMask(); 
+					} 
+				}
+			});
+			zk.Widget.$('$ingPBtn').listen({
+				onClick: function () {
+					notiepp.close();
+					hideMask(); 
+				}
+			});
+			zk.Widget.$('$donePBtn').listen({
+				onClick: function () {
+					notiepp.close();
+					hideMask(); 
+				}
+			});
+			zk.Widget.$('$allPBtn').listen({
+				onClick: function () {
+					notiepp.close();
+					hideMask(); 
+				}
+			});
+		});
+	</script>
+</div>

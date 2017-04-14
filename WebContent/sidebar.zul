@@ -1,0 +1,56 @@
+<div id="sidebar" sclass="sidebar"
+	apply="com.fuhj.itower.ui.SidebarComposer">
+	<!-- Shortcuts Button-->
+	<style>
+		.clock
+		[class^="z-"]:before{font-size:20px;padding-left:5px;padding-top:10px;}
+	</style>
+	<div class="shortcuts">
+		<!-- Display when expanded -->
+		<div class="shortcuts-expanded">
+			<a id="timeLbl" disabled="false" sclass="grey" />
+		</div>
+		<!-- Display when collapsed -->
+		<div class="shortcuts-collapsed">
+			<a iconSclass="z-icon-clock-o" disabled="false"
+				sclass="grey clock" />
+		</div>
+	</div>
+	<!-- Navigation List -->
+	<navbar id="navbar" sclass="nav-list" orient="vertical">
+		<navitem iconSclass="z-icon-dashboard" label="首页" id="mainNav" />
+		<nav id="nav1" iconSclass="z-icon-flash" label="停电告警信息">
+			<navitem label="停电告警监控" id="tdMonitorNav" selected="true"
+				onCreate="Events.postEvent(new Event(Events.ON_CLICK,self));" />
+			<!-- 			<navitem label="FSU离线告警监控" id="fsumonitorNav" /> -->
+			<!-- 		<navitem label="统计分析" id="" /> -->
+			<!-- 			<navitem label="重保站监控" id="zbzMonitorNav" /> -->
+			<!-- 			<navitem label="重保站配置" id="zbzConfigNav" /> -->
+		</nav>
+		<nav id="nav4" iconSclass="z-icon-user-md" label="发电调度">
+			<navitem label="当前停电工单" id="gElecQueryNav" />
+			<navitem label="发电信息" id="gElecInfoNav" />
+			<navitem label="发电账号管理" id="gElecUserNav" />
+			<navitem label="发电数据统计" id="gElecInfoReportNav" />
+		</nav>
+		<nav id="nav2" iconSclass="z-icon-building" label="站点信息管理">
+			<navitem label="站点信息管理" id="staManageNav" />
+		</nav>
+		<nav id="nav3" iconSclass="z-icon-gears" label="系统">
+			<navitem label="账号设置" id="accountSettingNav" />
+			<navitem label="更新日志" id="updateLogNav" />
+			<!-- 			<navitem label="意见建议" id="adviseNav" /> -->
+		</nav>
+		<navitem iconSclass="z-icon-android" label="微信机器人"
+			id="wxbotNav" />
+	</navbar>
+	<!-- Toggler -->
+	<div sclass="sidebar-collapse">
+		<a id="toggler" iconSclass="z-icon-angle-double-left" />
+	</div>
+	<popup id="calpp" zclass="tooltip"
+		sclass="right tooltip-error cal">
+		<span zclass="tooltip-arrow" />
+		<label zclass="tooltip-inner" value="2 Important Event" />
+	</popup>
+</div>

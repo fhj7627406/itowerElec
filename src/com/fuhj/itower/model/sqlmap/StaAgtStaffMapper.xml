@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="STAAGTSTAFFMAPPER" >
+  <resultMap id="BaseResultMap" type="com.fuhj.itower.model.StaAgtStaff" >
+    <id column="sas_id" property="sasId" jdbcType="INTEGER" />
+    <result column="stationCode" property="stationcode" jdbcType="VARCHAR" />
+    <result column="agstaffName" property="agstaffname" jdbcType="VARCHAR" />
+    <result column="agstaffTel" property="agstafftel" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sas_id, stationCode, agstaffName, agstaffTel, remark, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sta_agt_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    from sta_agt_staff
+    where sas_id = #{sasId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from sta_agt_staff
+    where sas_id = #{sasId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example" >
+    delete from sta_agt_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fuhj.itower.model.StaAgtStaff" >
+    insert into sta_agt_staff (sas_id, stationCode, agstaffName, 
+      agstaffTel, remark, status
+      )
+    values (#{sasId,jdbcType=INTEGER}, #{stationcode,jdbcType=VARCHAR}, #{agstaffname,jdbcType=VARCHAR}, 
+      #{agstafftel,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhj.itower.model.StaAgtStaff" >
+    insert into sta_agt_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      sas_id,
+      <if test="stationcode != null" >
+        stationCode,
+      </if>
+      <if test="agstaffname != null" >
+        agstaffName,
+      </if>
+      <if test="agstafftel != null" >
+        agstaffTel,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      status,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{sasId,jdbcType=INTEGER},
+      <if test="stationcode != null" >
+        #{stationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="agstaffname != null" >
+        #{agstaffname,jdbcType=VARCHAR},
+      </if>
+      <if test="agstafftel != null" >
+        #{agstafftel,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      #{status,jdbcType=SMALLINT},
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer" >
+    select count(*) from sta_agt_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sta_agt_staff
+    <set >
+      <if test="record.sasId != null" >
+        sas_id = #{record.sasId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationcode != null" >
+        stationCode = #{record.stationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agstaffname != null" >
+        agstaffName = #{record.agstaffname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agstafftel != null" >
+        agstaffTel = #{record.agstafftel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sta_agt_staff
+    set sas_id = #{record.sasId,jdbcType=INTEGER},
+      stationCode = #{record.stationcode,jdbcType=VARCHAR},
+      agstaffName = #{record.agstaffname,jdbcType=VARCHAR},
+      agstaffTel = #{record.agstafftel,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.StaAgtStaff" >
+    update sta_agt_staff
+    <set >
+      <if test="stationcode != null" >
+        stationCode = #{stationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="agstaffname != null" >
+        agstaffName = #{agstaffname,jdbcType=VARCHAR},
+      </if>
+      <if test="agstafftel != null" >
+        agstaffTel = #{agstafftel,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where sas_id = #{sasId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.StaAgtStaff" >
+    update sta_agt_staff
+    set stationCode = #{stationcode,jdbcType=VARCHAR},
+      agstaffName = #{agstaffname,jdbcType=VARCHAR},
+      agstaffTel = #{agstafftel,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT}
+    where sas_id = #{sasId,jdbcType=INTEGER}
+  </update>
+  <update id="updateFieldsByExample" parameterType="map" >
+    update sta_agt_staff set 
+    <foreach collection="fields" item="field" separator="," >
+      ${field.fieldName} = #{field.fieldValue}
+    </foreach>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

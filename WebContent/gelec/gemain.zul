@@ -1,0 +1,19 @@
+<?page id="elecMainPage" title="铁塔精准发电" contentType="text/html;charset=UTF-8"?>
+<?meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"?>
+<?link href="../bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="../less/gElec_index.css.dsp" rel="stylesheet" type="text/css"?>
+<zk xmlns:n="native">
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/api?v=2.0&amp;ak=76wfLYdAjvj1IBTws7b8tfLmDhWK9twj">
+	</script>
+	<include src="genavbar.zul" />
+	<div id="elecContent" use="com.fuhj.itower.ui.IncludeDiv"
+		sclass="">
+		<attribute name="onCreate">
+		<![CDATA[
+	self.setSrc("geindex.zul");
+]]>
+</attribute>
+	</div>
+	<div id="mask" sclass="mask"></div>
+</zk>

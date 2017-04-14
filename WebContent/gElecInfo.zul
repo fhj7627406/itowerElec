@@ -1,0 +1,99 @@
+<vlayout xmlns:n="native" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.GenElecInfoVM')" style="min-height:850px ;">
+	<style>
+		.areaBtn .caret {float: right; margin-top:7px;} .task.z-listbox .z-listitem, .task.z-listbox
+		.z-listitem:hover { border-left-width: 1px; } .myoddrow{background-color: #f2f6fb;
+		background-image: none;} .heavy-italic { font-weight: bold; font-style: italic; } .heavy {
+		font-weight: bold; }.z-datebox-input{height:30px;}
+		.z-datebox-button{height:30px;padding-top: 7px;}.z-popup-content{padding:0;}
+		.z-datebox-input{ padding: 4px 10px;} .date.z-popup .z-listbox .z-listcell-content {
+		margin:0; line-height: 20px;}  .date.z-popup .z-listbox .z-listitem-selected .z-listcell-content:before {top:6px;}
+	</style>
+	<a label="发电信息" iconSclass="z-icon-list-alt" sclass="rcaption lighter" />
+	<tabbox sclass="rtab" style="position:relative; margin-top:-30px;">
+		<tabs>
+			<tab label="发电信息" id="tab1" selected="true" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<vlayout spacing="10px">
+					<columnlayout
+						style="border-bottom: 1px dotted #E2E2E2;padding-bottom: 16px;padding-top: 7px;">
+						<columnchildren>
+							<panel>
+								<panelchildren>
+									<hbox align="center" spacing="10px">
+										查询地区：
+										<button dir="reverse" id="areaBtn"
+											sclass="btn-default btn-sm dropdown-toggle areaBtn"
+											popup="areapp, position=after_end, type=toggle" iconSclass="caret" width="150px"
+											label="--请选择--" zclass="btn" />
+										<space></space>
+										时间：
+										<datebox height="30px" constraint="no future,after 20160101"
+											format="yyyy-MM-dd" id="startDbx" width="110px">
+										</datebox>
+										—
+										<datebox height="30px" constraint="no future,after 20160101"
+											format="yyyy-MM-dd" id="endDbx" width="110px">
+										</datebox>
+										<space></space>
+										发电状态：
+										<button dir="reverse" label="@bind(vm.selectedStatus)"
+											sclass="btn-default btn-sm pull-right dropdown-toggle"
+											popup="statuspp, position=after_end, type=toggle" iconSclass="caret" zclass="btn"
+											width="70px" />
+										<space></space>
+										<button iconSclass="glyphicon glyphicon-search"
+											sclass="btn-primary btn-sm" zclass="btn" label=" 查询 "
+											onClick="@command('query')" autodisable="self,exportBtn" id="queryBtn" />
+										<button iconSclass="glyphicon glyphicon glyphicon-export"
+											sclass="btn-success btn-sm" zclass="btn" label=" 导出EXCEL"
+											onClick="@command('export',target=self)" autodisable="self"
+											style="margin-right:5px;" id="exportBtn" />	
+									</hbox>
+								</panelchildren>
+							</panel>
+						</columnchildren>
+					</columnlayout>
+					<grid id="gElecInfoGrd" mold="paging" pageSize="10" oddRowSclass="myoddrow"
+						class="gelecInfoGrid" emptyMessage="无数据">
+						<columns sizable="true">
+							<column iconSclass="z-icon-caret-right blue" width="40px"></column>
+							<column iconSclass="z-icon-caret-right blue" width="50px" label="序号" />
+							<column iconSclass="z-icon-caret-right blue" label="编号" />
+							<column iconSclass="z-icon-caret-right blue" label="地市" />
+							<column iconSclass="z-icon-caret-right blue" label="区县" />
+							<column iconSclass="z-icon-caret-right blue" label="故障单编码" />
+							<column iconSclass="z-icon-caret-right blue" label="站址名称" />
+							<column iconSclass="z-icon-caret-right blue" label="站址运维ID" />
+							<column iconSclass="z-icon-caret-right blue" label="所属运营商" />
+							<column iconSclass="z-icon-caret-right blue" label="数据来源" />
+							<column iconSclass="z-icon-caret-right blue" label="发电状态" />
+							<column iconSclass="z-icon-caret-right blue" label="开始发电时间" width="100px" />
+							<column iconSclass="z-icon-caret-right blue" label="结束发电时间" width="100px" />
+							<column iconSclass="z-icon-caret-right blue" label="历时" />
+							<column iconSclass="z-icon-caret-right blue" label="发电人员" />
+							<column iconSclass="z-icon-caret-right blue" label="联系电话" />
+							<column iconSclass="z-icon-caret-right blue" label="发电开始照片" />
+							<column iconSclass="z-icon-caret-right blue" label="发电结束照片" />
+							<column iconSclass="z-icon-caret-right blue" label="备注" />
+						</columns>
+					</grid>
+					<a label="发电信息由微信机器人手机精准发电平台提交，点击右侧箭头显示详情" iconSclass="glyphicon glyphicon-question-sign" />
+				</vlayout>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	<popup id="areapp" onOpen="@command('areappOnOpen')">
+		<tree id="areaTree" width="160px" style="border:none;padding:5px 5px;" rows="10"></tree>
+	</popup>
+	<popup id="statuspp" width="100px" sclass="date">
+		<listbox id="statusLbx" multiple="false" onSelect="@command('statusOnSelect',target=self)"
+			onCreate="Events.postEvent(Events.ON_SELECT,self,null);">
+			<listitem label="全部" value="-1" selected="true" />
+			<listitem label="进行中" value="2" />
+			<listitem label="已完成" value="1" />
+		</listbox>
+	</popup>
+</vlayout>

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ALARMHISTORYMAPPER">
+	<resultMap id="BaseResultMap" type="com.fuhj.itower.model.AlarmHistory">
+		<id column="alarm_history_id" property="alarmHistoryId" jdbcType="INTEGER" />
+		<result column="log_id" property="logId" jdbcType="INTEGER" />
+		<result column="it_province_id" property="itProvinceId"
+			jdbcType="VARCHAR" />
+		<result column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+		<result column="it_district_id" property="itDistrictId"
+			jdbcType="VARCHAR" />
+		<result column="alarm_type" property="alarmType" jdbcType="SMALLINT" />
+		<result column="troubleNO" property="troubleno" jdbcType="VARCHAR" />
+		<result column="billId" property="billid" jdbcType="VARCHAR" />
+		<result column="stationCode" property="stationcode" jdbcType="VARCHAR" />
+		<result column="stationName" property="stationname" jdbcType="VARCHAR" />
+		<result column="alarmTime" property="alarmtime" jdbcType="TIMESTAMP" />
+		<result column="alarmDuration" property="alarmduration"
+			jdbcType="INTEGER" />
+		<result column="voltage" property="voltage" jdbcType="VARCHAR" />
+		<result column="charge" property="charge" jdbcType="VARCHAR" />
+		<result column="chargePhone" property="chargephone" jdbcType="VARCHAR" />
+		<result column="preVoltage" property="prevoltage" jdbcType="VARCHAR" />
+		<result column="spareElecDuration" property="spareelecduration"
+			jdbcType="INTEGER" />
+		<result column="wayOfDuration" property="wayofduration"
+			jdbcType="INTEGER" />
+		<result column="elecCountdown" property="eleccountdown"
+			jdbcType="INTEGER" />
+		<result column="generBegin" property="generbegin" jdbcType="TIMESTAMP" />
+		<result column="generEnd" property="generend" jdbcType="TIMESTAMP" />
+		<result column="generPerson" property="generperson" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		alarm_history_id, log_id, it_province_id, it_city_id,
+		it_district_id, alarm_type,
+		troubleNO, billId, stationCode,
+		stationName, alarmTime, alarmDuration,
+		voltage, charge,
+		chargePhone,
+		preVoltage, spareElecDuration, wayOfDuration, elecCountdown,
+		generBegin,
+		generEnd, generPerson, status
+  </sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.fuhj.itower.dao.Example">
+		select
+		<if test="distinct">
+			distinct
+    </if>
+		<include refid="Base_Column_List" />
+		from alarm_history
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+    </if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from alarm_history
+		where alarm_history_id =
+		#{alarmHistoryId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from
+		alarm_history
+		where alarm_history_id =
+		#{alarmHistoryId,jdbcType=INTEGER}
+  </delete>
+	<delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example">
+		delete from alarm_history
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.fuhj.itower.model.AlarmHistory">
+		<selectKey resultType="int" keyProperty="alarmHistoryId"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+    </selectKey>
+		insert into alarm_history (log_id, it_province_id, it_city_id,
+		it_district_id, alarm_type, troubleNO,
+		billId, stationCode,
+		stationName,
+		alarmTime, alarmDuration, voltage,
+		charge, chargePhone,
+		preVoltage,
+		spareElecDuration, wayOfDuration, elecCountdown,
+		generBegin, generEnd, generPerson,
+		status)
+		values
+		(#{logId,jdbcType=INTEGER}, #{itProvinceId,jdbcType=VARCHAR},
+		#{itCityId,jdbcType=VARCHAR},
+		#{itDistrictId,jdbcType=VARCHAR},
+		#{alarmType,jdbcType=SMALLINT}, #{troubleno,jdbcType=VARCHAR},
+		#{billid,jdbcType=VARCHAR}, #{stationcode,jdbcType=VARCHAR},
+		#{stationname,jdbcType=VARCHAR},
+		#{alarmtime,jdbcType=TIMESTAMP},
+		#{alarmduration,jdbcType=INTEGER}, #{voltage,jdbcType=VARCHAR},
+		#{charge,jdbcType=VARCHAR}, #{chargephone,jdbcType=VARCHAR},
+		#{prevoltage,jdbcType=VARCHAR},
+		#{spareelecduration,jdbcType=INTEGER},
+		#{wayofduration,jdbcType=INTEGER}, #{eleccountdown,jdbcType=INTEGER},
+		#{generbegin,jdbcType=TIMESTAMP}, #{generend,jdbcType=TIMESTAMP},
+		#{generperson,jdbcType=VARCHAR},
+		#{status,jdbcType=SMALLINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.fuhj.itower.model.AlarmHistory">
+		<selectKey resultType="int" keyProperty="alarmHistoryId"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+    </selectKey>
+		insert into alarm_history
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			log_id,
+			<if test="itProvinceId != null">
+				it_province_id,
+      </if>
+			<if test="itCityId != null">
+				it_city_id,
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id,
+      </if>
+			alarm_type,
+			<if test="troubleno != null">
+				troubleNO,
+      </if>
+			<if test="billid != null">
+				billId,
+      </if>
+			<if test="stationcode != null">
+				stationCode,
+      </if>
+			<if test="stationname != null">
+				stationName,
+      </if>
+			<if test="alarmtime != null">
+				alarmTime,
+      </if>
+			alarmDuration,
+			<if test="voltage != null">
+				voltage,
+      </if>
+			<if test="charge != null">
+				charge,
+      </if>
+			<if test="chargephone != null">
+				chargePhone,
+      </if>
+			<if test="prevoltage != null">
+				preVoltage,
+      </if>
+			spareElecDuration,
+			wayOfDuration,
+			elecCountdown,
+			<if test="generbegin != null">
+				generBegin,
+      </if>
+			<if test="generend != null">
+				generEnd,
+      </if>
+			<if test="generperson != null">
+				generPerson,
+      </if>
+			status,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{logId,jdbcType=INTEGER},
+			<if test="itProvinceId != null">
+				#{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				#{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				#{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			#{alarmType,jdbcType=SMALLINT},
+			<if test="troubleno != null">
+				#{troubleno,jdbcType=VARCHAR},
+      </if>
+			<if test="billid != null">
+				#{billid,jdbcType=VARCHAR},
+      </if>
+			<if test="stationcode != null">
+				#{stationcode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationname != null">
+				#{stationname,jdbcType=VARCHAR},
+      </if>
+			<if test="alarmtime != null">
+				#{alarmtime,jdbcType=TIMESTAMP},
+      </if>
+			#{alarmduration,jdbcType=INTEGER},
+			<if test="voltage != null">
+				#{voltage,jdbcType=VARCHAR},
+      </if>
+			<if test="charge != null">
+				#{charge,jdbcType=VARCHAR},
+      </if>
+			<if test="chargephone != null">
+				#{chargephone,jdbcType=VARCHAR},
+      </if>
+			<if test="prevoltage != null">
+				#{prevoltage,jdbcType=VARCHAR},
+      </if>
+			#{spareelecduration,jdbcType=INTEGER},
+			#{wayofduration,jdbcType=INTEGER},
+			#{eleccountdown,jdbcType=INTEGER},
+			<if test="generbegin != null">
+				#{generbegin,jdbcType=TIMESTAMP},
+      </if>
+			<if test="generend != null">
+				#{generend,jdbcType=TIMESTAMP},
+      </if>
+			<if test="generperson != null">
+				#{generperson,jdbcType=VARCHAR},
+      </if>
+			#{status,jdbcType=SMALLINT},
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.fuhj.itower.dao.Example"
+		resultType="java.lang.Integer">
+		select count(*) from alarm_history
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update alarm_history
+		<set>
+			<if test="record.alarmHistoryId != null">
+				alarm_history_id =
+				#{record.alarmHistoryId,jdbcType=INTEGER},
+      </if>
+			<if test="record.logId != null">
+				log_id = #{record.logId,jdbcType=INTEGER},
+      </if>
+			<if test="record.itProvinceId != null">
+				it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.itCityId != null">
+				it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itDistrictId != null">
+				it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.alarmType != null">
+				alarm_type = #{record.alarmType,jdbcType=SMALLINT},
+      </if>
+			<if test="record.troubleno != null">
+				troubleNO = #{record.troubleno,jdbcType=VARCHAR},
+      </if>
+			<if test="record.billid != null">
+				billId = #{record.billid,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationcode != null">
+				stationCode = #{record.stationcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.stationname != null">
+				stationName = #{record.stationname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.alarmtime != null">
+				alarmTime = #{record.alarmtime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.alarmduration != null">
+				alarmDuration = #{record.alarmduration,jdbcType=INTEGER},
+			</if>
+			<if test="record.voltage != null">
+				voltage = #{record.voltage,jdbcType=VARCHAR},
+      </if>
+			<if test="record.charge != null">
+				charge = #{record.charge,jdbcType=VARCHAR},
+      </if>
+			<if test="record.chargephone != null">
+				chargePhone = #{record.chargephone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.prevoltage != null">
+				preVoltage = #{record.prevoltage,jdbcType=VARCHAR},
+      </if>
+			<if test="record.spareelecduration != null">
+				spareElecDuration =
+				#{record.spareelecduration,jdbcType=INTEGER},
+      </if>
+			<if test="record.wayofduration != null">
+				wayOfDuration = #{record.wayofduration,jdbcType=INTEGER},
+			</if>
+			<if test="record.eleccountdown != null">
+				elecCountdown = #{record.eleccountdown,jdbcType=INTEGER},
+			</if>
+			<if test="record.generbegin != null">
+				generBegin = #{record.generbegin,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.generend != null">
+				generEnd = #{record.generend,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.generperson != null">
+				generPerson = #{record.generperson,jdbcType=VARCHAR},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=SMALLINT},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update alarm_history
+		set alarm_history_id =
+		#{record.alarmHistoryId,jdbcType=INTEGER},
+		log_id =
+		#{record.logId,jdbcType=INTEGER},
+		it_province_id =
+		#{record.itProvinceId,jdbcType=VARCHAR},
+		it_city_id =
+		#{record.itCityId,jdbcType=VARCHAR},
+		it_district_id =
+		#{record.itDistrictId,jdbcType=VARCHAR},
+		alarm_type =
+		#{record.alarmType,jdbcType=SMALLINT},
+		troubleNO =
+		#{record.troubleno,jdbcType=VARCHAR},
+		billId =
+		#{record.billid,jdbcType=VARCHAR},
+		stationCode =
+		#{record.stationcode,jdbcType=VARCHAR},
+		stationName =
+		#{record.stationname,jdbcType=VARCHAR},
+		alarmTime =
+		#{record.alarmtime,jdbcType=TIMESTAMP},
+		alarmDuration =
+		#{record.alarmduration,jdbcType=INTEGER},
+		voltage =
+		#{record.voltage,jdbcType=VARCHAR},
+		charge =
+		#{record.charge,jdbcType=VARCHAR},
+		chargePhone =
+		#{record.chargephone,jdbcType=VARCHAR},
+		preVoltage =
+		#{record.prevoltage,jdbcType=VARCHAR},
+		spareElecDuration =
+		#{record.spareelecduration,jdbcType=INTEGER},
+		wayOfDuration =
+		#{record.wayofduration,jdbcType=INTEGER},
+		elecCountdown =
+		#{record.eleccountdown,jdbcType=INTEGER},
+		generBegin =
+		#{record.generbegin,jdbcType=TIMESTAMP},
+		generEnd =
+		#{record.generend,jdbcType=TIMESTAMP},
+		generPerson =
+		#{record.generperson,jdbcType=VARCHAR},
+		status =
+		#{record.status,jdbcType=SMALLINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.AlarmHistory">
+		update alarm_history
+		<set>
+			<if test="logId != null">
+				log_id = #{logId,jdbcType=INTEGER},
+      </if>
+			<if test="itProvinceId != null">
+				it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				it_city_id = #{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="alarmType != null">
+				alarm_type = #{alarmType,jdbcType=SMALLINT},
+      </if>
+			<if test="troubleno != null">
+				troubleNO = #{troubleno,jdbcType=VARCHAR},
+      </if>
+			<if test="billid != null">
+				billId = #{billid,jdbcType=VARCHAR},
+      </if>
+			<if test="stationcode != null">
+				stationCode = #{stationcode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationname != null">
+				stationName = #{stationname,jdbcType=VARCHAR},
+      </if>
+			<if test="alarmtime != null">
+				alarmTime = #{alarmtime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="alarmduration != null">
+				alarmDuration = #{alarmduration,jdbcType=INTEGER},
+      </if>
+			<if test="voltage != null">
+				voltage = #{voltage,jdbcType=VARCHAR},
+      </if>
+			<if test="charge != null">
+				charge = #{charge,jdbcType=VARCHAR},
+      </if>
+			<if test="chargephone != null">
+				chargePhone = #{chargephone,jdbcType=VARCHAR},
+      </if>
+			<if test="prevoltage != null">
+				preVoltage = #{prevoltage,jdbcType=VARCHAR},
+      </if>
+			<if test="spareelecduration != null">
+				spareElecDuration =
+				#{spareelecduration,jdbcType=INTEGER},
+      </if>
+			<if test="wayofduration != null">
+				wayOfDuration = #{wayofduration,jdbcType=INTEGER},
+      </if>
+			<if test="eleccountdown != null">
+				elecCountdown = #{eleccountdown,jdbcType=INTEGER},
+      </if>
+			<if test="generbegin != null">
+				generBegin = #{generbegin,jdbcType=TIMESTAMP},
+      </if>
+			<if test="generend != null">
+				generEnd = #{generend,jdbcType=TIMESTAMP},
+      </if>
+			<if test="generperson != null">
+				generPerson = #{generperson,jdbcType=VARCHAR},
+      </if>
+			<if test="status != null">
+				status = #{status,jdbcType=SMALLINT},
+      </if>
+		</set>
+		where alarm_history_id = #{alarmHistoryId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.AlarmHistory">
+		update
+		alarm_history
+		set log_id = #{logId,jdbcType=INTEGER},
+		it_province_id =
+		#{itProvinceId,jdbcType=VARCHAR},
+		it_city_id =
+		#{itCityId,jdbcType=VARCHAR},
+		it_district_id =
+		#{itDistrictId,jdbcType=VARCHAR},
+		alarm_type =
+		#{alarmType,jdbcType=SMALLINT},
+		troubleNO =
+		#{troubleno,jdbcType=VARCHAR},
+		billId = #{billid,jdbcType=VARCHAR},
+		stationCode = #{stationcode,jdbcType=VARCHAR},
+		stationName =
+		#{stationname,jdbcType=VARCHAR},
+		alarmTime =
+		#{alarmtime,jdbcType=TIMESTAMP},
+		alarmDuration =
+		#{alarmduration,jdbcType=INTEGER},
+		voltage =
+		#{voltage,jdbcType=VARCHAR},
+		charge = #{charge,jdbcType=VARCHAR},
+		chargePhone = #{chargephone,jdbcType=VARCHAR},
+		preVoltage =
+		#{prevoltage,jdbcType=VARCHAR},
+		spareElecDuration =
+		#{spareelecduration,jdbcType=INTEGER},
+		wayOfDuration =
+		#{wayofduration,jdbcType=INTEGER},
+		elecCountdown =
+		#{eleccountdown,jdbcType=INTEGER},
+		generBegin =
+		#{generbegin,jdbcType=TIMESTAMP},
+		generEnd =
+		#{generend,jdbcType=TIMESTAMP},
+		generPerson =
+		#{generperson,jdbcType=VARCHAR},
+		status = #{status,jdbcType=SMALLINT}
+		where alarm_history_id = #{alarmHistoryId,jdbcType=INTEGER}
+  </update>
+	<update id="updateFieldsByExample" parameterType="map">
+		update alarm_history set
+		<foreach collection="fields" item="field" separator=",">
+			${field.fieldName} = #{field.fieldValue}
+    </foreach>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<resultMap id="AlarmHisMap" type="com.fuhj.itower.ui.model.AlarmHistoryModel"
+		extends="BaseResultMap">
+		<!-- <result column="province" property="province" jdbcType="VARCHAR" /> -->
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="district" property="district" jdbcType="VARCHAR" />
+		<result column="queryTime" property="queryTime" jdbcType="TIMESTAMP" />
+
+	</resultMap>
+
+	<select id="selectAlarmHisCountByCustom" resultType="java.lang.Integer"
+		parameterType="map">
+		SELECT count(*) FROM alarm_history a LEFT JOIN station b
+		ON
+		a.stationCode = b.stationCode
+		LEFT JOIN alarm_query_log c
+		ON a.log_id =
+		c.log_id
+		WHERE 1 = 1
+		<if test="troubleno!=null">
+			AND a.troubleNO=#{troubleno,jdbcType=VARCHAR}
+		</if>
+		<if test="stationName!=null">
+			AND a.stationName=#{stationName,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectAlarmHisByCustom" parameterType="map"
+		resultMap="AlarmHisMap">
+		SELECT
+		c.queryTime,
+		a.*,
+		(SELECT
+		cname
+		FROM
+		it_city d
+		WHERE d.it_city_id =
+		b.it_city_id) city,
+		(SELECT
+		dname
+		FROM
+		it_district e
+		WHERE e.it_district_id
+		= b.it_district_id) district
+		FROM
+		alarm_history a
+		LEFT JOIN station b
+		ON
+		a.stationCode = b.stationCode
+		LEFT JOIN alarm_query_log c
+		ON a.log_id =
+		c.log_id
+		WHERE 1 = 1
+		<if test="troubleno!=null">
+			AND a.troubleNO=#{troubleno,jdbcType=VARCHAR}
+		</if>
+		<if test="stationName!=null">
+			AND a.stationName=#{stationName,jdbcType=VARCHAR}
+		</if>
+		ORDER BY a.log_id DESC
+		LIMIT
+		#{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+	</select>
+</mapper>

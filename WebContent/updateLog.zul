@@ -1,0 +1,18 @@
+<vlayout xmlns:n="native" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.UpdateLogVM')"
+	spacing="0">
+	<hbox align="center">
+		<a label="更新日志" iconSclass="z-icon-list"
+			sclass="rcaption lighter" />
+		<button iconSclass="glyphicon glyphicon-refresh"
+			sclass="btn-primary btn-sm" zclass="btn" label=" 修改"
+			onClick="@command('update')" autodisable="self"
+			style="margin-left:20px;" id="updateBtn" visible="false" />
+	</hbox>
+	<separator bar="true" height="40px" />
+	<div class="" style="padding-left:40px;">
+		<html id="logContent" content="@load(vm.latestLog.content)"
+			style="padding-left:100px;" />
+	</div>
+	<separator bar="true" height="40px" />
+</vlayout>

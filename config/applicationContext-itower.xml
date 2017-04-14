@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- mapper definitions -->
+
+	<bean id="keepLoginJob" class="com.fuhj.itower.tasks.KeepItowerLogin" />
+	<bean id="queryDZJob" class="com.fuhj.itower.tasks.QueryItowerDZ" />
+	<bean id="queryZBJob" class="com.fuhj.itower.tasks.QueryItowerZB" />
+	<bean id="queryQXJob" class="com.fuhj.itower.tasks.QueryItowerQianXun" />
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="keepLoginTrigger" />
+				<ref bean="queryDZTrigger" />
+				<ref bean="queryZBTrigger" />
+				<ref bean="queryQXTrigger" />
+			</list>
+		</property>
+		<property name="autoStartup" value="true" />
+	</bean>
+
+	<bean id="keepLoginTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="keepLoginJobDetail" />
+		<!-- 50秒后开始 每5分钟执行一次 -->
+		<property name="cronExpression" value="50 0/8 * * * ?" />
+	</bean>
+	<bean id="keepLoginJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="keepLoginJob" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<bean id="queryDZTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="queryDZJobDetail" />
+		<property name="cronExpression" value="0 0/30 * * * ?" />
+	</bean>
+	<bean id="queryDZJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="queryDZJob" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<bean id="queryZBTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="queryZBJobDetail" />
+		<property name="cronExpression" value="0 0 0/1 * * ?" />
+	</bean>
+	<bean id="queryZBJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="queryZBJob" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<bean id="queryQXTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="queryQXJobDetail" />
+		<property name="cronExpression" value="0 15 * * * ?" />
+	</bean>
+	<bean id="queryQXJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="queryQXJob" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<bean id="genericMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" abstract="true">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="GenericMapperInterface" value="com.fuhj.itower.dao.GenericMapper" />
+	</bean>
+	<bean id="sysUserMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="SYSUSERMAPPER" />
+	</bean>
+	<bean id="itStationMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ITSTATIONMAPPER" />
+	</bean>
+	<bean id="cityMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ITCITYMAPPER" />
+	</bean>
+	<bean id="provinceMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ITPROVINCEMAPPER" />
+	</bean>
+	<bean id="districtMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ITDISTRICTMAPPER" />
+	</bean>
+	<bean id="staAgtStaffMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="STAAGTSTAFFMAPPER" />
+	</bean>
+	<bean id="updateLogMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="UPDATELOGMAPPER" />
+	</bean>
+
+	<bean id="alarmHistoryMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ALARMHISTORYMAPPER" />
+	</bean>
+
+	<bean id="alarmQueryLogMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ALARMQUERYLOGMAPPER" />
+	</bean>
+
+	<bean id="botChatLogMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="BOTCHATLOGMAPPER" />
+	</bean>
+	<bean id="stationBatteryMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="STATIONBATTERYMAPPER" />
+	</bean>
+
+	<bean id="fSUCondItemMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="FSUCONDITEMMAPPER" />
+	</bean>
+	<bean id="zbzItemMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ZBZITEMMAPPER" />
+	</bean>
+	<bean id="itBillMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="ITBILLMAPPER" />
+	</bean>
+	<bean id="gElecInfoMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="GELECINFOMAPPER" />
+	</bean>
+	<bean id="gElecUserMapper" parent="genericMapper">
+		<property name="mapperNamespace" value="GELECUSERMAPPER" />
+	</bean>
+
+	<bean id="loginService" class="com.fuhj.itower.service.impl.LoginServiceImpl">
+		<property name="sysUserMapper" ref="sysUserMapper" />
+		<property name="updateLogMapper" ref="updateLogMapper" />
+	</bean>
+	<bean id="stationService" class="com.fuhj.itower.service.impl.StationServiceImpl">
+		<property name="itStationMapper" ref="itStationMapper" />
+		<property name="staAgtStaffMapper" ref="staAgtStaffMapper" />
+		<property name="stationBatteryMapper" ref="stationBatteryMapper" />
+		<property name="fSUCondItemMapper" ref="fSUCondItemMapper" />
+		<property name="zbzItemMapper" ref="zbzItemMapper" />
+	</bean>
+	<bean id="mainService" class="com.fuhj.itower.service.impl.MainServiceImpl">
+		<property name="alarmHistoryMapper" ref="alarmHistoryMapper" />
+		<property name="alarmQueryLogMapper" ref="alarmQueryLogMapper" />
+		<property name="botChatLogMapper" ref="botChatLogMapper" />
+
+	</bean>
+	<bean id="locationService" class="com.fuhj.itower.service.impl.LocationServiceImpl">
+		<property name="cityMapper" ref="cityMapper" />
+		<property name="provinceMapper" ref="provinceMapper" />
+		<property name="districtMapper" ref="districtMapper" />
+	</bean>
+
+	<bean id="aPIService" class="com.fuhj.itower.api.APIServiceImpl">
+		<property name="mainService" ref="mainService" />
+		<property name="locationService" ref="locationService" />
+		<property name="stationService" ref="stationService" />
+	</bean>
+	<bean id="gelecService" class="com.fuhj.itower.service.impl.GelecServiceImpl">
+		<property name="itBillMapper" ref="itBillMapper" />
+		<property name="gElecInfoMapper" ref="gElecInfoMapper" />
+		<property name="gElecUserMapper" ref="gElecUserMapper" />
+		<property name="locationService" ref="locationService" />
+	</bean>
+</beans>

@@ -1,0 +1,57 @@
+<?page title="精准发电登录" contentType="text/html;charset=UTF-8"?>
+<?meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"?>
+<?link href="../bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="../less/gElec_index.css.dsp" rel="stylesheet" type="text/css"?>
+<zk xmlns:n="native" xmlns:w="client">
+	<style>.form-control{font-size:16px;}</style>
+	<div class="row" style="margin-top:20px;"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.gelec.GElecLoginVM')"
+		form="@id('fx') @load(vm.loginUser) @save(vm.loginUser,before='submit') @validator(vm)"
+		validationMessages="@id('vmsgs')" onOK="@command('submit')">
+		<div class="col-xs-12">
+			<div class="col-xs-10 col-xs-offset-1">
+				<vlayout spacing="20px">
+					<n:h4>用户登录</n:h4>
+					<div style="border-bottom: 1px dotted #E2E2E2;"></div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon">
+							<n:i class="glyphicon glyphicon-user"
+								aria-hidden="true">
+							</n:i>
+						</span>
+						<textbox class="form-control" placeholder="用户名"
+							height="40px" maxlength="20" value="@bind(fx.loginName)">
+						</textbox>
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon">
+							<n:i class="glyphicon glyphicon-lock"></n:i>
+						</span>
+						<textbox class="form-control" placeholder="密码"
+							type="password" height="40px" maxlength="32"
+							value="@bind(fx.loginPwd)">
+						</textbox>
+					</div>
+					<button id="loginBtn"
+						iconSclass="glyphicon glyphicon-log-in"
+						sclass="btn-primary btn-large" zclass="btn" label=" 登 录"
+						onClick="@command('submit')" autodisable="self" width="100%"
+						style="font-size:16px" height="40px" />
+					<div class="row-fluid">
+						<div class="col-xs-8">
+							<label style="color:#bd362f;font-size:14px"
+								value="@load(vmsgs['key'])" />
+						</div>
+						<div class="col-xs-4">
+							<a class="pull-right" style="font-size:15px"
+								href="gereg.zul">
+								账号注册
+							</a>
+						</div>
+					</div>
+				</vlayout>
+			</div>
+		</div>
+	</div>
+</zk>

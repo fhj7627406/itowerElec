@@ -1,0 +1,64 @@
+<vlayout sclass="page-content" xmlns:n="native"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.ZbzConfigVM')">
+	<style>
+		.z-combobox-input[readonly]{
+		    background: none;
+		}
+	</style>
+	<a label="重保站配置" iconSclass="z-icon-bell" sclass="rcaption lighter" />
+	<columnlayout
+		style="border-bottom: 1px dotted #E2E2E2;padding-bottom: 16px;padding-top: 7px;">
+		<columnchildren>
+			<panel>
+				<panelchildren>
+					<hbox align="center" spacing="10px">
+						省份：
+						<combobox width="80px" readonly="true"
+							id="provinceCmb" />
+						市：
+						<combobox width="80px" readonly="true"
+							id="cityCmb" />
+						区县：
+						<combobox width="80px" readonly="true"
+							id="districtCmb" />
+						<button iconSclass="glyphicon glyphicon-plus"
+							sclass="btn-primary btn-sm" zclass="btn" label=" 修改 "
+							onClick="@command('configBtnOnclick')"
+							autodisable="self,exportBtn"
+							style="margin-right:5px;margin-top:1px;" id="addBtn" />
+						<!-- 						<button iconSclass="glyphicon glyphicon-import" -->
+						<!-- 							sclass="btn-primary btn-sm" zclass="btn" label=" 导入 " onClick="" -->
+						<!-- 							autodisable="self,exportBtn" -->
+						<!-- 							style="margin-right:5px;margin-top:1px;" id="importBtn" /> -->
+					</hbox>
+				</panelchildren>
+			</panel>
+		</columnchildren>
+	</columnlayout>
+	<panel border="normal" id="pfalarmPal" sclass="panel-primary">
+		<panelchildren>
+			<vlayout>
+				<listbox id="staLbx" mold="paging" pageSize="20"
+					selectedItem="@bind(vm.selectedSta)" style="border:0;">
+					<listhead sizable="true">
+						<listheader label="序号"
+							iconSclass="z-icon-caret-right blue" width="45px" />
+						<listheader label="省"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="地市"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="区县"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="站址名称"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="站址编码"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="操作"
+							iconSclass="z-icon-caret-right blue" />
+					</listhead>
+				</listbox>
+			</vlayout>
+		</panelchildren>
+	</panel>
+</vlayout>

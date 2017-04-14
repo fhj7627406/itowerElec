@@ -1,0 +1,142 @@
+<window title="添加停电工单" border="normal" maximizable="false" sizable="false" style="backgroud:#ddd;"
+	closable="true" width="430px">
+	<style>
+		.form-control{font-size:13px;} .date.z-popup .z-listbox .z-listcell-content{ padding: 0px
+		11px 0px 25px; margin:0; font-size:13px;} .date.z-popup .z-listbox .z-listitem-selected
+		.z-listcell-content:before{ top: 4px;} .mylbx.z-listbox .z-listitem .z-listcell-content
+		{padding: 2px 10px;font-size: 12px; } .mylbx .z-listbox-body { padding-bottom: 0; }
+		.mylbx.z-listbox .z-listitem{border-left:0;} .mylbx.z-listbox { border-bottom:0; }
+		.z-bandbox-popup{padding:0;} .mylbx.z-listbox .z-listbox-emptybody td{padding-top:
+		5px;padding-bottom:5px;} .z-bandbox-input{height:30px;padding:6px
+		12px;}.z-bandbox-button{height:30px;padding-top:7px;}
+	</style>
+	<vlayout xmlns:n="native" spacing="0" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.AddBillVM')"
+		form="@id('fxbill') @load(vm.bill) @save(vm.bill,before='submit') @validator(vm)"
+		validationMessages="@id('vmsgs')">
+		<n:form class="form-horizontal" role="form" style="margin-top:8px;">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">故障单类型</label>
+				<label class="col-sm-8 control-label" style="text-align: left;"
+					value="@load(fxbill.faultType)">
+				</label>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工单区域</label>
+				<div class="col-sm-8">
+					<button dir="reverse" id="provinceBtn"
+						sclass="btn-default btn-sm dropdown-toggle"
+						popup="provincepp, position=after_end, type=toggle" iconSclass="caret" zclass="btn"
+						width="60px" />
+					<button dir="reverse" id="cityBtn"
+						sclass="btn-default btn-sm  dropdown-toggle" popup="citypp, position=after_end, type=toggle"
+						iconSclass="caret" zclass="btn" />
+					<button dir="reverse" id="districtBtn"
+						sclass="btn-default btn-sm  dropdown-toggle"
+						popup="districtpp, position=after_end, type=toggle" iconSclass="caret" zclass="btn" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工单编码</label>
+				<div class="col-sm-8">
+					<textbox class="form-control" placeholder="自定义编码" height="30px"
+						value="@bind(fxbill.billCode)">
+					</textbox>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">站址名称</label>
+				<div class="col-sm-8">
+					<bandbox id="stNameBdx" placeholder="站名关键字或站址运维ID"
+						value="@bind(fxbill.stationName)"
+						onChanging="@command('stNameBdxOnChanging',target=self,e=event)" autodrop="true"
+						width="100%">
+						<bandpopup>
+							<listbox id="stNameRSLbx" sclass="task mylbx" width="450px" emptyMessage="无数据"
+								onSelect="@command('stNameRSLbxonSelect',target=self)" multiple="false">
+								<listhead>
+									<listheader width="250px"
+										iconSclass="z-icon-caret-right blue">
+										站名
+									</listheader>
+									<listheader width="120px"
+										iconSclass="z-icon-caret-right blue">
+										运维ID
+									</listheader>
+									<listheader width="80px" iconSclass="z-icon-caret-right blue">
+										站址来源
+									</listheader>
+								</listhead>
+							</listbox>
+						</bandpopup>
+					</bandbox>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">站址运维ID</label>
+				<div class="col-sm-8">
+					<textbox class="form-control" placeholder="请输入站址运维ID" height="30px"
+						value="@bind(fxbill.stationCode)" id="stationCodeTxt">
+					</textbox>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">故障来源</label>
+				<div class="col-sm-8">
+					<button dir="reverse" label="@bind(fxbill.faultSource)"
+						sclass="btn-default btn-sm dropdown-toggle"
+						popup="faultSourcepp, position=after_end, type=toggle" iconSclass="caret" zclass="btn"
+						width="150px" id="faultSourceBtn" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">告警详情</label>
+				<div class="col-sm-8">
+					<textbox class="form-control" height="30px" value="@bind(fxbill.alarmDetail)"></textbox>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">备注</label>
+				<div class="col-sm-8">
+					<textbox class="form-control" rows="2" value="@bind(fxbill.remark)"></textbox>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-8">
+					<label style="color:#bd362f" value="@load(vmsgs['key'])" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-2 col-md-offset-5">
+					<button iconSclass="glyphicon glyphicon-ok" sclass="btn-info btn-sm"
+						zclass="btn" label=" 提交 " onClick="@command('submit')" autodisable="self" id="submitBtn" />
+				</div>
+			</div>
+		</n:form>
+		<popup id="provincepp" width="90px" sclass="date">
+			<listbox id="provinceLbx" multiple="false"
+				onCreate="@command('provinceonCreate',target=self)"
+				onSelect="@command('provinceonSelect',target=self)" selectedItem="@save(fxbill.itProvinceId)">
+				<listitem label="湖南" value="0001928" />
+				<listitem label="广西" value="0098364" />
+			</listbox>
+		</popup>
+		<popup id="citypp" width="100px" sclass="date">
+			<listbox id="cityLbx" multiple="false" onSelect="@command('cityonSelect',target=self)" />
+		</popup>
+		<popup id="districtpp" width="170px" sclass="date">
+			<listbox id="districtLbx" multiple="false"
+				onSelect="@command('districtonSelect',target=self)" />
+		</popup>
+		<popup id="faultSourcepp" width="150px" sclass="date">
+			<listbox id="faultSourceLbx" multiple="false"
+				onSelect="@command('faultSourceLbxonSelect',target=self)"
+				onCreate="Events.postEvent(Events.ON_SELECT,self,null);"
+				selectedItem="@save(fxbill.faultSource)">
+				<listitem label="人工受理" value="人工受理" selected="true" />
+				<listitem label="人工受理-客户网管" value="人工受理-客户网管" />
+				<listitem label="铁塔集团动环网管" value="人工受理-客户网管" />
+			</listbox>
+		</popup>
+	</vlayout>
+</window>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<tasks>
+		<task>
+			<chatRoomName>益阳铁塔维护工作群</chatRoomName>
+			<range>0099949</range>
+		</task>
+		<task>
+			<chatRoomName>新代维益阳铁塔维护交流群</chatRoomName>
+			<range>0099949</range>
+		</task>
+<!-- 		<task> -->
+<!-- 			<chatRoomName>广西监控机器人配置</chatRoomName> -->
+<!-- 			<range>0099990</range> -->
+<!-- 		</task> -->
+	</tasks>
+</configuration>

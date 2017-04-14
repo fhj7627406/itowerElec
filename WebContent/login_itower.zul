@@ -1,0 +1,23 @@
+<window id="itloginwindow" title="登录运维系统" border="normal"
+	maximizable="false" sizable="false" style="backgroud:#ddd;"
+	closable="true" height="162px" width="230px"
+	apply="com.fuhj.itower.ui.vm.ITowerLoginWin"
+	onOK="Events.sendEvent(new Event(Events.ON_CLICK,submit));">
+	<space height="1px" />
+	<vlayout style="padding-left:27px;" spacing="15px">
+<!-- 		<textbox id="itloginName" type="text" width="160px" -->
+<!-- 			placeholder="请输入用户名" height="28px" value="${arg.loginName}" -->
+<!-- 			class="form-control" /> -->
+<!-- 		<textbox type="password" width="160px" placeholder="请输入密码" -->
+<!-- 			height="28px" value="${arg.pwd}" id="pwdtxt" class="form-control" /> -->
+		<hbox>
+			<textbox width="80px" placeholder="验证码" height="28px"
+				id="itocr" class="form-control" maxlength="4"/>
+			<image content="${arg.ocrimg}"
+				style="padding-top:3px;padding-left:8px;" />
+		</hbox>
+		<button sclass="btn-danger btn-sm" zclass="btn" label=" 登 录  "
+			autodisable="self" width="160px" id="submit">
+		</button>
+	</vlayout>
+</window>

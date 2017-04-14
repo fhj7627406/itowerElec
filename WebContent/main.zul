@@ -1,0 +1,28 @@
+<?page id="mainPage" title="微信监控机器人系统"?>
+<?link href="bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+<!-- <?link href="http://fonts.useso.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css"?> -->
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+<zk xmlns:n="native">
+	<include src="navbar.zul" />
+	<hlayout id="main" spacing="0">
+		<include src="sidebar.zul" />
+		<vlayout spacing="0" hflex="1">
+			<div sclass="breadcrumbs">
+				<div sclass="breadcrumb">
+					<span sclass="home-icon z-icon-home" />
+					<a label="首页" href="#" />
+					<label id="breadcrumblbl"></label>
+				</div>
+			</div>
+			<div id="xcontents" use="com.fuhj.itower.ui.IncludeDiv"
+				sclass="page-content" />
+		</vlayout>
+	</hlayout>
+	<!-- Include the jQuery plugins to draw the chart -->
+	<script src="js/excanvas.min.js" if="${zk.ie lt 9}"/>
+	<script src="js/jquery.easy-pie-chart.min.js"></script>
+	<script src="js/jquery.flot.min.js"/>
+	<script src="js/jquery.flot.pie.js"/>
+	<script src="js/jquery.sparkline.min.js"></script>
+</zk>

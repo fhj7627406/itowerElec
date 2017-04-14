@@ -1,0 +1,83 @@
+<vlayout xmlns:n="native" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.GenElecUserVM')" style="min-height:860px ;">
+	<style>
+		.task.z-listbox .z-listitem, .task.z-listbox .z-listitem:hover { border-left-width: 1px; }
+		.heavy{font-weight:bold;}
+	</style>
+	<a label="发电账号管理" iconSclass="z-icon-list-alt" sclass="rcaption lighter" />
+
+	<tabbox sclass="rtab" style="position:relative; margin-top:-30px;" id="atabbox">
+		<tabs>
+			<!-- 			<tab label="历史停电工单" id="tab2" /> -->
+			<tab label="发电账号管理" id="tab1" selected="true" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<vlayout spacing="10px">
+					<columnlayout
+						style="border-bottom: 1px dotted #E2E2E2;padding-bottom: 16px;padding-top: 7px;">
+						<columnchildren>
+							<panel onOK="@command('query')">
+								<panelchildren>
+									<hbox align="center" spacing="10px">
+										<label value="查询地区："></label>
+										<label sclass="heavy" value="@load(vm.provinceTxt)"></label>
+										<space></space>
+										<label value="登录账号："></label>
+										<textbox class="form-control" height="30px" width="150px"
+											id="loginNameTxt">
+										</textbox>
+										<space></space>
+										<label value="姓名："></label>
+										<textbox class="form-control" height="30px" width="120px"
+											id="userNameTxt">
+										</textbox>
+										<space></space>
+										<label value="联系电话："></label>
+										<textbox class="form-control" height="30px" width="120px"
+											id="userPhoneTxt">
+										</textbox>
+										<space></space>
+										<button iconSclass="glyphicon glyphicon-search"
+											sclass="btn-primary btn-sm" zclass="btn" label=" 查询 " onClick="@command('query')"
+											autodisable="self" id="queryBtn" />
+										<space></space>
+										<button iconSclass="glyphicon glyphicon-wrench"
+											sclass="btn-info btn-sm" zclass="btn" label=" 重设账号密码 " onClick="@command('resetPwd')"
+											autodisable="self" id="resetPwdBtn" />
+									</hbox>
+								</panelchildren>
+							</panel>
+						</columnchildren>
+					</columnlayout>
+					<listbox id="gElecUserLbx" sclass="task" mold="paging" pageSize="15"
+						emptyMessage="无数据">
+						<!-- 						<frozen columns="4"></frozen> -->
+						<listhead sizable="true">
+							<listheader label="序号" iconSclass="z-icon-caret-right blue"
+								width="65px" />
+							<listheader label="省份" iconSclass="z-icon-caret-right blue"
+								width="75px" />
+							<listheader label="地市" iconSclass="z-icon-caret-right blue"
+								width="75px" />
+							<listheader label="区县" iconSclass="z-icon-caret-right blue" />
+							<listheader label="登录账号" iconSclass="z-icon-caret-right blue"
+								width="150px" />
+							<listheader label="姓名" iconSclass="z-icon-caret-right blue" />
+							<listheader label="联系电话" iconSclass="z-icon-caret-right blue" />
+							<listheader label="注册时间" iconSclass="z-icon-caret-right blue"
+								width="150px" />
+							<listheader label="最后一次登录时间" iconSclass="z-icon-caret-right blue"
+								width="150px" />
+							<listheader label="已完成发电" iconSclass="z-icon-caret-right blue" />
+							<listheader label="进行中发电" iconSclass="z-icon-caret-right blue" />
+							<listheader label="总发电" iconSclass="z-icon-caret-right blue" />
+							<listheader label="状态" iconSclass="z-icon-caret-right blue" />
+						</listhead>
+					</listbox>
+					<a label="选中一条后进行操作" iconSclass="glyphicon glyphicon-question-sign" />
+				</vlayout>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</vlayout>

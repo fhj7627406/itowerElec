@@ -1,0 +1,159 @@
+<?page title="用户注册" contentType="text/html;charset=UTF-8"?>
+<?meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"?>
+<?link href="../bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="../less/gElec_index.css.dsp" rel="stylesheet" type="text/css"?>
+<zk xmlns:n="native" xmlns:w="client">
+	<style>
+		.control-label{ font-size:16px; } .input-lg{height:52px;}
+		.form-control{font-size:16px;}
+	</style>
+	<div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.gelec.GElecUserRegVM')"
+		form="@id('fx') @save(vm.regUser,before='submitForm') @validator(vm)"
+		validationMessages="@id('vmsgs')">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<space height="30px"></space>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					用户名
+				</n:label>
+				<label style="color:#bd362f;font-size:14px">*</label>
+			</div>
+			<div class="col-xs-6">
+				<div sclass="input-lg" style="padding: 0px;">
+					<textbox height="40px" class="form-control"
+						value="@bind(fx.loginName)" maxlength="20">
+					</textbox>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					密码
+				</n:label>
+				<label style="color:#bd362f;font-size:14px">*</label>
+			</div>
+			<div class="col-xs-6">
+				<div sclass="input-lg" style="padding: 0px;">
+					<textbox height="40px" class="form-control"
+						type="password" value="@bind(fx.loginPwd)" maxlength="32">
+					</textbox>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					确认密码
+				</n:label>
+				<label style="color:#bd362f;font-size:14px">*</label>
+			</div>
+			<div class="col-xs-6">
+				<div sclass="input-lg" style="padding: 0px;">
+					<textbox height="40px" class="form-control"
+						type="password" value="@bind(fx.tempStr)" maxlength="32">
+					</textbox>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					真实姓名
+				</n:label>
+				<label style="color:#bd362f;font-size:14px">*</label>
+			</div>
+			<div class="col-xs-6">
+				<div sclass="input-lg" style="padding: 0px;">
+					<textbox height="40px" class="form-control"
+						value="@bind(fx.userName)" maxlength="20">
+					</textbox>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					手机号码
+				</n:label>
+				<label style="color:#bd362f;font-size:14px">*</label>
+			</div>
+			<div class="col-xs-6">
+				<div sclass="input-lg" style="padding: 0px;">
+					<textbox height="40px" class="form-control"
+						value="@bind(fx.userPhone)" maxlength="100">
+					</textbox>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					省份
+				</n:label>
+				<label style="color:#bd362f;font-size:14px">*</label>
+			</div>
+			<div class="col-xs-6 input-lg" style="padding-top: 0px;">
+				<selectbox class="form-control" id="provincesbx"
+					height="40px" tabindex="1">
+				</selectbox>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					城市
+				</n:label>
+			</div>
+			<div class="col-xs-6 input-lg" style="padding-top: 0px;">
+				<selectbox class="form-control" id="citysbx"
+					height="40px" tabindex="1">
+				</selectbox>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-4 col-xs-offset-1">
+				<n:label class="control-label"
+					style="padding-top:9px;">
+					地区
+				</n:label>
+			</div>
+			<div class="col-xs-6 input-lg" style="padding-top: 0px;">
+				<selectbox class="form-control" id="districtsbx"
+					height="40px" tabindex="1">
+				</selectbox>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-10 col-xs-offset-1">
+				<label style="color:#bd362f;font-size:14px"
+					value="@load(vmsgs['key'])" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-10 col-xs-offset-1"
+				style="padding-top:8px;">
+				<button iconSclass="glyphicon glyphicon-ok"
+					sclass="btn-success btn-large" zclass="btn" label=" 注册"
+					onClick="@command('submitForm')" autodisable="self" id="queryBtn"
+					tabindex="5" width="100%" height="40px" style="font-size:16px;" />
+			</div>
+		</div>
+	</div>
+</zk>

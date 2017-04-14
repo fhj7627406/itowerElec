@@ -1,0 +1,105 @@
+<vlayout xmlns:n="native" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.gelec.GElecIndexVM')"
+	spacing="0" style="padding-top:10px;">
+	<div class="container-fluid">
+		<!-- 			<div class="row-fluid"> -->
+		<!-- 				<div class="span12"> -->
+		<!-- 					<a sclass="pull-right" -->
+		<!-- 						style="font-size:14px;padding-top:5px;" label="注销" -->
+		<!-- 						onClick="@command('logout')" /> -->
+		<!-- 					<space></space> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<div class="col-xs-6">
+			<div class="input-group">
+				<div class="input-group-addon">省份</div>
+				<selectbox class="form-control" id="provincesbx"
+					height="40px">
+				</selectbox>
+			</div>
+			<n:p class="help-block">
+				<label id="help_p" />
+			</n:p>
+		</div>
+		<div class=" col-xs-6">
+			<div class="input-group">
+				<div class="input-group-addon">城市</div>
+				<selectbox class="form-control" id="citysbx"
+					height="40px">
+				</selectbox>
+			</div>
+			<n:p class="help-block">
+				<label id="help_c" />
+			</n:p>
+		</div>
+		<div sclass="col-xs-12">
+			<div class="input-group">
+				<div class="input-group-addon">地区</div>
+				<selectbox class="form-control" id="districtsbx"
+					height="40px">
+				</selectbox>
+			</div>
+			<n:p class="help-block">
+				<label id="help_d" />
+			</n:p>
+		</div>
+		<div class="col-xs-12" id="btnDiv">
+			<div class="center">
+				<button iconSclass="glyphicon glyphicon-search"
+					sclass="btn-success btn-large" zclass="btn" label="查询 "
+					onClick="@command('queryBtnOnClick')" autodisable="self"
+					id="queryBtn" width="110px" style="font-size:16px" height="40px" />
+				<space></space>
+				<button iconSclass="glyphicon glyphicon-flash"
+					sclass="btn-danger btn-large" zclass="btn" label="开始发电"
+					onClick="@command('nextBtnOnClick')" autodisable="self"
+					id="nextBtn" width="110px" style="font-size:16px" height="40px" />
+			</div>
+			<n:p class="help-block pull-right">
+				<label id="help_t" />
+			</n:p>
+		</div>
+	</div>
+	<div class="container-fluid"
+		style="padding-right:5px;padding-left:5px;">
+		<div class="row-fluid">
+			<listbox xmlns:ca="client/attribute"
+				ca:data-scrollable="false" id="itBillLbx" class="itBill"
+				emptyMessage="无数据" oddRowSclass="myoddrow">
+				<listhead>
+					<listheader label="序号"
+						iconSclass="z-icon-caret-right blue" width="60px" />
+					<listheader iconSclass="z-icon-caret-right blue"
+						label="站名">
+						<div sclass="nav-search pull-right">
+							<bandbox placeholder="关键字 ..."
+								sclass="input-prepend" id="keyworkbdx" maxlength="40" cols="10" />
+						</div>
+					</listheader>
+				</listhead>
+			</listbox>
+		</div>
+	</div>
+	<space height="35px"></space>
+<script type="text/javascript" defer="true">
+		var btndivtop;
+		var btndivheight=jq('$btnDiv').height();
+		var btnDiv=jq('$btnDiv');
+		$(window).scroll(function(event){
+			if(!btndivtop){
+				btndivtop=jq('$btnDiv').offset().top;
+			}
+		 var vtop=$(document).scrollTop();
+		 if(vtop>btndivtop+btndivheight){
+		 	btnDiv.addClass("navbar-fixed-bottom");
+		 	btnDiv.css("margin-bottom","10px");
+		 }else{
+			btnDiv.removeClass("navbar-fixed-bottom");
+			btnDiv.css("margin-bottom","0px");
+		 }
+    	});
+		/*解决listbox在某些浏览器下选中一条后自动回到页面顶部的BUG,原属性position: absolute;*/
+		//jq('.z-focus-a').css("position","fixed");
+		jq('.z-focus-a').remove();
+	</script>
+</vlayout>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ALARMQUERYLOGMAPPER" >
+  <resultMap id="BaseResultMap" type="com.fuhj.itower.model.AlarmQueryLog" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="queryTime" property="querytime" jdbcType="TIMESTAMP" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="range" property="range" jdbcType="VARCHAR" />
+    <result column="returnCode" property="returncode" jdbcType="SMALLINT" />
+    <result column="returnCount" property="returncount" jdbcType="INTEGER" />
+    <result column="timeTaking" property="timetaking" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fuhj.itower.model.AlarmQueryLog" extends="BaseResultMap" >
+    <result column="hasException" property="hasexception" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    log_id, queryTime, userId, range, returnCode, returnCount, timeTaking
+  </sql>
+  <sql id="Blob_Column_List" >
+    hasException
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.fuhj.itower.dao.Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from alarm_query_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from alarm_query_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from alarm_query_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from alarm_query_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example" >
+    delete from alarm_query_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fuhj.itower.model.AlarmQueryLog" >
+    <selectKey resultType="int" keyProperty="logId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into alarm_query_log (queryTime, userId, range, 
+      returnCode, returnCount, timeTaking, 
+      hasException)
+    values (#{querytime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER}, #{range,jdbcType=VARCHAR}, 
+      #{returncode,jdbcType=SMALLINT}, #{returncount,jdbcType=INTEGER}, #{timetaking,jdbcType=INTEGER}, 
+      #{hasexception,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhj.itower.model.AlarmQueryLog" >
+    <selectKey resultType="int" keyProperty="logId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into alarm_query_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="querytime != null" >
+        queryTime,
+      </if>
+      userId,
+      <if test="range != null" >
+        range,
+      </if>
+      returnCode,
+      returnCount,
+      timeTaking,
+      <if test="hasexception != null" >
+        hasException,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="querytime != null" >
+        #{querytime,jdbcType=TIMESTAMP},
+      </if>
+      #{userid,jdbcType=INTEGER},
+      <if test="range != null" >
+        #{range,jdbcType=VARCHAR},
+      </if>
+      #{returncode,jdbcType=SMALLINT},
+      #{returncount,jdbcType=INTEGER},
+      #{timetaking,jdbcType=INTEGER},
+      <if test="hasexception != null" >
+        #{hasexception,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer" >
+    select count(*) from alarm_query_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update alarm_query_log
+    <set >
+      <if test="record.logId != null" >
+        log_id = #{record.logId,jdbcType=INTEGER},
+      </if>
+      <if test="record.querytime != null" >
+        queryTime = #{record.querytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.range != null" >
+        range = #{record.range,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returncode != null" >
+        returnCode = #{record.returncode,jdbcType=SMALLINT},
+      </if>
+      <if test="record.returncount != null" >
+        returnCount = #{record.returncount,jdbcType=INTEGER},
+      </if>
+      <if test="record.timetaking != null" >
+        timeTaking = #{record.timetaking,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasexception != null" >
+        hasException = #{record.hasexception,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update alarm_query_log
+    set log_id = #{record.logId,jdbcType=INTEGER},
+      queryTime = #{record.querytime,jdbcType=TIMESTAMP},
+      userId = #{record.userid,jdbcType=INTEGER},
+      range = #{record.range,jdbcType=VARCHAR},
+      returnCode = #{record.returncode,jdbcType=SMALLINT},
+      returnCount = #{record.returncount,jdbcType=INTEGER},
+      timeTaking = #{record.timetaking,jdbcType=INTEGER},
+      hasException = #{record.hasexception,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update alarm_query_log
+    set log_id = #{record.logId,jdbcType=INTEGER},
+      queryTime = #{record.querytime,jdbcType=TIMESTAMP},
+      userId = #{record.userid,jdbcType=INTEGER},
+      range = #{record.range,jdbcType=VARCHAR},
+      returnCode = #{record.returncode,jdbcType=SMALLINT},
+      returnCount = #{record.returncount,jdbcType=INTEGER},
+      timeTaking = #{record.timetaking,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.AlarmQueryLog" >
+    update alarm_query_log
+    <set >
+      <if test="querytime != null" >
+        queryTime = #{querytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="range != null" >
+        range = #{range,jdbcType=VARCHAR},
+      </if>
+      <if test="returncode != null" >
+        returnCode = #{returncode,jdbcType=SMALLINT},
+      </if>
+      <if test="returncount != null" >
+        returnCount = #{returncount,jdbcType=INTEGER},
+      </if>
+      <if test="timetaking != null" >
+        timeTaking = #{timetaking,jdbcType=INTEGER},
+      </if>
+      <if test="hasexception != null" >
+        hasException = #{hasexception,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fuhj.itower.model.AlarmQueryLog" >
+    update alarm_query_log
+    set queryTime = #{querytime,jdbcType=TIMESTAMP},
+      userId = #{userid,jdbcType=INTEGER},
+      range = #{range,jdbcType=VARCHAR},
+      returnCode = #{returncode,jdbcType=SMALLINT},
+      returnCount = #{returncount,jdbcType=INTEGER},
+      timeTaking = #{timetaking,jdbcType=INTEGER},
+      hasException = #{hasexception,jdbcType=LONGVARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.AlarmQueryLog">
+	update alarm_query_log
+	set queryTime = #{querytime,jdbcType=TIMESTAMP},
+	userId = #{userid,jdbcType=INTEGER},
+	range = #{range,jdbcType=VARCHAR},
+	returnCode = #{returncode,jdbcType=SMALLINT},
+	returnCount = #{returncount,jdbcType=INTEGER},
+	timeTaking = #{timetaking,jdbcType=INTEGER}
+	where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateFieldsByExample" parameterType="map" >
+    update alarm_query_log set 
+    <foreach collection="fields" item="field" separator="," >
+      ${field.fieldName} = #{field.fieldValue}
+    </foreach>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,72 @@
+<vlayout sclass="page-content" xmlns:n="native"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.StaManageVM')">
+	<style>
+		.task.z-listbox .z-listitem, .task.z-listbox .z-listitem:hover {
+		border-left-width: 0; } .task.z-listbox .z-listitem {
+		border-left: none; }
+	</style>
+	<a label="站点信息" iconSclass="z-icon-bell" sclass="rcaption lighter" />
+	<columnlayout
+		style="border-bottom: 1px dotted #E2E2E2;padding-bottom: 16px;padding-top: 7px;">
+		<columnchildren>
+			<panel>
+				<panelchildren>
+					<hbox align="center" spacing="10px">
+						站点名称：
+						<textbox id="stNameTxt" class="form-control"
+							height="30px" cols="20">
+						</textbox>
+						站点编码：
+						<textbox id="stCodeTxt" class="form-control"
+							height="30px" cols="20">
+						</textbox>
+						<space width="25px" />
+						<button id="queryBtn" label="查询"
+							sclass="btn-primary btn-sm" autodisable="self" zclass="btn"
+							iconSclass="glyphicon glyphicon-search" />
+					</hbox>
+				</panelchildren>
+			</panel>
+		</columnchildren>
+	</columnlayout>
+	<panel id="pfalarmPal" sclass="panel-primary">
+		<panelchildren>
+			<vlayout>
+				<listbox id="staLbx" sclass="task" mold="paging"
+					pageSize="20" selectedItem="@bind(vm.selectedSta)">
+					<listhead sizable="true">
+						<listheader label="序号"
+							iconSclass="z-icon-caret-right blue" width="45px" />
+						<listheader label="省"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="地市"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="区县"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="站址名称"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="站址编码"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="资源站址编码"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="机房(动环)维护人员"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="机房(动环)维护人员联系电话"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="发电等待时长"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="区域经理"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="区域经理电话"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="所属厂家"
+							iconSclass="z-icon-caret-right blue" />
+						<listheader label="操作"
+							iconSclass="z-icon-caret-right blue" />
+					</listhead>
+				</listbox>
+			</vlayout>
+		</panelchildren>
+	</panel>
+</vlayout>

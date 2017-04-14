@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ZBZITEMMAPPER">
+	<resultMap id="BaseResultMap" type="com.fuhj.itower.model.ZbzItem">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="it_province_id" property="itProvinceId"
+			jdbcType="VARCHAR" />
+		<result column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+		<result column="it_district_id" property="itDistrictId"
+			jdbcType="VARCHAR" />
+		<result column="station_id" property="stationId" jdbcType="INTEGER" />
+		<result column="update_user" property="updateUser" jdbcType="INTEGER" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, it_province_id, it_city_id, it_district_id, station_id,
+		update_user,
+		update_time,
+		status, remark
+  </sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.fuhj.itower.dao.Example">
+		select
+		<if test="distinct">
+			distinct
+    </if>
+		<include refid="Base_Column_List" />
+		from zbzitem
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+    </if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from zbzitem
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from
+		zbzitem
+		where id = #{id,jdbcType=INTEGER}
+  </delete>
+	<delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example">
+		delete from zbzitem
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.fuhj.itower.model.ZbzItem">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+    </selectKey>
+		insert into zbzitem (it_province_id, it_city_id, it_district_id,
+		station_id, update_user, update_time,
+		status, remark)
+		values
+		(#{itProvinceId,jdbcType=VARCHAR}, #{itCityId,jdbcType=VARCHAR},
+		#{itDistrictId,jdbcType=VARCHAR},
+		#{stationId,jdbcType=INTEGER},
+		#{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.fuhj.itower.model.ZbzItem">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+    </selectKey>
+		insert into zbzitem
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="itProvinceId != null">
+				it_province_id,
+      </if>
+			<if test="itCityId != null">
+				it_city_id,
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id,
+      </if>
+			station_id,
+			update_user,
+			<if test="updateTime != null">
+				update_time,
+      </if>
+			status,
+			<if test="remark != null">
+				remark,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="itProvinceId != null">
+				#{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				#{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				#{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			#{stationId,jdbcType=INTEGER},
+			#{updateUser,jdbcType=INTEGER},
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+      </if>
+			#{status,jdbcType=SMALLINT},
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.fuhj.itower.dao.Example"
+		resultType="java.lang.Integer">
+		select count(*) from zbzitem
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update zbzitem
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+      </if>
+			<if test="record.itProvinceId != null">
+				it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.itCityId != null">
+				it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itDistrictId != null">
+				it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.stationId != null">
+				station_id = #{record.stationId,jdbcType=INTEGER},
+      </if>
+			<if test="record.updateUser != null">
+				update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=SMALLINT},
+      </if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update zbzitem
+		set id = #{record.id,jdbcType=INTEGER},
+		it_province_id =
+		#{record.itProvinceId,jdbcType=VARCHAR},
+		it_city_id =
+		#{record.itCityId,jdbcType=VARCHAR},
+		it_district_id =
+		#{record.itDistrictId,jdbcType=VARCHAR},
+		station_id =
+		#{record.stationId,jdbcType=INTEGER},
+		update_user =
+		#{record.updateUser,jdbcType=INTEGER},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP},
+		status =
+		#{record.status,jdbcType=SMALLINT},
+		remark =
+		#{record.remark,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.ZbzItem">
+		update zbzitem
+		<set>
+			<if test="itProvinceId != null">
+				it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				it_city_id = #{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="stationId != null">
+				station_id = #{stationId,jdbcType=INTEGER},
+      </if>
+			<if test="updateUser != null">
+				update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="status != null">
+				status = #{status,jdbcType=SMALLINT},
+      </if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.ZbzItem">
+		update zbzitem
+		set
+		it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+		it_city_id =
+		#{itCityId,jdbcType=VARCHAR},
+		it_district_id =
+		#{itDistrictId,jdbcType=VARCHAR},
+		station_id =
+		#{stationId,jdbcType=INTEGER},
+		update_user =
+		#{updateUser,jdbcType=INTEGER},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=SMALLINT},
+		remark = #{remark,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateFieldsByExample" parameterType="map">
+		update zbzitem set
+		<foreach collection="fields" item="field" separator=",">
+			${field.fieldName} = #{field.fieldValue}
+    </foreach>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<resultMap id="ZbzitemResultMap" type="com.fuhj.itower.model.ZbzItem"
+		extends="BaseResultMap">
+		<result column="stationCode" property="tempStr" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectCustomzbz" parameterType="map" resultMap="ZbzitemResultMap">
+		SELECT a.*,b.stationCode FROM zbzitem a LEFT JOIN station b ON
+		a.station_id=b.station_id where a.status=1
+		<if test="provinceId!=null">
+			AND a.it_province_id=#{provinceId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityId!=null">
+			AND a.it_city_id=#{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="districtId!=null">
+			AND a.it_district_id=#{districtId,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

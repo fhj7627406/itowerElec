@@ -1,0 +1,17 @@
+<vlayout sclass="page-content" xmlns:n="native"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.PermVM')">
+	<style>
+		.qrList.z-listbox .z-listcell-content{
+		padding:0}.qrList.z-listbox{padding-left:40px;}
+	</style>
+	<a label="查询区域设置" iconSclass="z-icon-bell"
+		sclass="rcaption lighter" />
+	<separator bar="true" />
+	<listbox id="queryRangeLbx" width="200px" sclass="qrList" />
+	<separator bar="true" />
+	<button iconSclass="glyphicon glyphicon-floppy-saved"
+		sclass="btn-primary btn-sm" zclass="btn" label=" 保 存 "
+		onClick="@command('save')" autodisable="self" id="saveBtn"
+		style="margin-left:40px;" />
+</vlayout>

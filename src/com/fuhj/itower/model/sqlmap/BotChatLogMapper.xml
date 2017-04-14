@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BOTCHATLOGMAPPER" >
+  <resultMap id="BaseResultMap" type="com.fuhj.itower.model.BotChatLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="receiveorsend" property="receiveorsend" jdbcType="SMALLINT" />
+    <result column="fromUser" property="fromuser" jdbcType="VARCHAR" />
+    <result column="fromUserName" property="fromusername" jdbcType="VARCHAR" />
+    <result column="toUser" property="touser" jdbcType="VARCHAR" />
+    <result column="toUserName" property="tousername" jdbcType="VARCHAR" />
+    <result column="msgType" property="msgtype" jdbcType="INTEGER" />
+    <result column="fromMyself" property="frommyself" jdbcType="SMALLINT" />
+    <result column="fromGroup" property="fromgroup" jdbcType="SMALLINT" />
+    <result column="logTime" property="logtime" jdbcType="TIMESTAMP" />
+    <result column="serviceType" property="servicetype" jdbcType="SMALLINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fuhj.itower.model.BotChatLog" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, receiveorsend, fromUser, fromUserName, toUser, toUserName, msgType, fromMyself, 
+    fromGroup, logTime, serviceType, remark
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.fuhj.itower.dao.Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from botchatlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from botchatlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from botchatlog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="int" >
+    delete from botchatlog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example" >
+    delete from botchatlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fuhj.itower.model.BotChatLog" >
+    <selectKey resultType="int" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into botchatlog (receiveorsend, fromUser, fromUserName, 
+      toUser, toUserName, msgType, 
+      fromMyself, fromGroup, logTime, 
+      serviceType, remark, content
+      )
+    values (#{receiveorsend,jdbcType=SMALLINT}, #{fromuser,jdbcType=VARCHAR}, #{fromusername,jdbcType=VARCHAR}, 
+      #{touser,jdbcType=VARCHAR}, #{tousername,jdbcType=VARCHAR}, #{msgtype,jdbcType=INTEGER}, 
+      #{frommyself,jdbcType=SMALLINT}, #{fromgroup,jdbcType=SMALLINT}, #{logtime,jdbcType=TIMESTAMP}, 
+      #{servicetype,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhj.itower.model.BotChatLog" >
+    <selectKey resultType="int" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into botchatlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      receiveorsend,
+      <if test="fromuser != null" >
+        fromUser,
+      </if>
+      <if test="fromusername != null" >
+        fromUserName,
+      </if>
+      <if test="touser != null" >
+        toUser,
+      </if>
+      <if test="tousername != null" >
+        toUserName,
+      </if>
+      msgType,
+      fromMyself,
+      fromGroup,
+      <if test="logtime != null" >
+        logTime,
+      </if>
+      serviceType,
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{receiveorsend,jdbcType=SMALLINT},
+      <if test="fromuser != null" >
+        #{fromuser,jdbcType=VARCHAR},
+      </if>
+      <if test="fromusername != null" >
+        #{fromusername,jdbcType=VARCHAR},
+      </if>
+      <if test="touser != null" >
+        #{touser,jdbcType=VARCHAR},
+      </if>
+      <if test="tousername != null" >
+        #{tousername,jdbcType=VARCHAR},
+      </if>
+      #{msgtype,jdbcType=INTEGER},
+      #{frommyself,jdbcType=SMALLINT},
+      #{fromgroup,jdbcType=SMALLINT},
+      <if test="logtime != null" >
+        #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      #{servicetype,jdbcType=SMALLINT},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer" >
+    select count(*) from botchatlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update botchatlog
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveorsend != null" >
+        receiveorsend = #{record.receiveorsend,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fromuser != null" >
+        fromUser = #{record.fromuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromusername != null" >
+        fromUserName = #{record.fromusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.touser != null" >
+        toUser = #{record.touser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tousername != null" >
+        toUserName = #{record.tousername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgtype != null" >
+        msgType = #{record.msgtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.frommyself != null" >
+        fromMyself = #{record.frommyself,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fromgroup != null" >
+        fromGroup = #{record.fromgroup,jdbcType=SMALLINT},
+      </if>
+      <if test="record.logtime != null" >
+        logTime = #{record.logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.servicetype != null" >
+        serviceType = #{record.servicetype,jdbcType=SMALLINT},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update botchatlog
+    set id = #{record.id,jdbcType=INTEGER},
+      receiveorsend = #{record.receiveorsend,jdbcType=SMALLINT},
+      fromUser = #{record.fromuser,jdbcType=VARCHAR},
+      fromUserName = #{record.fromusername,jdbcType=VARCHAR},
+      toUser = #{record.touser,jdbcType=VARCHAR},
+      toUserName = #{record.tousername,jdbcType=VARCHAR},
+      msgType = #{record.msgtype,jdbcType=INTEGER},
+      fromMyself = #{record.frommyself,jdbcType=SMALLINT},
+      fromGroup = #{record.fromgroup,jdbcType=SMALLINT},
+      logTime = #{record.logtime,jdbcType=TIMESTAMP},
+      serviceType = #{record.servicetype,jdbcType=SMALLINT},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update botchatlog
+    set id = #{record.id,jdbcType=INTEGER},
+      receiveorsend = #{record.receiveorsend,jdbcType=SMALLINT},
+      fromUser = #{record.fromuser,jdbcType=VARCHAR},
+      fromUserName = #{record.fromusername,jdbcType=VARCHAR},
+      toUser = #{record.touser,jdbcType=VARCHAR},
+      toUserName = #{record.tousername,jdbcType=VARCHAR},
+      msgType = #{record.msgtype,jdbcType=INTEGER},
+      fromMyself = #{record.frommyself,jdbcType=SMALLINT},
+      fromGroup = #{record.fromgroup,jdbcType=SMALLINT},
+      logTime = #{record.logtime,jdbcType=TIMESTAMP},
+      serviceType = #{record.servicetype,jdbcType=SMALLINT},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.BotChatLog" >
+    update botchatlog
+    <set >
+      <if test="receiveorsend != null" >
+        receiveorsend = #{receiveorsend,jdbcType=SMALLINT},
+      </if>
+      <if test="fromuser != null" >
+        fromUser = #{fromuser,jdbcType=VARCHAR},
+      </if>
+      <if test="fromusername != null" >
+        fromUserName = #{fromusername,jdbcType=VARCHAR},
+      </if>
+      <if test="touser != null" >
+        toUser = #{touser,jdbcType=VARCHAR},
+      </if>
+      <if test="tousername != null" >
+        toUserName = #{tousername,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null" >
+        msgType = #{msgtype,jdbcType=INTEGER},
+      </if>
+      <if test="frommyself != null" >
+        fromMyself = #{frommyself,jdbcType=SMALLINT},
+      </if>
+      <if test="fromgroup != null" >
+        fromGroup = #{fromgroup,jdbcType=SMALLINT},
+      </if>
+      <if test="logtime != null" >
+        logTime = #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servicetype != null" >
+        serviceType = #{servicetype,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fuhj.itower.model.BotChatLog" >
+    update botchatlog
+    set receiveorsend = #{receiveorsend,jdbcType=SMALLINT},
+      fromUser = #{fromuser,jdbcType=VARCHAR},
+      fromUserName = #{fromusername,jdbcType=VARCHAR},
+      toUser = #{touser,jdbcType=VARCHAR},
+      toUserName = #{tousername,jdbcType=VARCHAR},
+      msgType = #{msgtype,jdbcType=INTEGER},
+      fromMyself = #{frommyself,jdbcType=SMALLINT},
+      fromGroup = #{fromgroup,jdbcType=SMALLINT},
+      logTime = #{logtime,jdbcType=TIMESTAMP},
+      serviceType = #{servicetype,jdbcType=SMALLINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.BotChatLog">
+	update botchatlog
+	set receiveorsend = #{receiveorsend,jdbcType=SMALLINT},
+	fromUser = #{fromuser,jdbcType=VARCHAR},
+	fromUserName = #{fromusername,jdbcType=VARCHAR},
+	toUser = #{touser,jdbcType=VARCHAR},
+	toUserName = #{tousername,jdbcType=VARCHAR},
+	msgType = #{msgtype,jdbcType=INTEGER},
+	fromMyself = #{frommyself,jdbcType=SMALLINT},
+	fromGroup = #{fromgroup,jdbcType=SMALLINT},
+	logTime = #{logtime,jdbcType=TIMESTAMP},
+	serviceType = #{servicetype,jdbcType=SMALLINT},
+	remark = #{remark,jdbcType=VARCHAR}
+	where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateFieldsByExample" parameterType="map" >
+    update botchatlog set 
+    <foreach collection="fields" item="field" separator="," >
+      ${field.fieldName} = #{field.fieldValue}
+    </foreach>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

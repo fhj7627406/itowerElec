@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GELECINFOMAPPER">
+	<resultMap id="BaseResultMap" type="com.fuhj.itower.model.GElecInfo">
+		<id column="gelec_info_id" property="gelecInfoId" jdbcType="INTEGER" />
+		<result column="g_code" property="gCode" jdbcType="VARCHAR" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="district" property="district" jdbcType="VARCHAR" />
+		<result column="it_province_id" property="itProvinceId" jdbcType="VARCHAR" />
+		<result column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+		<result column="it_district_id" property="itDistrictId" jdbcType="VARCHAR" />
+		<result column="it_bill_id" property="itBillId" jdbcType="INTEGER" />
+		<result column="bill_code" property="billCode" jdbcType="VARCHAR" />
+		<result column="fault_source" property="faultSource" jdbcType="VARCHAR" />
+		<result column="alarm_detail" property="alarmDetail" jdbcType="VARCHAR" />
+		<result column="station_name" property="stationName" jdbcType="VARCHAR" />
+		<result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+		<result column="station_SYS_Code" property="stationSysCode" jdbcType="VARCHAR" />
+		<result column="operator" property="operator" jdbcType="VARCHAR" />
+		<result column="oper_code" property="operCode" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="duration" property="duration" jdbcType="VARCHAR" />
+		<result column="odometer" property="odometer" jdbcType="VARCHAR" />
+		<result column="petrol_price" property="petrolPrice" jdbcType="VARCHAR" />
+		<result column="machine_count" property="machineCount" jdbcType="SMALLINT" />
+		<result column="area_type" property="areaType" jdbcType="VARCHAR" />
+		<result column="data_origin" property="dataOrigin" jdbcType="VARCHAR" />
+		<result column="reason" property="reason" jdbcType="VARCHAR" />
+		<result column="machine_power" property="machinePower" jdbcType="VARCHAR" />
+		<result column="machine_type" property="machineType" jdbcType="VARCHAR" />
+		<result column="machine_NO" property="machineNo" jdbcType="VARCHAR" />
+		<result column="person" property="person" jdbcType="VARCHAR" />
+		<result column="contact" property="contact" jdbcType="VARCHAR" />
+		<result column="start_voltage" property="startVoltage" jdbcType="VARCHAR" />
+		<result column="start_lng" property="startLng" jdbcType="DOUBLE" />
+		<result column="start_lat" property="startLat" jdbcType="DOUBLE" />
+		<result column="start_addr" property="startAddr" jdbcType="VARCHAR" />
+		<result column="end_voltage" property="endVoltage" jdbcType="VARCHAR" />
+		<result column="end_lng" property="endLng" jdbcType="DOUBLE" />
+		<result column="end_lat" property="endLat" jdbcType="DOUBLE" />
+		<result column="end_addr" property="endAddr" jdbcType="VARCHAR" />
+		<result column="pic1" property="pic1" jdbcType="VARCHAR" />
+		<result column="pic2" property="pic2" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+		<result column="creator_agent_id" property="creatorAgentId" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+                </when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+                </when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		gelec_info_id, g_code, province, city, district, it_province_id, it_city_id,
+		it_district_id,
+		it_bill_id, bill_code, fault_source, alarm_detail, station_name, station_code,
+		station_SYS_Code,
+		operator, oper_code, start_time, end_time, duration, odometer, petrol_price,
+		machine_count,
+		area_type, data_origin, reason, machine_power, machine_type, machine_NO, person,
+		contact, start_voltage, start_lng, start_lat, start_addr, end_voltage, end_lng, end_lat,
+		end_addr,
+		pic1, pic2, create_time, update_time, creator_id, creator_agent_id, status,
+		remark
+  </sql>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example">
+		select
+		<if test="distinct">
+			distinct
+    </if>
+		<include refid="Base_Column_List" />
+		from gelec_info
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+    </if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from gelec_info
+		where gelec_info_id = #{gelecInfoId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from gelec_info
+		where gelec_info_id =
+		#{gelecInfoId,jdbcType=INTEGER}
+  </delete>
+	<delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example">
+		delete from gelec_info
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.fuhj.itower.model.GElecInfo">
+		<selectKey resultType="int" keyProperty="gelecInfoId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into gelec_info (g_code, province, city,
+		district, it_province_id, it_city_id,
+		it_district_id, it_bill_id, bill_code,
+		fault_source, alarm_detail, station_name,
+		station_code,
+		station_SYS_Code, operator,
+		oper_code, start_time, end_time,
+		duration, odometer, petrol_price,
+		machine_count, area_type, data_origin,
+		reason, machine_power, machine_type,
+		machine_NO, person,
+		contact,
+		start_voltage, start_lng, start_lat,
+		start_addr, end_voltage, end_lng,
+		end_lat, end_addr,
+		pic1,
+		pic2, create_time, update_time,
+		creator_id, creator_agent_id, status,
+		remark)
+		values
+		(#{gCode,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+		#{district,jdbcType=VARCHAR}, #{itProvinceId,jdbcType=VARCHAR}, #{itCityId,jdbcType=VARCHAR},
+		#{itDistrictId,jdbcType=VARCHAR}, #{itBillId,jdbcType=INTEGER}, #{billCode,jdbcType=VARCHAR},
+		#{faultSource,jdbcType=VARCHAR}, #{alarmDetail,jdbcType=VARCHAR}, #{stationName,jdbcType=VARCHAR},
+		#{stationCode,jdbcType=VARCHAR}, #{stationSysCode,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR},
+		#{operCode,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+		#{duration,jdbcType=VARCHAR}, #{odometer,jdbcType=VARCHAR}, #{petrolPrice,jdbcType=VARCHAR},
+		#{machineCount,jdbcType=SMALLINT}, #{areaType,jdbcType=VARCHAR}, #{dataOrigin,jdbcType=VARCHAR},
+		#{reason,jdbcType=VARCHAR}, #{machinePower,jdbcType=VARCHAR}, #{machineType,jdbcType=VARCHAR},
+		#{machineNo,jdbcType=VARCHAR}, #{person,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR},
+		#{startVoltage,jdbcType=VARCHAR}, #{startLng,jdbcType=DOUBLE}, #{startLat,jdbcType=DOUBLE},
+		#{startAddr,jdbcType=VARCHAR}, #{endVoltage,jdbcType=VARCHAR}, #{endLng,jdbcType=DOUBLE},
+		#{endLat,jdbcType=DOUBLE}, #{endAddr,jdbcType=VARCHAR}, #{pic1,jdbcType=VARCHAR},
+		#{pic2,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{creatorId,jdbcType=INTEGER}, #{creatorAgentId,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.fuhj.itower.model.GElecInfo">
+		<selectKey resultType="int" keyProperty="gelecInfoId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into gelec_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gCode != null">
+				g_code,
+      </if>
+			<if test="province != null">
+				province,
+      </if>
+			<if test="city != null">
+				city,
+      </if>
+			<if test="district != null">
+				district,
+      </if>
+			<if test="itProvinceId != null">
+				it_province_id,
+      </if>
+			<if test="itCityId != null">
+				it_city_id,
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id,
+      </if>
+			it_bill_id,
+			<if test="billCode != null">
+				bill_code,
+      </if>
+			<if test="faultSource != null">
+				fault_source,
+      </if>
+			<if test="alarmDetail != null">
+				alarm_detail,
+      </if>
+			<if test="stationName != null">
+				station_name,
+      </if>
+			<if test="stationCode != null">
+				station_code,
+      </if>
+			<if test="stationSysCode != null">
+				station_SYS_Code,
+      </if>
+			<if test="operator != null">
+				operator,
+      </if>
+			<if test="operCode != null">
+				oper_code,
+      </if>
+			<if test="startTime != null">
+				start_time,
+      </if>
+			<if test="endTime != null">
+				end_time,
+      </if>
+			<if test="duration != null">
+				duration,
+      </if>
+			<if test="odometer != null">
+				odometer,
+      </if>
+			<if test="petrolPrice != null">
+				petrol_price,
+      </if>
+			machine_count,
+			<if test="areaType != null">
+				area_type,
+      </if>
+			<if test="dataOrigin != null">
+				data_origin,
+      </if>
+			<if test="reason != null">
+				reason,
+      </if>
+			<if test="machinePower != null">
+				machine_power,
+      </if>
+			<if test="machineType != null">
+				machine_type,
+      </if>
+			<if test="machineNo != null">
+				machine_NO,
+      </if>
+			<if test="person != null">
+				person,
+      </if>
+			<if test="contact != null">
+				contact,
+      </if>
+			<if test="startVoltage != null">
+				start_voltage,
+      </if>
+			start_lng,
+			start_lat,
+			<if test="startAddr != null">
+				start_addr,
+      </if>
+			<if test="endVoltage != null">
+				end_voltage,
+      </if>
+			end_lng,
+			end_lat,
+			<if test="endAddr != null">
+				end_addr,
+      </if>
+			<if test="pic1 != null">
+				pic1,
+      </if>
+			<if test="pic2 != null">
+				pic2,
+      </if>
+			<if test="createTime != null">
+				create_time,
+      </if>
+			<if test="updateTime != null">
+				update_time,
+      </if>
+			creator_id,
+			creator_agent_id,
+			status,
+			<if test="remark != null">
+				remark,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gCode != null">
+				#{gCode,jdbcType=VARCHAR},
+      </if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+      </if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+      </if>
+			<if test="district != null">
+				#{district,jdbcType=VARCHAR},
+      </if>
+			<if test="itProvinceId != null">
+				#{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				#{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				#{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			#{itBillId,jdbcType=INTEGER},
+			<if test="billCode != null">
+				#{billCode,jdbcType=VARCHAR},
+      </if>
+			<if test="faultSource != null">
+				#{faultSource,jdbcType=VARCHAR},
+      </if>
+			<if test="alarmDetail != null">
+				#{alarmDetail,jdbcType=VARCHAR},
+      </if>
+			<if test="stationName != null">
+				#{stationName,jdbcType=VARCHAR},
+      </if>
+			<if test="stationCode != null">
+				#{stationCode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationSysCode != null">
+				#{stationSysCode,jdbcType=VARCHAR},
+      </if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+      </if>
+			<if test="operCode != null">
+				#{operCode,jdbcType=VARCHAR},
+      </if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="duration != null">
+				#{duration,jdbcType=VARCHAR},
+      </if>
+			<if test="odometer != null">
+				#{odometer,jdbcType=VARCHAR},
+      </if>
+			<if test="petrolPrice != null">
+				#{petrolPrice,jdbcType=VARCHAR},
+      </if>
+			#{machineCount,jdbcType=SMALLINT},
+			<if test="areaType != null">
+				#{areaType,jdbcType=VARCHAR},
+      </if>
+			<if test="dataOrigin != null">
+				#{dataOrigin,jdbcType=VARCHAR},
+      </if>
+			<if test="reason != null">
+				#{reason,jdbcType=VARCHAR},
+      </if>
+			<if test="machinePower != null">
+				#{machinePower,jdbcType=VARCHAR},
+      </if>
+			<if test="machineType != null">
+				#{machineType,jdbcType=VARCHAR},
+      </if>
+			<if test="machineNo != null">
+				#{machineNo,jdbcType=VARCHAR},
+      </if>
+			<if test="person != null">
+				#{person,jdbcType=VARCHAR},
+      </if>
+			<if test="contact != null">
+				#{contact,jdbcType=VARCHAR},
+      </if>
+			<if test="startVoltage != null">
+				#{startVoltage,jdbcType=VARCHAR},
+      </if>
+			#{startLng,jdbcType=DOUBLE},
+			#{startLat,jdbcType=DOUBLE},
+			<if test="startAddr != null">
+				#{startAddr,jdbcType=VARCHAR},
+      </if>
+			<if test="endVoltage != null">
+				#{endVoltage,jdbcType=VARCHAR},
+      </if>
+			#{endLng,jdbcType=DOUBLE},
+			#{endLat,jdbcType=DOUBLE},
+			<if test="endAddr != null">
+				#{endAddr,jdbcType=VARCHAR},
+      </if>
+			<if test="pic1 != null">
+				#{pic1,jdbcType=VARCHAR},
+      </if>
+			<if test="pic2 != null">
+				#{pic2,jdbcType=VARCHAR},
+      </if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+      </if>
+			#{creatorId,jdbcType=INTEGER},
+			#{creatorAgentId,jdbcType=INTEGER},
+			#{status,jdbcType=SMALLINT},
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer">
+		select count(*) from gelec_info
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update gelec_info
+		<set>
+			<if test="record.gelecInfoId != null">
+				gelec_info_id = #{record.gelecInfoId,jdbcType=INTEGER},
+      </if>
+			<if test="record.gCode != null">
+				g_code = #{record.gCode,jdbcType=VARCHAR},
+      </if>
+			<if test="record.province != null">
+				province = #{record.province,jdbcType=VARCHAR},
+      </if>
+			<if test="record.city != null">
+				city = #{record.city,jdbcType=VARCHAR},
+      </if>
+			<if test="record.district != null">
+				district = #{record.district,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itProvinceId != null">
+				it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itCityId != null">
+				it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itDistrictId != null">
+				it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itBillId != null">
+				it_bill_id = #{record.itBillId,jdbcType=INTEGER},
+      </if>
+			<if test="record.billCode != null">
+				bill_code = #{record.billCode,jdbcType=VARCHAR},
+      </if>
+			<if test="record.faultSource != null">
+				fault_source = #{record.faultSource,jdbcType=VARCHAR},
+      </if>
+			<if test="record.alarmDetail != null">
+				alarm_detail = #{record.alarmDetail,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationName != null">
+				station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationCode != null">
+				station_code = #{record.stationCode,jdbcType=VARCHAR},
+      </if>
+			<if test="record.stationSysCode != null">
+				station_SYS_Code = #{record.stationSysCode,jdbcType=VARCHAR},
+      </if>
+			<if test="record.operator != null">
+				operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+			<if test="record.operCode != null">
+				oper_code = #{record.operCode,jdbcType=VARCHAR},
+      </if>
+			<if test="record.startTime != null">
+				start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.endTime != null">
+				end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.duration != null">
+				duration = #{record.duration,jdbcType=VARCHAR},
+      </if>
+			<if test="record.odometer != null">
+				odometer = #{record.odometer,jdbcType=VARCHAR},
+      </if>
+			<if test="record.petrolPrice != null">
+				petrol_price = #{record.petrolPrice,jdbcType=VARCHAR},
+      </if>
+			<if test="record.machineCount != null">
+				machine_count = #{record.machineCount,jdbcType=SMALLINT},
+      </if>
+			<if test="record.areaType != null">
+				area_type = #{record.areaType,jdbcType=VARCHAR},
+      </if>
+			<if test="record.dataOrigin != null">
+				data_origin = #{record.dataOrigin,jdbcType=VARCHAR},
+      </if>
+			<if test="record.reason != null">
+				reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+			<if test="record.machinePower != null">
+				machine_power = #{record.machinePower,jdbcType=VARCHAR},
+      </if>
+			<if test="record.machineType != null">
+				machine_type = #{record.machineType,jdbcType=VARCHAR},
+      </if>
+			<if test="record.machineNo != null">
+				machine_NO = #{record.machineNo,jdbcType=VARCHAR},
+      </if>
+			<if test="record.person != null">
+				person = #{record.person,jdbcType=VARCHAR},
+      </if>
+			<if test="record.contact != null">
+				contact = #{record.contact,jdbcType=VARCHAR},
+      </if>
+			<if test="record.startVoltage != null">
+				start_voltage = #{record.startVoltage,jdbcType=VARCHAR},
+      </if>
+			<if test="record.startLng != null">
+				start_lng = #{record.startLng,jdbcType=DOUBLE},
+      </if>
+			<if test="record.startLat != null">
+				start_lat = #{record.startLat,jdbcType=DOUBLE},
+      </if>
+			<if test="record.startAddr != null">
+				start_addr = #{record.startAddr,jdbcType=VARCHAR},
+      </if>
+			<if test="record.endVoltage != null">
+				end_voltage = #{record.endVoltage,jdbcType=VARCHAR},
+      </if>
+			<if test="record.endLng != null">
+				end_lng = #{record.endLng,jdbcType=DOUBLE},
+      </if>
+			<if test="record.endLat != null">
+				end_lat = #{record.endLat,jdbcType=DOUBLE},
+      </if>
+			<if test="record.endAddr != null">
+				end_addr = #{record.endAddr,jdbcType=VARCHAR},
+      </if>
+			<if test="record.pic1 != null">
+				pic1 = #{record.pic1,jdbcType=VARCHAR},
+      </if>
+			<if test="record.pic2 != null">
+				pic2 = #{record.pic2,jdbcType=VARCHAR},
+      </if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.creatorId != null">
+				creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+			<if test="record.creatorAgentId != null">
+				creator_agent_id = #{record.creatorAgentId,jdbcType=INTEGER},
+      </if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=SMALLINT},
+      </if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update gelec_info
+		set gelec_info_id = #{record.gelecInfoId,jdbcType=INTEGER},
+		g_code =
+		#{record.gCode,jdbcType=VARCHAR},
+		province = #{record.province,jdbcType=VARCHAR},
+		city =
+		#{record.city,jdbcType=VARCHAR},
+		district = #{record.district,jdbcType=VARCHAR},
+		it_province_id =
+		#{record.itProvinceId,jdbcType=VARCHAR},
+		it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+		it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+		it_bill_id =
+		#{record.itBillId,jdbcType=INTEGER},
+		bill_code = #{record.billCode,jdbcType=VARCHAR},
+		fault_source =
+		#{record.faultSource,jdbcType=VARCHAR},
+		alarm_detail = #{record.alarmDetail,jdbcType=VARCHAR},
+		station_name = #{record.stationName,jdbcType=VARCHAR},
+		station_code =
+		#{record.stationCode,jdbcType=VARCHAR},
+		station_SYS_Code =
+		#{record.stationSysCode,jdbcType=VARCHAR},
+		operator = #{record.operator,jdbcType=VARCHAR},
+		oper_code = #{record.operCode,jdbcType=VARCHAR},
+		start_time =
+		#{record.startTime,jdbcType=TIMESTAMP},
+		end_time = #{record.endTime,jdbcType=TIMESTAMP},
+		duration =
+		#{record.duration,jdbcType=VARCHAR},
+		odometer = #{record.odometer,jdbcType=VARCHAR},
+		petrol_price =
+		#{record.petrolPrice,jdbcType=VARCHAR},
+		machine_count = #{record.machineCount,jdbcType=SMALLINT},
+		area_type = #{record.areaType,jdbcType=VARCHAR},
+		data_origin =
+		#{record.dataOrigin,jdbcType=VARCHAR},
+		reason = #{record.reason,jdbcType=VARCHAR},
+		machine_power =
+		#{record.machinePower,jdbcType=VARCHAR},
+		machine_type = #{record.machineType,jdbcType=VARCHAR},
+		machine_NO = #{record.machineNo,jdbcType=VARCHAR},
+		person = #{record.person,jdbcType=VARCHAR},
+		contact = #{record.contact,jdbcType=VARCHAR},
+		start_voltage =
+		#{record.startVoltage,jdbcType=VARCHAR},
+		start_lng = #{record.startLng,jdbcType=DOUBLE},
+		start_lat =
+		#{record.startLat,jdbcType=DOUBLE},
+		start_addr = #{record.startAddr,jdbcType=VARCHAR},
+		end_voltage =
+		#{record.endVoltage,jdbcType=VARCHAR},
+		end_lng = #{record.endLng,jdbcType=DOUBLE},
+		end_lat =
+		#{record.endLat,jdbcType=DOUBLE},
+		end_addr = #{record.endAddr,jdbcType=VARCHAR},
+		pic1 =
+		#{record.pic1,jdbcType=VARCHAR},
+		pic2 = #{record.pic2,jdbcType=VARCHAR},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+		creator_id = #{record.creatorId,jdbcType=INTEGER},
+		creator_agent_id =
+		#{record.creatorAgentId,jdbcType=INTEGER},
+		status = #{record.status,jdbcType=SMALLINT},
+		remark =
+		#{record.remark,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.GElecInfo">
+		update gelec_info
+		<set>
+			<if test="gCode != null">
+				g_code = #{gCode,jdbcType=VARCHAR},
+      </if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+      </if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+      </if>
+			<if test="district != null">
+				district = #{district,jdbcType=VARCHAR},
+      </if>
+			<if test="itProvinceId != null">
+				it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				it_city_id = #{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="itBillId != null">
+				it_bill_id = #{itBillId,jdbcType=INTEGER},
+      </if>
+			<if test="billCode != null">
+				bill_code = #{billCode,jdbcType=VARCHAR},
+      </if>
+			<if test="faultSource != null">
+				fault_source = #{faultSource,jdbcType=VARCHAR},
+      </if>
+			<if test="alarmDetail != null">
+				alarm_detail = #{alarmDetail,jdbcType=VARCHAR},
+      </if>
+			<if test="stationName != null">
+				station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+			<if test="stationCode != null">
+				station_code = #{stationCode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationSysCode != null">
+				station_SYS_Code = #{stationSysCode,jdbcType=VARCHAR},
+      </if>
+			<if test="operator != null">
+				operator = #{operator,jdbcType=VARCHAR},
+      </if>
+			<if test="operCode != null">
+				oper_code = #{operCode,jdbcType=VARCHAR},
+      </if>
+			<if test="startTime != null">
+				start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="duration != null">
+				duration = #{duration,jdbcType=VARCHAR},
+      </if>
+			<if test="odometer != null">
+				odometer = #{odometer,jdbcType=VARCHAR},
+      </if>
+			<if test="petrolPrice != null">
+				petrol_price = #{petrolPrice,jdbcType=VARCHAR},
+      </if>
+			<if test="machineCount != null">
+				machine_count = #{machineCount,jdbcType=SMALLINT},
+      </if>
+			<if test="areaType != null">
+				area_type = #{areaType,jdbcType=VARCHAR},
+      </if>
+			<if test="dataOrigin != null">
+				data_origin = #{dataOrigin,jdbcType=VARCHAR},
+      </if>
+			<if test="reason != null">
+				reason = #{reason,jdbcType=VARCHAR},
+      </if>
+			<if test="machinePower != null">
+				machine_power = #{machinePower,jdbcType=VARCHAR},
+      </if>
+			<if test="machineType != null">
+				machine_type = #{machineType,jdbcType=VARCHAR},
+      </if>
+			<if test="machineNo != null">
+				machine_NO = #{machineNo,jdbcType=VARCHAR},
+      </if>
+			<if test="person != null">
+				person = #{person,jdbcType=VARCHAR},
+      </if>
+			<if test="contact != null">
+				contact = #{contact,jdbcType=VARCHAR},
+      </if>
+			<if test="startVoltage != null">
+				start_voltage = #{startVoltage,jdbcType=VARCHAR},
+      </if>
+			<if test="startLng != null">
+				start_lng = #{startLng,jdbcType=DOUBLE},
+      </if>
+			<if test="startLat != null">
+				start_lat = #{startLat,jdbcType=DOUBLE},
+      </if>
+			<if test="startAddr != null">
+				start_addr = #{startAddr,jdbcType=VARCHAR},
+      </if>
+			<if test="endVoltage != null">
+				end_voltage = #{endVoltage,jdbcType=VARCHAR},
+      </if>
+			<if test="endLng != null">
+				end_lng = #{endLng,jdbcType=DOUBLE},
+      </if>
+			<if test="endLat != null">
+				end_lat = #{endLat,jdbcType=DOUBLE},
+      </if>
+			<if test="endAddr != null">
+				end_addr = #{endAddr,jdbcType=VARCHAR},
+      </if>
+			<if test="pic1 != null">
+				pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+			<if test="pic2 != null">
+				pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="creatorId != null">
+				creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+			<if test="creatorAgentId != null">
+				creator_agent_id = #{creatorAgentId,jdbcType=INTEGER},
+      </if>
+			<if test="status != null">
+				status = #{status,jdbcType=SMALLINT},
+      </if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		where gelec_info_id = #{gelecInfoId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.GElecInfo">
+		update gelec_info
+		set g_code =
+		#{gCode,jdbcType=VARCHAR},
+		province = #{province,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		district = #{district,jdbcType=VARCHAR},
+		it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+		it_city_id = #{itCityId,jdbcType=VARCHAR},
+		it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+		it_bill_id = #{itBillId,jdbcType=INTEGER},
+		bill_code = #{billCode,jdbcType=VARCHAR},
+		fault_source =
+		#{faultSource,jdbcType=VARCHAR},
+		alarm_detail = #{alarmDetail,jdbcType=VARCHAR},
+		station_name =
+		#{stationName,jdbcType=VARCHAR},
+		station_code = #{stationCode,jdbcType=VARCHAR},
+		station_SYS_Code =
+		#{stationSysCode,jdbcType=VARCHAR},
+		operator = #{operator,jdbcType=VARCHAR},
+		oper_code =
+		#{operCode,jdbcType=VARCHAR},
+		start_time = #{startTime,jdbcType=TIMESTAMP},
+		end_time =
+		#{endTime,jdbcType=TIMESTAMP},
+		duration = #{duration,jdbcType=VARCHAR},
+		odometer =
+		#{odometer,jdbcType=VARCHAR},
+		petrol_price = #{petrolPrice,jdbcType=VARCHAR},
+		machine_count =
+		#{machineCount,jdbcType=SMALLINT},
+		area_type = #{areaType,jdbcType=VARCHAR},
+		data_origin =
+		#{dataOrigin,jdbcType=VARCHAR},
+		reason = #{reason,jdbcType=VARCHAR},
+		machine_power =
+		#{machinePower,jdbcType=VARCHAR},
+		machine_type = #{machineType,jdbcType=VARCHAR},
+		machine_NO =
+		#{machineNo,jdbcType=VARCHAR},
+		person = #{person,jdbcType=VARCHAR},
+		contact =
+		#{contact,jdbcType=VARCHAR},
+		start_voltage = #{startVoltage,jdbcType=VARCHAR},
+		start_lng =
+		#{startLng,jdbcType=DOUBLE},
+		start_lat = #{startLat,jdbcType=DOUBLE},
+		start_addr =
+		#{startAddr,jdbcType=VARCHAR},
+		end_voltage = #{endVoltage,jdbcType=VARCHAR},
+		end_lng =
+		#{endLng,jdbcType=DOUBLE},
+		end_lat = #{endLat,jdbcType=DOUBLE},
+		end_addr =
+		#{endAddr,jdbcType=VARCHAR},
+		pic1 = #{pic1,jdbcType=VARCHAR},
+		pic2 = #{pic2,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		creator_id = #{creatorId,jdbcType=INTEGER},
+		creator_agent_id = #{creatorAgentId,jdbcType=INTEGER},
+		status = #{status,jdbcType=SMALLINT},
+		remark = #{remark,jdbcType=VARCHAR}
+		where gelec_info_id =
+		#{gelecInfoId,jdbcType=INTEGER}
+  </update>
+	<update id="updateFieldsByExample" parameterType="map">
+		update gelec_info set
+		<foreach collection="fields" item="field" separator=",">
+			${field.fieldName} =
+			#{field.fieldValue}
+    </foreach>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="customSelectMaxCode" resultType="java.lang.String" parameterType="map">
+	<![CDATA[
+		SELECT IFNULL(MAX(g_code),'0') g_code
+		FROM gelec_info WHERE CREATE_TIME between #{beginTime,jdbcType=TIMESTAMP} and #{endTime,jdbcType=TIMESTAMP}
+		and STATUS<9
+	]]>
+	</select>
+
+	<resultMap id="reportMap" type="com.fuhj.itower.ui.model.GenElecReportItem">
+		<result column="it_province_id" property="itProvinceId" jdbcType="VARCHAR" />
+		<result column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+		<result column="it_district_id" property="itDistrictId" jdbcType="VARCHAR" />
+		<result column="show_name" property="showName" jdbcType="VARCHAR" />
+		<result column="_sum" property="sum" jdbcType="INTEGER" />
+		<result column="_done" property="done" jdbcType="INTEGER" />
+		<result column="_ing" property="ing" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="customSelectGelecReport_p" parameterType="map" resultMap="reportMap">
+		SELECT a.it_city_id,a.cname show_name,
+		(SELECT COUNT(*) FROM gelec_info b WHERE
+		b.it_city_id=a.it_city_id 
+		<![CDATA[ AND b.status<>0 AND b.status<>9]]>
+		<if test="startDate!=null">
+			AND b.start_time >=#{startDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endDate!=null">
+			<![CDATA[AND b.start_time <=#{endDate,jdbcType=TIMESTAMP}]]>
+		</if>
+		) _sum,
+		(SELECT COUNT(*) FROM gelec_info b WHERE b.it_city_id=a.it_city_id AND b.status=1
+		<if test="startDate!=null">
+			AND b.start_time>=#{startDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endDate!=null">
+			<![CDATA[AND b.start_time<=#{endDate,jdbcType=TIMESTAMP}]]>
+		</if>
+		) _done,
+		(SELECT COUNT(*) FROM gelec_info b WHERE b.it_city_id=a.it_city_id AND b.status=2
+		<if test="startDate!=null">
+			AND b.start_time >=#{startDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endDate!=null">
+			<![CDATA[AND b.start_time <=#{endDate,jdbcType=TIMESTAMP}]]>
+		</if>
+		) _ing
+		FROM it_city a WHERE 1=1
+		<if test="itProvinceId!=null">
+			AND a.it_province_id = #{itProvinceId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="customSelectGelecReport_c" parameterType="map" resultMap="reportMap">
+		SELECT a.it_district_id,a.dshortname show_name,
+		(SELECT COUNT(*) FROM gelec_info b WHERE
+		b.it_district_id=a.it_district_id 
+		<![CDATA[AND b.status<>0 AND b.status<>9]]>
+		<if test="startDate!=null">
+			AND b.start_time >=#{startDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endDate!=null">
+			<![CDATA[AND b.start_time <=#{endDate,jdbcType=TIMESTAMP}]]>
+		</if>
+		) _sum,
+		(SELECT COUNT(*) FROM gelec_info b WHERE b.it_district_id=a.it_district_id AND b.status=1
+		<if test="startDate!=null">
+			AND b.start_time>=#{startDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endDate!=null">
+			<![CDATA[AND b.start_time<=#{endDate,jdbcType=TIMESTAMP}]]>
+		</if>
+		) _done,
+		(SELECT COUNT(*) FROM gelec_info b WHERE b.it_district_id=a.it_district_id AND b.status=2
+		<if test="startDate!=null">
+			AND b.start_time >=#{startDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endDate!=null">
+			<![CDATA[AND b.start_time <=#{endDate,jdbcType=TIMESTAMP}]]>
+		</if>
+		) _ing
+		FROM it_district a WHERE 1=1
+		<if test="itCityId!=null">
+			AND a.it_city_id =#{itCityId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<resultMap id="summaryMap" type="com.fuhj.itower.ui.model.Summary">
+		<result column="sum_done" property="sumDone" jdbcType="INTEGER" />
+		<result column="month_done" property="monthDone" jdbcType="INTEGER" />
+		<result column="today_done" property="todayDone" jdbcType="INTEGER" />
+		<result column="sum_ing" property="sumIng" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="customSelectSummary_p" parameterType="map" resultMap="summaryMap">
+		SELECT
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=1 AND it_province_id =
+		#{itProvinceId,jdbcType=VARCHAR}) sum_done,
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=1 AND
+		it_province_id =#{itProvinceId,jdbcType=VARCHAR} AND 
+		<![CDATA[end_time>=#{monthBegin,jdbcType=TIMESTAMP} AND end_time <=#{monthEND,jdbcType=TIMESTAMP}]]>)
+		month_done,
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=1 AND it_province_id =
+		#{itProvinceId,jdbcType=VARCHAR} AND 
+		<![CDATA[end_time>=#{todayBegin,jdbcType=TIMESTAMP} AND end_time <=#{todayEnd,jdbcType=TIMESTAMP}]]>)
+		today_done,
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=2 AND it_province_id =
+		#{itProvinceId,jdbcType=VARCHAR}) sum_ing
+		FROM DUAL
+	</select>
+	<select id="customSelectSummary_c" parameterType="map" resultMap="summaryMap">
+		SELECT
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=1 AND it_city_id =
+		#{itCityId,jdbcType=VARCHAR}) sum_done,
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=1 AND
+		it_city_id = #{itCityId,jdbcType=VARCHAR} AND 
+		<![CDATA[end_time>=#{monthBegin,jdbcType=TIMESTAMP} AND end_time <=#{monthEND,jdbcType=TIMESTAMP}]]>)
+		month_done,
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=1 AND it_city_id =
+		#{itCityId,jdbcType=VARCHAR} AND 
+		<![CDATA[end_time>=#{todayBegin,jdbcType=TIMESTAMP} AND end_time <=#{todayEnd,jdbcType=TIMESTAMP}]]>)
+		today_done,
+		(SELECT COUNT(*) FROM gelec_info WHERE STATUS=2 AND it_city_id =
+		#{itCityId,jdbcType=VARCHAR}) sum_ing
+		FROM DUAL
+	</select>
+</mapper>

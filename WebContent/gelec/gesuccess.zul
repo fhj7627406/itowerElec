@@ -1,0 +1,25 @@
+<div xmlns:n="native">
+	<space height="180px"></space>
+	<div class="form-group">
+		<div class="col-xs-12">
+			<div class="center">
+				<n:label class="control-label">数据提交成功！</n:label>
+			</div>
+		</div>
+	</div>
+	<space></space>
+	<div class="row-fluid">
+		<div class="span12 center">
+			<button label="返回" sclass="btn-primary btn-large"
+				iconSclass="glyphicon glyphicon-backward" autodisable="self"
+				zclass="btn" width="90px" style="font-size:16px" height="40px">
+				<attribute name="onClick">
+					if(session.getAttribute("selectedITBill")!=null){
+						session.removeAttribute("selectedITBill");
+					}
+					com.fuhj.util.WebAppUtil.getElecIncludePage().setSrc("geindex.zul");
+				</attribute>
+			</button>
+		</div>
+	</div>
+</div>

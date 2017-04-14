@@ -1,0 +1,242 @@
+<div xmlns:n="native" xmlns:w="client" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.gelec.GElecListVM')">
+	<style>
+		.itBill.z-listbox .z-listcell-content{line-height:20px;} .z-listbox
+		.z-label{font-size:13px;} .rtab .z-hlayout-inner{display:inherit;} .rtab .z-hlayout
+		.z-label{font-size:14px;}
+	</style>
+	<tabbox id="listTabox" sclass="rtab" style="position:relative;">
+		<tabs>
+			<tab id="ingTab" label="进行中"></tab>
+			<tab id="doneTab" label="已完成"></tab>
+			<tab id="allTab" label="全部"></tab>
+			<tab id="detailTab" label="详情"></tab>
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<vlayout spacing="0">
+					<listbox id="ingLbx" sclass="itBill" xmlns:ca="client/attribute"
+						ca:data-scrollable="false" multiple="false">
+						<listhead>
+							<listheader width="45px"></listheader>
+							<listheader></listheader>
+							<listheader width="25px"></listheader>
+						</listhead>
+					</listbox>
+				</vlayout>
+			</tabpanel>
+			<tabpanel>
+				<listbox id="doneLbx" sclass="itBill" xmlns:ca="client/attribute"
+					ca:data-scrollable="false" emptyMessage="无已完成发电任务" multiple="false">
+					<listhead>
+						<listheader width="45px"></listheader>
+						<listheader></listheader>
+						<listheader width="25px"></listheader>
+					</listhead>
+				</listbox>
+			</tabpanel>
+			<tabpanel>
+				<listbox id="allLbx" sclass="itBill" xmlns:ca="client/attribute"
+					ca:data-scrollable="false" emptyMessage="无发电任务" multiple="false">
+					<listhead>
+						<listheader width="45px"></listheader>
+						<listheader></listheader>
+						<listheader width="25px"></listheader>
+					</listhead>
+				</listbox>
+			</tabpanel>
+			<tabpanel>
+				<vlayout>
+					<hlayout>
+						<div class="col-xs-4">
+							<label sclass="heavy" value="编号" />
+						</div>
+						<div class="col-xs-5">
+							<label value="@load(vm.selected.gCode)"></label>
+						</div>
+						<div class="col-xs-3">
+							<label
+								value="@load(vm.selected.status eq 1?'已完成':vm.selected.status eq 2?'进行中':'')"
+								sclass="@load(vm.selected.status eq 1?'green':vm.selected.status eq 2?'red':'')">
+							</label>
+						</div>
+					</hlayout>
+					<hlayout>
+						<div class="col-xs-4">
+							<label sclass="heavy" value="故障单编码" />
+						</div>
+						<div class="col-xs-8">
+							<label sclass="red" value="@load(vm.selected.billCode)" />
+						</div>
+					</hlayout>
+					<hlayout>
+						<div class="col-xs-4">
+							<label sclass="heavy" value="故障来源" />
+						</div>
+						<div class="col-xs-8">
+							<label value="@load(vm.selected.faultSource)" />
+						</div>
+					</hlayout>
+					<hlayout>
+						<div class="col-xs-4">
+							<label sclass="heavy" value="告警描述" />
+						</div>
+						<div class="col-xs-8">
+							<label value="@load(vm.selected.alarmDetail)" />
+						</div>
+					</hlayout>
+					<hlayout>
+						<div class="col-xs-4">
+							<label sclass="heavy" value="站址名称" />
+						</div>
+						<div class="col-xs-8">
+							<label sclass="blue" value="@load(vm.selected.stationName)" />
+						</div>
+					</hlayout>
+					<hlayout>
+						<div class="col-xs-4">
+							<label sclass="heavy" value="站址编码" />
+						</div>
+						<div class="col-xs-8">
+							<label sclass="blue" value="@load(vm.selected.stationCode)" />
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.startTime)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="发电开始时间" />
+						</div>
+						<div class="col-xs-8">
+							<label
+								value="@load(vm.selected.startTime) @converter('formatedDate', format='yyyy-MM-dd HH:mm:ss')" />
+						</div>
+					</hlayout>
+					<!-- 					<hlayout visible="@load(not empty vm.selected.startVoltage)"> -->
+					<!-- 						<div class="col-xs-4"> -->
+					<!-- 							<label sclass="heavy" value="发电开始电压 " /> -->
+					<!-- 						</div> -->
+					<!-- 						<div class="col-xs-8"> -->
+					<!-- 							<label -->
+					<!-- 								value="@load(vm.selected.startVoltage)"/> -->
+					<!-- 						</div> -->
+					<!-- 					</hlayout> -->
+					<hlayout visible="@load(not empty vm.selected.endTime)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="发电结束时间" />
+						</div>
+						<div class="col-xs-8">
+							<label
+								value="@load(vm.selected.endTime) @converter('formatedDate', format='yyyy-MM-dd HH:mm:ss')" />
+						</div>
+					</hlayout>
+					<!-- 					<hlayout visible="@load(not empty vm.selected.endVoltage)"> -->
+					<!-- 						<div class="col-xs-4"> -->
+					<!-- 							<label sclass="heavy" value="发电结束电压 " /> -->
+					<!-- 						</div> -->
+					<!-- 						<div class="col-xs-8"> -->
+					<!-- 							<label -->
+					<!-- 								value="@load(vm.selected.endVoltage)"/> -->
+					<!-- 						</div> -->
+					<!-- 					</hlayout> -->
+					<hlayout visible="@load(not empty vm.selected.machinePower)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="油机" />
+						</div>
+						<div class="col-xs-3">
+							<label value="@load(vm.selected.machinePower)" />
+						</div>
+						<div class="col-xs-3">
+							<label value="@load(vm.selected.machineType)" />
+						</div>
+						<div class="col-xs-2">
+							<label value="@load(vm.selected.machineCount)" />
+							台
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.machinePower)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="油机编号" />
+						</div>
+						<div class="col-xs-8">
+							<label value="@load(vm.selected.machineNo)" />
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.reason)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="发电原因" />
+						</div>
+						<div class="col-xs-8">
+							<label value="@load(vm.selected.reason)" />
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.person)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="发电人" />
+						</div>
+						<div class="col-xs-8">
+							<label value="@load(vm.selected.person)" />
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.contact)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="联系方式" />
+						</div>
+						<div class="col-xs-8">
+							<label value="@load(vm.selected.contact)" />
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.odometer)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="往返公里数" />
+						</div>
+						<div class="col-xs-8">
+							<label value="@load(vm.selected.odometer)" />
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.pic1)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="发电开始照片" />
+						</div>
+						<div class="col-xs-8"></div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.pic1)">
+						<div class="col-xs-12" style="padding-top:8px;">
+							<div class="center">
+								<image id="pic1Img" width="100%" />
+							</div>
+						</div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.pic2)">
+						<div class="col-xs-4">
+							<label sclass="heavy" value="发电结束照片" />
+						</div>
+						<div class="col-xs-8"></div>
+					</hlayout>
+					<hlayout visible="@load(not empty vm.selected.pic2)">
+						<div class="col-xs-12" style="padding-top:8px;">
+							<div class="center">
+								<image id="pic2Img" width="100%" />
+							</div>
+						</div>
+					</hlayout>
+				</vlayout>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	<space height="50px"></space>
+	<div class="col-xs-12 navbar-fixed-bottom" id="btnDiv" style="margin-bottom:10px;">
+		<div class="center">
+			<button iconSclass="glyphicon glyphicon-search" sclass="btn-success btn-large"
+				zclass="btn" label="查看详情 " onClick="@command('goDetail')" autodisable="self" id="showDetailBtn"
+				width="110px" style="font-size:16px" height="40px" />
+			<space id="endGelecSpace"></space>
+			<button id="endGelecBtn" iconSclass="glyphicon glyphicon-flash"
+				sclass="btn-danger btn-large" zclass="btn" label="结束发电" onClick="@command('endGelec')"
+				autodisable="self" width="110px" style="font-size:16px" height="40px" />
+		</div>
+	</div>
+	<script type="text/javascript" defer="true">
+		/*解决listbox在某些浏览器下选中一条后自动回到页面顶部的BUG,原属性position: absolute;*/
+		//jq('.z-focus-a').css("position","fixed"); 
+		jq('.z-focus-a').remove();
+	</script>
+</div>

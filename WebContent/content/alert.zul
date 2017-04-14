@@ -1,0 +1,14 @@
+<!-- Alert -->
+<window id="alertWin" closable="true" border="normal"
+	sclass="alert alert-success">
+	<caption>
+		<a iconSclass="z-icon-check" />
+		欢迎使用
+		<label value="高歌交通信息综合查询平台"
+			style="font-weight:bold;color:#69AA46" />
+		<label value="(v1.0)"
+			style="font-weight:bold;font-size:10px;color:#69AA46" />
+		, 机动车违法记录最近一次同步日期在 2014-04-10 12:33:21,同步已完成 !
+		<space />
+	</caption>
+</window>

@@ -1,0 +1,45 @@
+<window id="zbzSearchWin" title="站点查询" border="normal"
+	maximizable="false" sizable="false" style="backgroud:#ddd;"
+	closable="true" height="525px" width="600px"
+	apply="com.fuhj.itower.ui.vm.ZbzSearchWin">
+	<style>
+		.z-listcell-content{ line-height:20px; } .task .z-listbox-body
+		{padding-bottom: 0; }
+	</style>
+	<vlayout style="padding-left:7px;padding-top:5px;" spacing="5px">
+		<hbox>
+			<label value="站点名称：" />
+			<textbox id="stNameTxt" height="25px" class="form-control"
+				cols="20" style="font-size:12px;" />
+			<space />
+			<label value="站点编码：" />
+			<textbox id="stCodeTxt" height="25px" class="form-control"
+				cols="14" style="font-size:12px;" />
+			<space />
+			<button iconSclass="glyphicon glyphicon-search"
+				sclass="btn-primary btn-sm" zclass="btn" label=" 查询 "
+				autodisable="self" id="searchBtn" />
+		</hbox>
+		<listbox id="staLbx" mold="paging" pageSize="20" sclass="task"
+			height="400px"
+			style="border-top: 1px dotted #E2E2E2;padding-top: 7px;">
+			<listhead sizable="true">
+				<listheader label="序号"
+					iconSclass="z-icon-caret-right blue" width="40px" />
+				<listheader label="省份"
+					iconSclass="z-icon-caret-right blue" />
+				<listheader label="地市"
+					iconSclass="z-icon-caret-right blue" />
+				<listheader label="区县"
+					iconSclass="z-icon-caret-right blue" />
+				<listheader label="站点名称"
+					iconSclass="z-icon-caret-right blue" width="250px" />
+				<listheader label="站点编码"
+					iconSclass="z-icon-caret-right blue" />
+			</listhead>
+		</listbox>
+		<button iconSclass="glyphicon glyphicon-search"
+			sclass="btn-primary btn-sm" zclass="btn" label=" 确定 "
+			autodisable="self" style="margin-left:250px;" id="" />
+	</vlayout>
+</window>

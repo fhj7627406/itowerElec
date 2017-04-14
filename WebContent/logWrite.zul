@@ -1,0 +1,23 @@
+<window title="更新日志" border="normal" maximizable="false" sizable="false"
+	style="backgroud:#ddd;" closable="true" width="1024px" height="768px"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.LogWriteVM')">
+	<vlayout spacing="10px">
+		<ckeditor id="ulogCKeditor"
+			customConfigurationsPath="/js/ckez-config.js"
+			filebrowserImageBrowseUrl="ckez-upload"
+			filebrowserImageUploadUrl="ckez-upload" height="540px"
+			value="@load(vm.latestLog.content)">
+		</ckeditor>
+		<grid>
+			<rows>
+				<row align="center">
+					<button
+						iconSclass="glyphicon glyphicon-floppy-saved"
+						sclass="btn-success btn-sm" zclass="btn" label=" 保 存 "
+						onClick="@command('save')" autodisable="self" />
+				</row>
+			</rows>
+		</grid>
+	</vlayout>
+</window>

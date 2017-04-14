@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by ZK Studio -->
+<zk>
+	<client-config>
+		<error-reload>
+			<device-type>ajax</device-type>
+			<connection-type>server-push</connection-type>
+			<error-code>410</error-code>
+			<reload-uri>/login.zul</reload-uri>
+		</error-reload>
+	</client-config>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/timeout.zul</timeout-uri><!-- An empty URL can cause the 
+			browser to reload the same URL -->
+	</device-config>
+	<library-property>
+		<name>org.zkoss.zkmax.tablet.ui.disabled</name>
+		<value>true</value>
+	</library-property>
+	<library-property>
+		<name>org.zkoss.web.preferred.locale</name>
+		<value>zh_CN</value>
+	</library-property>
+	<system-config>
+		<disable-event-thread>false</disable-event-thread>
+	</system-config>
+	<session-config>
+		<session-timeout>18000</session-timeout>
+		<timer-keep-alive>false</timer-keep-alive>
+		<max-desktops-per-session>10</max-desktops-per-session>
+		<max-requests-per-session>5</max-requests-per-session>
+		<max-pushes-per-session>10</max-pushes-per-session>
+	</session-config>
+<!-- 	<library-property> -->
+<!-- 		<name>org.zkoss.zul.Button.mold</name> -->
+<!-- 		<value>trendy</value> -->
+<!-- 	</library-property> -->
+	<!-- <library-property> -->
+	<!-- <name>org.zkoss.zul.Menupopup.mold</name> -->
+	<!-- <value>bs</value> -->
+	<!-- </library-property> -->
+	<!-- <library-property> -->
+	<!-- <name>org.zkoss.zkmax.zul.Navbar.mold</name> -->
+	<!-- <value>bs</value> -->
+	<!-- </library-property> -->
+	<!-- <library-property> -->
+	<!-- <name>org.zkoss.zul.Paging.mold</name> -->
+	<!-- <value>bs</value> -->
+	<!-- </library-property> -->
+	<!-- <library-property> -->
+	<!-- <name>org.zkoss.zul.Panel.mold</name> -->
+	<!-- <value>bs</value> -->
+	<!-- </library-property> -->
+
+	<library-property>
+		<name>org.zkoss.zul.progressbox.position</name>
+		<value>center,center</value>
+	</library-property>
+	<library-property>
+		<name>org.zkoss.zul.tree.rightSelect</name>
+		<value>false</value>
+	</library-property>
+	<!-- <library-property> -->
+	<!-- <name>org.zkoss.theme.preferred</name> -->
+	<!-- <value>atlantic</value> or silvertail, atlantic -->
+	<!-- </library-property> -->
+
+</zk>

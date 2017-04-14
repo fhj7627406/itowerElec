@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GELECUSERMAPPER">
+	<resultMap id="BaseResultMap" type="com.fuhj.itower.model.GElecUser">
+		<id column="gelec_user_id" property="gelecUserId" jdbcType="INTEGER" />
+		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
+		<result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="it_province_id" property="itProvinceId" jdbcType="VARCHAR" />
+		<result column="it_city_id" property="itCityId" jdbcType="VARCHAR" />
+		<result column="it_district_id" property="itDistrictId" jdbcType="VARCHAR" />
+		<result column="wx_open_id" property="wxOpenId" jdbcType="VARCHAR" />
+		<result column="user_type" property="userType" jdbcType="SMALLINT" />
+		<result column="user_level" property="userLevel" jdbcType="SMALLINT" />
+		<result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+		<result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+                </when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+                </when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		gelec_user_id, login_name, login_pwd, user_name, user_phone, it_province_id,
+		it_city_id,
+		it_district_id, wx_open_id, user_type, user_level, reg_time, last_login_time, status,
+		remark
+  </sql>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fuhj.itower.dao.Example">
+		select
+		<if test="distinct">
+			distinct
+    </if>
+		<include refid="Base_Column_List" />
+		from gelec_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+    </if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from gelec_user
+		where gelec_user_id = #{gelecUserId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from gelec_user
+		where gelec_user_id =
+		#{gelecUserId,jdbcType=INTEGER}
+  </delete>
+	<delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example">
+		delete from gelec_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.fuhj.itower.model.GElecUser">
+		<selectKey resultType="int" keyProperty="gelecUserId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into gelec_user (login_name, login_pwd, user_name,
+		user_phone, it_province_id, it_city_id,
+		it_district_id, wx_open_id, user_type,
+		user_level, reg_time, last_login_time,
+		status, remark)
+		values
+		(#{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR}, #{itProvinceId,jdbcType=VARCHAR}, #{itCityId,jdbcType=VARCHAR},
+		#{itDistrictId,jdbcType=VARCHAR}, #{wxOpenId,jdbcType=VARCHAR}, #{userType,jdbcType=SMALLINT},
+		#{userLevel,jdbcType=SMALLINT}, #{regTime,jdbcType=TIMESTAMP},
+		#{lastLoginTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.fuhj.itower.model.GElecUser">
+		<selectKey resultType="int" keyProperty="gelecUserId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into gelec_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="loginName != null">
+				login_name,
+      </if>
+			<if test="loginPwd != null">
+				login_pwd,
+      </if>
+			<if test="userName != null">
+				user_name,
+      </if>
+			<if test="userPhone != null">
+				user_phone,
+      </if>
+			<if test="itProvinceId != null">
+				it_province_id,
+      </if>
+			<if test="itCityId != null">
+				it_city_id,
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id,
+      </if>
+			<if test="wxOpenId != null">
+				wx_open_id,
+      </if>
+			user_type,
+			user_level,
+			<if test="regTime != null">
+				reg_time,
+      </if>
+			<if test="lastLoginTime != null">
+				last_login_time,
+      </if>
+			status,
+			<if test="remark != null">
+				remark,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+      </if>
+			<if test="loginPwd != null">
+				#{loginPwd,jdbcType=VARCHAR},
+      </if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+      </if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+      </if>
+			<if test="itProvinceId != null">
+				#{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				#{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				#{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="wxOpenId != null">
+				#{wxOpenId,jdbcType=VARCHAR},
+      </if>
+			#{userType,jdbcType=SMALLINT},
+			#{userLevel,jdbcType=SMALLINT},
+			<if test="regTime != null">
+				#{regTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="lastLoginTime != null">
+				#{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+			#{status,jdbcType=SMALLINT},
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.fuhj.itower.dao.Example" resultType="java.lang.Integer">
+		select count(*) from gelec_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update gelec_user
+		<set>
+			<if test="record.gelecUserId != null">
+				gelec_user_id = #{record.gelecUserId,jdbcType=INTEGER},
+      </if>
+			<if test="record.loginName != null">
+				login_name = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+			<if test="record.loginPwd != null">
+				login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+      </if>
+			<if test="record.userName != null">
+				user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+			<if test="record.userPhone != null">
+				user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itProvinceId != null">
+				it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itCityId != null">
+				it_city_id = #{record.itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.itDistrictId != null">
+				it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.wxOpenId != null">
+				wx_open_id = #{record.wxOpenId,jdbcType=VARCHAR},
+      </if>
+			<if test="record.userType != null">
+				user_type = #{record.userType,jdbcType=SMALLINT},
+      </if>
+			<if test="record.userLevel != null">
+				user_level = #{record.userLevel,jdbcType=SMALLINT},
+      </if>
+			<if test="record.regTime != null">
+				reg_time = #{record.regTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.lastLoginTime != null">
+				last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=SMALLINT},
+      </if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update gelec_user
+		set gelec_user_id = #{record.gelecUserId,jdbcType=INTEGER},
+		login_name =
+		#{record.loginName,jdbcType=VARCHAR},
+		login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+		user_name =
+		#{record.userName,jdbcType=VARCHAR},
+		user_phone = #{record.userPhone,jdbcType=VARCHAR},
+		it_province_id = #{record.itProvinceId,jdbcType=VARCHAR},
+		it_city_id =
+		#{record.itCityId,jdbcType=VARCHAR},
+		it_district_id = #{record.itDistrictId,jdbcType=VARCHAR},
+		wx_open_id = #{record.wxOpenId,jdbcType=VARCHAR},
+		user_type = #{record.userType,jdbcType=SMALLINT},
+		user_level = #{record.userLevel,jdbcType=SMALLINT},
+		reg_time =
+		#{record.regTime,jdbcType=TIMESTAMP},
+		last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+		status = #{record.status,jdbcType=SMALLINT},
+		remark = #{record.remark,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.GElecUser">
+		update gelec_user
+		<set>
+			<if test="loginName != null">
+				login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+			<if test="loginPwd != null">
+				login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+			<if test="itProvinceId != null">
+				it_province_id = #{itProvinceId,jdbcType=VARCHAR},
+      </if>
+			<if test="itCityId != null">
+				it_city_id = #{itCityId,jdbcType=VARCHAR},
+      </if>
+			<if test="itDistrictId != null">
+				it_district_id = #{itDistrictId,jdbcType=VARCHAR},
+      </if>
+			<if test="wxOpenId != null">
+				wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
+      </if>
+			<if test="userType != null">
+				user_type = #{userType,jdbcType=SMALLINT},
+      </if>
+			<if test="userLevel != null">
+				user_level = #{userLevel,jdbcType=SMALLINT},
+      </if>
+			<if test="regTime != null">
+				reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="lastLoginTime != null">
+				last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="status != null">
+				status = #{status,jdbcType=SMALLINT},
+      </if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		where gelec_user_id = #{gelecUserId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.GElecUser">
+		update gelec_user
+		set login_name =
+		#{loginName,jdbcType=VARCHAR},
+		login_pwd = #{loginPwd,jdbcType=VARCHAR},
+		user_name =
+		#{userName,jdbcType=VARCHAR},
+		user_phone = #{userPhone,jdbcType=VARCHAR},
+		it_province_id =
+		#{itProvinceId,jdbcType=VARCHAR},
+		it_city_id = #{itCityId,jdbcType=VARCHAR},
+		it_district_id =
+		#{itDistrictId,jdbcType=VARCHAR},
+		wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
+		user_type =
+		#{userType,jdbcType=SMALLINT},
+		user_level = #{userLevel,jdbcType=SMALLINT},
+		reg_time =
+		#{regTime,jdbcType=TIMESTAMP},
+		last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+		status =
+		#{status,jdbcType=SMALLINT},
+		remark = #{remark,jdbcType=VARCHAR}
+		where gelec_user_id =
+		#{gelecUserId,jdbcType=INTEGER}
+  </update>
+	<update id="updateFieldsByExample" parameterType="map">
+		update gelec_user set
+		<foreach collection="fields" item="field" separator=",">
+			${field.fieldName} =
+			#{field.fieldValue}
+    </foreach>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<resultMap id="GelecUserModelMap" type="com.fuhj.itower.ui.model.GelecUserModel" extends="BaseResultMap">
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="district" property="district" jdbcType="VARCHAR" />
+		<result column="_done" property="done" jdbcType="INTEGER" />
+		<result column="_ing" property="ing" jdbcType="INTEGER" />
+		<result column="_sum" property="sum" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="customSelectGelecUser" parameterType="map" resultMap="GelecUserModelMap">
+		SELECT a.*,b.pname province,c.cname
+		city,d.dname district,
+		(SELECT COUNT(*) FROM gelec_info WHERE
+		gelec_info.creator_id=a.gelec_user_id
+		AND gelec_info.STATUS=1 )
+		_done,
+		(SELECT COUNT(*) FROM
+		gelec_info WHERE
+		gelec_info.creator_id=a.gelec_user_id AND gelec_info.STATUS=2 )
+		_ing,
+		(SELECT
+		SUM(_done+_ing)) _sum
+		FROM gelec_user a
+		LEFT JOIN it_province b ON b.it_province_id=a.it_province_id
+		LEFT JOIN it_city c
+		ON c.it_city_id=a.it_city_id
+		LEFT JOIN it_district d ON
+		d.it_district_id=a.it_district_id
+		WHERE <![CDATA[a.status<>0]]>
+		<if test="itProvinceId!=null">
+			AND a.it_province_id=#{itProvinceId,jdbcType=VARCHAR}
+		</if>
+		<if test="loginName!=null">
+			AND a.login_name = #{loginName,jdbcType=VARCHAR}
+		</if>
+		<if test="userName!=null">
+			AND a.user_name = #{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="userPhone!=null">
+			AND a.user_phone = #{userPhone,jdbcType=VARCHAR}
+		</if>
+		ORDER BY a.gelec_user_id
+	</select>
+</mapper>

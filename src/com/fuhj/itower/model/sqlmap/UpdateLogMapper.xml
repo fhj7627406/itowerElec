@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UPDATELOGMAPPER">
+	<resultMap id="BaseResultMap" type="com.fuhj.itower.model.UpdateLog">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="sysuser_id" property="sysuserId" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, title, content, createtime, sysuser_id, status, remark
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.fuhj.itower.dao.Example">
+		select
+		<if test="distinct">
+			distinct
+    </if>
+		<include refid="Base_Column_List" />
+		from updatelog
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+    </if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from updatelog
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from
+		updatelog
+		where id = #{id,jdbcType=INTEGER}
+  </delete>
+	<delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example">
+		delete from updatelog
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.fuhj.itower.model.UpdateLog">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+    </selectKey>
+		insert into updatelog (title, content, createtime,
+		sysuser_id, status,
+		remark
+		)
+		values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+		#{createtime,jdbcType=TIMESTAMP},
+		#{sysuserId,jdbcType=INTEGER},
+		#{status,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.fuhj.itower.model.UpdateLog">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+    </selectKey>
+		insert into updatelog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title != null">
+				title,
+      </if>
+			<if test="content != null">
+				content,
+      </if>
+			<if test="createtime != null">
+				createtime,
+      </if>
+			sysuser_id,
+			status,
+			<if test="remark != null">
+				remark,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+      </if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+      </if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+      </if>
+			#{sysuserId,jdbcType=INTEGER},
+			#{status,jdbcType=SMALLINT},
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.fuhj.itower.dao.Example"
+		resultType="java.lang.Integer">
+		select count(*) from updatelog
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update updatelog
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+      </if>
+			<if test="record.title != null">
+				title = #{record.title,jdbcType=VARCHAR},
+      </if>
+			<if test="record.content != null">
+				content = #{record.content,jdbcType=VARCHAR},
+      </if>
+			<if test="record.createtime != null">
+				createtime = #{record.createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.sysuserId != null">
+				sysuser_id = #{record.sysuserId,jdbcType=INTEGER},
+      </if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=SMALLINT},
+      </if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update updatelog
+		set id = #{record.id,jdbcType=INTEGER},
+		title =
+		#{record.title,jdbcType=VARCHAR},
+		content =
+		#{record.content,jdbcType=VARCHAR},
+		createtime =
+		#{record.createtime,jdbcType=TIMESTAMP},
+		sysuser_id =
+		#{record.sysuserId,jdbcType=INTEGER},
+		status =
+		#{record.status,jdbcType=SMALLINT},
+		remark =
+		#{record.remark,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.UpdateLog">
+		update updatelog
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+      </if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+      </if>
+			<if test="createtime != null">
+				createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+			<if test="sysuserId != null">
+				sysuser_id = #{sysuserId,jdbcType=INTEGER},
+      </if>
+			<if test="status != null">
+				status = #{status,jdbcType=SMALLINT},
+      </if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+      </if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.UpdateLog">
+		update updatelog
+		set title = #{title,jdbcType=VARCHAR},
+		content =
+		#{content,jdbcType=VARCHAR},
+		createtime =
+		#{createtime,jdbcType=TIMESTAMP},
+		sysuser_id =
+		#{sysuserId,jdbcType=INTEGER},
+		status = #{status,jdbcType=SMALLINT},
+		remark = #{remark,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateFieldsByExample" parameterType="map">
+		update updatelog set
+		<foreach collection="fields" item="field" separator=",">
+			${field.fieldName} = #{field.fieldValue}
+    </foreach>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="selectLatestLogByCustom" parameterType="map"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM updateLOG WHERE STATUS=1 ORDER BY createtime DESC LIMIT 0,1
+	</select>
+</mapper>

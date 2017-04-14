@@ -1,0 +1,153 @@
+<vlayout xmlns:n="native" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fuhj.itower.ui.vm.GenElecQueryVM')" style="min-height:860px ;">
+	<style>
+		.areaBtn .caret {float: right; margin-top:7px;} .task.z-listbox .z-listitem, .task.z-listbox
+		.z-listitem:hover { border-left-width: 1px; }
+	</style>
+	<a label="当前停电工单" iconSclass="z-icon-list-alt" sclass="rcaption lighter" />
+
+	<tabbox sclass="rtab" style="position:relative; margin-top:-30px;" id="atabbox">
+		<tabs>
+			<!-- 			<tab label="历史停电工单" id="tab2" /> -->
+			<tab label="当前停电工单" id="tab1" selected="true" />
+		</tabs>
+		<tabpanels>
+			<!-- Tab Comments Content -->
+			<!-- 			<tabpanel> -->
+			<!-- 				<vlayout spacing="10px"> -->
+			<!-- 					<columnlayout -->
+			<!-- 						style="border-bottom: 1px dotted #E2E2E2;padding-bottom: 16px;padding-top: 7px;"> -->
+			<!-- 						<columnchildren> -->
+			<!-- 							<panel> -->
+			<!-- 								<panelchildren> -->
+			<!-- 									<hbox align="center" -->
+			<!-- 										spacing="15px"> -->
+			<!-- 										故障单编号: -->
+			<!-- 										<textbox height="30px" -->
+			<!-- 											id="hisTNOTxt" class="form-control" cols="23" -->
+			<!-- 											style="font-size:12px;" /> -->
+			<!-- 										站点名称: -->
+			<!-- 										<textbox height="30px" -->
+			<!-- 											id="hisSTNameTxt" class="form-control" cols="20" -->
+			<!-- 											style="font-size:12px;" /> -->
+			<!-- 										<space width="20px" /> -->
+			<!-- 										<button -->
+			<!-- 											iconSclass="glyphicon glyphicon-search" -->
+			<!-- 											sclass="btn-primary btn-sm" zclass="btn" label=" 查询 " -->
+			<!-- 											onClick="@command('')" autodisable="self,exportBtn" -->
+			<!-- 											style="margin-right:5px;margin-top:1px;" id="queryHisBtn" -->
+			<!-- 											disabled="true" /> -->
+			<!-- 									</hbox> -->
+			<!-- 								</panelchildren> -->
+			<!-- 							</panel> -->
+			<!-- 						</columnchildren> -->
+			<!-- 					</columnlayout> -->
+			<!-- 					<listbox id="pfalarmHisLbx" sclass="task" -->
+			<!-- 						mold="paging" pageSize="20" style="border:0;"> -->
+			<!-- 						<listhead sizable="true"> -->
+			<!-- 							<listheader label="序号" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" width="50px" /> -->
+			<!-- 							<listheader label="查询时间" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="地市" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="区县" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="故障单编号" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="站名" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="站点编码" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="停电时间" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="告警历时(M)" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="实时电压(V)" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="发电开始时间" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="发电结束时间" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 							<listheader label="发电人员" -->
+			<!-- 								iconSclass="z-icon-caret-right blue" /> -->
+			<!-- 						</listhead> -->
+
+			<!-- 					</listbox> -->
+
+			<!-- 				</vlayout> -->
+			<!-- 			</tabpanel> -->
+			<tabpanel>
+				<vlayout spacing="10px">
+					<columnlayout
+						style="border-bottom: 1px dotted #E2E2E2;padding-bottom: 16px;padding-top: 7px;">
+						<columnchildren>
+							<panel>
+								<panelchildren>
+									<hbox align="center" spacing="10px">
+										查询地区：
+										<button dir="reverse" id="areaBtn"
+											sclass="btn-default btn-sm dropdown-toggle areaBtn"
+											popup="areapp, position=after_end, type=toggle" iconSclass="caret" width="150px"
+											label="--请选择--" zclass="btn" />
+										<space width="25px" />
+									
+										<button iconSclass="glyphicon glyphicon-search"
+											sclass="btn-primary btn-sm" zclass="btn" label=" 查询 "
+											onClick="@command('query')" autodisable="self,exportBtn"
+											style="" id="queryBtn" />
+										<button iconSclass="glyphicon glyphicon glyphicon-export"
+											sclass="btn-success btn-sm" zclass="btn" label=" 导出EXCEL"
+											onClick="@command('export',target=self)" autodisable="self"
+											style="" id="exportBtn" />
+										<button iconSclass="glyphicon glyphicon-plus"
+											sclass="btn-info btn-sm" zclass="btn" label=" 添加 " onClick="@command('addBill')"
+											autodisable="self" style="" id="addBtn" />
+									</hbox>
+								</panelchildren>
+							</panel>
+						</columnchildren>
+					</columnlayout>
+					<listbox id="tdITBlillLbx" sclass="task" mold="paging" pageSize="10"
+						emptyMessage="无数据">
+						<!-- 						<frozen columns="4"></frozen> -->
+						<listhead sizable="true">
+							<listheader label="序号" iconSclass="z-icon-caret-right blue" />
+							<listheader label="地市" iconSclass="z-icon-caret-right blue" />
+							<listheader label="区县" iconSclass="z-icon-caret-right blue" />
+							<listheader label="故障单编码" iconSclass="z-icon-caret-right blue" />
+							<listheader label="故障设备类型" iconSclass="z-icon-caret-right blue" />
+							<listheader label="告警描述" iconSclass="z-icon-caret-right blue" />
+							<listheader label="告警等级" iconSclass="z-icon-caret-right blue" />
+							<listheader label="告警状态" iconSclass="z-icon-caret-right blue" />
+							<listheader label="工单状态" iconSclass="z-icon-caret-right blue" />
+							<listheader label="站址名称" iconSclass="z-icon-caret-right blue" />
+							<listheader label="站址运维ID" iconSclass="z-icon-caret-right blue" />
+							<listheader label="派单时间" iconSclass="z-icon-caret-right blue"
+								width="100px" />
+							<listheader label="接单时间" iconSclass="z-icon-caret-right blue"
+								width="100px" />
+							<listheader label="告警时间" iconSclass="z-icon-caret-right blue"
+								width="100px" />
+							<listheader label="故障来源" iconSclass="z-icon-caret-right blue" />
+							<listheader label="代维公司" iconSclass="z-icon-caret-right blue" />
+							<listheader label="工单处理历时" iconSclass="z-icon-caret-right blue" />
+							<listheader label="接单时长" iconSclass="z-icon-caret-right blue" />
+							<listheader label="所属运营商" iconSclass="z-icon-caret-right blue" />
+							<listheader label="数据来源" iconSclass="z-icon-caret-right blue" />
+							<listheader label="是否具备发电条件" iconSclass="z-icon-caret-right blue" />
+							<listheader label="FSU厂家" iconSclass="z-icon-caret-right blue" />
+							<listheader label="开关电源厂家" iconSclass="z-icon-caret-right blue" />
+							<listheader label="是否是发电工单" iconSclass="z-icon-caret-right blue" />
+						</listhead>
+					</listbox>
+					<a label="此列表查询结果为运监系统当前停电工单（交维，检修），刷新间隔为5分钟，如无停电工单又需长期发电，请在此页面手工添加一条停电工单"
+						iconSclass="glyphicon glyphicon-question-sign" />
+				</vlayout>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	<popup id="areapp" onOpen="@command('areappOnOpen')">
+		<tree id="areaTree" width="160px" style="border:none;padding:5px 5px;" rows="10"></tree>
+	</popup>
+</vlayout>

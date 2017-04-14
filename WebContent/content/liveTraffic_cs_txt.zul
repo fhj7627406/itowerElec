@@ -1,0 +1,16 @@
+<panel id="ltcspal" border="normal" sclass="conversation"
+	apply="com.gaogenet.ggauto.ui.LiveTrafficTxtPanel" collapsible="true" >
+	<caption iconSclass="z-icon-list" label="最新路况信息滚动" />
+	<panelchildren>
+		<vlayout>
+			<grid id="ltcsGrid" height="511px" width="400px"
+				sclass="dialog">
+				<columns>
+					<column width="48px" />
+					<column />
+				</columns>
+				<rows></rows>
+			</grid>
+		</vlayout>
+	</panelchildren>
+</panel>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="STATIONBATTERYMAPPER">
+	<resultMap id="BaseResultMap" type="com.fuhj.itower.model.StationBattery">
+		<id column="station_battery_id" property="stationBatteryId"
+			jdbcType="INTEGER" />
+		<result column="stationCode" property="stationcode" jdbcType="VARCHAR" />
+		<result column="stationSid" property="stationsid" jdbcType="VARCHAR" />
+		<result column="batteryId" property="batteryid" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+                </when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+                </when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+                  </foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		station_battery_id, stationCode, stationSid, batteryId
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.fuhj.itower.dao.Example">
+		select
+		<if test="distinct">
+			distinct
+    </if>
+		<include refid="Base_Column_List" />
+		from station_battery
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+    </if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from station_battery
+		where station_battery_id =
+		#{stationBatteryId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="int">
+		delete from
+		station_battery
+		where station_battery_id =
+		#{stationBatteryId,jdbcType=INTEGER}
+  </delete>
+	<delete id="deleteByExample" parameterType="com.fuhj.itower.dao.Example">
+		delete from station_battery
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.fuhj.itower.model.StationBattery">
+		<selectKey resultType="int" keyProperty="stationBatteryId"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+    </selectKey>
+		insert into station_battery (stationCode, stationSid, batteryId
+		)
+		values (#{stationcode,jdbcType=VARCHAR},
+		#{stationsid,jdbcType=VARCHAR},
+		#{batteryid,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.fuhj.itower.model.StationBattery">
+		<selectKey resultType="int" keyProperty="stationBatteryId"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+    </selectKey>
+		insert into station_battery
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="stationcode != null">
+				stationCode,
+      </if>
+			<if test="stationsid != null">
+				stationSid,
+      </if>
+			<if test="batteryid != null">
+				batteryId,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="stationcode != null">
+				#{stationcode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationsid != null">
+				#{stationsid,jdbcType=VARCHAR},
+      </if>
+			<if test="batteryid != null">
+				#{batteryid,jdbcType=VARCHAR},
+      </if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.fuhj.itower.dao.Example"
+		resultType="java.lang.Integer">
+		select count(*) from station_battery
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update station_battery
+		<set>
+			<if test="record.stationBatteryId != null">
+				station_battery_id =
+				#{record.stationBatteryId,jdbcType=INTEGER},
+      </if>
+			<if test="record.stationcode != null">
+				stationCode = #{record.stationcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.stationsid != null">
+				stationSid = #{record.stationsid,jdbcType=VARCHAR},
+      </if>
+			<if test="record.batteryid != null">
+				batteryId = #{record.batteryid,jdbcType=VARCHAR},
+      </if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update station_battery
+		set station_battery_id =
+		#{record.stationBatteryId,jdbcType=INTEGER},
+		stationCode =
+		#{record.stationcode,jdbcType=VARCHAR},
+		stationSid =
+		#{record.stationsid,jdbcType=VARCHAR},
+		batteryId =
+		#{record.batteryid,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.fuhj.itower.model.StationBattery">
+		update station_battery
+		<set>
+			<if test="stationcode != null">
+				stationCode = #{stationcode,jdbcType=VARCHAR},
+      </if>
+			<if test="stationsid != null">
+				stationSid = #{stationsid,jdbcType=VARCHAR},
+      </if>
+			<if test="batteryid != null">
+				batteryId = #{batteryid,jdbcType=VARCHAR},
+      </if>
+		</set>
+		where station_battery_id = #{stationBatteryId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.fuhj.itower.model.StationBattery">
+		update
+		station_battery
+		set stationCode = #{stationcode,jdbcType=VARCHAR},
+		stationSid = #{stationsid,jdbcType=VARCHAR},
+		batteryId =
+		#{batteryid,jdbcType=VARCHAR}
+		where station_battery_id =
+		#{stationBatteryId,jdbcType=INTEGER}
+  </update>
+	<update id="updateFieldsByExample" parameterType="map">
+		update station_battery set
+		<foreach collection="fields" item="field" separator=",">
+			${field.fieldName} = #{field.fieldValue}
+    </foreach>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+</mapper>
