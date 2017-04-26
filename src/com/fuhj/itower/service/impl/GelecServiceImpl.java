@@ -57,6 +57,7 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see com.fuhj.itower.service.MainService#addITBills(java.util.List)
 	 */
 	@Override
@@ -71,7 +72,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#addITBillsByXLS(org.apache.poi.hssf.usermodel.HSSFWorkbook)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.MainService#addITBillsByXLS(org.apache.poi.hssf.
+	 * usermodel.HSSFWorkbook)
 	 */
 	@Override
 	public void addITBillsByXLS(String itProvinceId, String itCityId, HSSFWorkbook wb) throws ServiceException {
@@ -157,8 +161,8 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 				bill.setStatus(1);
 				itBillMapper.insert(bill);
 			}
-			AppLogger.sysDebug("addITBillsByXLS done,provinceId:" + itProvinceId + " cityId:" + itCityId + " locationName:"
-					+ locationService.getLocationName(itProvinceId, itCityId, null) + " count:" + (data.length - 1));
+			AppLogger.sysDebug("addITBillsByXLS done,provinceId:" + itProvinceId + " cityId:" + itCityId + " locationName:" + locationService.getLocationName(itProvinceId, itCityId, null) + " count:"
+					+ (data.length - 1));
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
@@ -166,7 +170,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#deleteITBillByArea(java.lang.String, java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.MainService#deleteITBillByArea(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public void deleteITBillByArea(String itProvinceId, String itCityId) throws ServiceException {
@@ -183,7 +190,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getITBill(java.lang.String, java.lang.String)
+	 * 
+	 * @see com.fuhj.itower.service.GelecService#getITBill(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public List<ITBill> getITBill(String provinceId, String cityId) throws ServiceException {
@@ -192,7 +201,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#getITBill(java.lang.String, java.lang.String, java.lang.String)
+	 * 
+	 * @see com.fuhj.itower.service.MainService#getITBill(java.lang.String,
+	 * java.lang.String, java.lang.String)
 	 */
 	@Override
 	public List<ITBill> getITBill(String provinceId, String cityId, String districtId) throws ServiceException {
@@ -201,7 +212,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#getITBill(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * 
+	 * @see com.fuhj.itower.service.MainService#getITBill(java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public List<ITBill> getITBill(String provinceId, String cityId, String districtId, String nameKeyword) throws ServiceException {
@@ -223,7 +236,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#getITBill(java.util.List, java.lang.String)
+	 * 
+	 * @see com.fuhj.itower.service.MainService#getITBill(java.util.List,
+	 * java.lang.String)
 	 */
 	@Override
 	public List<ITBill> getITBill(List<String> districtId, String nameKeyword) throws ServiceException {
@@ -241,7 +256,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#addGElecInfo(com.fuhj.itower.model.GElecInfo)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.MainService#addGElecInfo(com.fuhj.itower.model.
+	 * GElecInfo)
 	 */
 	@Override
 	public void addGElecInfo(GElecInfo info) throws ServiceException {
@@ -251,7 +269,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#addGElecUser(com.fuhj.itower.model.GElecUser)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.MainService#addGElecUser(com.fuhj.itower.model.
+	 * GElecUser)
 	 */
 	@Override
 	public void addGElecUser(GElecUser user) throws ServiceException {
@@ -263,7 +284,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#gelecLogin(java.lang.String, java.lang.String)
+	 * 
+	 * @see com.fuhj.itower.service.MainService#gelecLogin(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public GElecUser gelecLogin(String loginName, String pwd) throws ServiceException {
@@ -279,7 +302,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.MainService#checkGelcLoginName(java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.MainService#checkGelcLoginName(java.lang.String)
 	 */
 	@Override
 	public boolean checkGelcLoginName(String loginName) throws ServiceException {
@@ -293,6 +318,7 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see com.fuhj.itower.service.GelecService#getGElecInfo(int, int)
 	 */
 	@Override
@@ -307,6 +333,7 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see com.fuhj.itower.service.GelecService#getGElecInfoInProgress(int)
 	 */
 	@Override
@@ -319,6 +346,7 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see com.fuhj.itower.service.GelecService#getITBillById(int)
 	 */
 	@Override
@@ -328,7 +356,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#updateGElecInfoEnd(com.fuhj.itower.model.GElecInfo)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#updateGElecInfoEnd(com.fuhj.itower.
+	 * model.GElecInfo)
 	 */
 	@Override
 	public void updateGElecInfoEnd(GElecInfo info) throws ServiceException {
@@ -337,6 +368,7 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see com.fuhj.itower.service.GelecService#updateGElecInfoCancel(int)
 	 */
 	@Override
@@ -353,7 +385,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getNextContractCode(com.fuhj.itower.model.GElecUser)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#getNextContractCode(com.fuhj.itower.
+	 * model.GElecUser)
 	 */
 	@Override
 	public String getNextGElecInfoCode() throws ServiceException {
@@ -404,7 +439,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGElecCount(int, java.util.List)
+	 * 
+	 * @see com.fuhj.itower.service.GelecService#getGElecCount(int,
+	 * java.util.List)
 	 */
 	@Override
 	public int getGElecCount(int gelec_user_id, List<Integer> statusList) throws ServiceException {
@@ -417,7 +454,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getAllGElecInfo(java.util.List, com.fuhj.itower.model.GElecInfo)
+	 * 
+	 * @see com.fuhj.itower.service.GelecService#getAllGElecInfo(java.util.List,
+	 * com.fuhj.itower.model.GElecInfo)
 	 */
 	@Override
 	public List<GElecInfo> getGElecInfo(List<String> districtId, GElecInfo queryArg) throws ServiceException {
@@ -434,14 +473,21 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 			if (queryArg.getStartTime() != null) {
 				criteria.andStartTimeGreaterThanOrEqualTo(FormatUtil.getBeginTimeOfDay(queryArg.getStartTime()));
 			}
-			if (queryArg.getEndTime() != null) {
-				criteria.andEndTimeLessThanOrEqualTo(FormatUtil.getEndTimeOfDay(queryArg.getEndTime()));
-			}
-			if (queryArg.getStatus() != -1) {
-				criteria.andStatusEqualTo(queryArg.getStatus());
-			} else {
+			if (queryArg.getStatus() == -1) {
 				criteria.andStatusNotEqualTo(0);
 				criteria.andStatusNotEqualTo(9);
+
+			} else {
+				criteria.andStatusEqualTo(queryArg.getStatus());
+				if (queryArg.getStatus() == 2) {
+					if (queryArg.getEndTime() != null) {
+						criteria.andStartTimeLessThanOrEqualTo(FormatUtil.getEndTimeOfDay(queryArg.getEndTime()));
+					}
+				} else {
+					if (queryArg.getEndTime() != null) {
+						criteria.andEndTimeLessThanOrEqualTo(FormatUtil.getEndTimeOfDay(queryArg.getEndTime()));
+					}
+				}
 			}
 		} else {
 			criteria.andStatusNotEqualTo(0);
@@ -458,7 +504,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGReportByProvince(java.lang.String)
+	 * 
+	 * @see com.fuhj.itower.service.GelecService#getGReportByProvince(java.lang.
+	 * String)
 	 */
 	@Override
 	public List<GenElecReportItem> getGReportByProvince(String itProvinceId, Date startDate, Date endDate) throws ServiceException {
@@ -471,7 +519,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGReportByCity(java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#getGReportByCity(java.lang.String)
 	 */
 	@Override
 	public List<GenElecReportItem> getGReportByCity(String itCityId, Date startDate, Date endDate) throws ServiceException {
@@ -484,7 +534,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGSummaryByProvince(java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#getGSummaryByProvince(java.lang.
+	 * String)
 	 */
 	@Override
 	public Summary getGSummaryByProvince(String itProvinceId) throws ServiceException {
@@ -500,7 +553,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGSummaryByCity(java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#getGSummaryByCity(java.lang.String)
 	 */
 	@Override
 	public Summary getGSummaryByCity(String itCityId) throws ServiceException {
@@ -516,7 +571,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGElecUser(java.util.List, java.lang.String, java.lang.String, java.lang.String)
+	 * 
+	 * @see com.fuhj.itower.service.GelecService#getGElecUser(java.util.List,
+	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public List<GElecUser> getGElecUserBydistrict(List<String> range, String loginName, String userName, String userPhone) throws ServiceException {
@@ -538,6 +595,7 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see com.fuhj.itower.service.GelecService#getGElecUser(java.util.List)
 	 */
 	@Override
@@ -547,11 +605,13 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGElecUserByProvince(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#getGElecUserByProvince(java.lang.
+	 * String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public List<GelecUserModel> getGElecUserByProvince(String itProvinceId, String loginName, String userName, String userPhone)
-			throws ServiceException {
+	public List<GelecUserModel> getGElecUserByProvince(String itProvinceId, String loginName, String userName, String userPhone) throws ServiceException {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		if (StringUtils.isNotEmpty(itProvinceId)) {
 			paraMap.put("itProvinceId", itProvinceId);
@@ -570,7 +630,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#getGElecUserByProvince(java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#getGElecUserByProvince(java.lang.
+	 * String)
 	 */
 	@Override
 	public List<GelecUserModel> getGElecUserByProvince(String itProvinceId) throws ServiceException {
@@ -579,7 +642,9 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#updateLastLoginTime(int, java.util.Date)
+	 * 
+	 * @see com.fuhj.itower.service.GelecService#updateLastLoginTime(int,
+	 * java.util.Date)
 	 */
 	@Override
 	public void updateLastLoginTime(int gelecUserId, Date time) throws ServiceException {
@@ -593,7 +658,10 @@ public class GelecServiceImpl extends AbstractServiceImpl implements GelecServic
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.fuhj.itower.service.GelecService#updateGelecUserPwd(java.lang.String, java.lang.String)
+	 * 
+	 * @see
+	 * com.fuhj.itower.service.GelecService#updateGelecUserPwd(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public void updateGelecUserPwd(int gelecUserId, String newPwd) throws ServiceException {
